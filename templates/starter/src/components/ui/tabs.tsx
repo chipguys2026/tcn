@@ -3,8 +3,8 @@ import { createStrictContext } from '@/lib/ui/create-context'
 import { Pressable } from '@/lib/ui/pressable'
 import { RovingGroup, useRovingItem } from '@/lib/ui/roving-group'
 import { useComponentStyles } from '@/lib/ui/style-review'
+import { tabsDefaults } from '@/lib/ui/styles'
 import { useControllable } from '@/lib/ui/use-controllable'
-import { tabsDefaults } from './tabs.styles'
 
 type State = {
   value: string

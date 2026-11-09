@@ -17,14 +17,21 @@ Anchored selection/menu/tooltip popups prefer the requested side, then try alter
 Select/Menu items remain one row and truncate when needed. A native vertical scrollbar handles excess height; keyboard focus reveals its item, including after resize. Tooltip wraps text and clips to its region without installing a scrollbox or taking focus.
 
 ```tsx
-<SelectContent width="auto" height="auto" minWidth="trigger" maxWidth={32} maxHeight={16}>
-  <SelectItem value="bun">Bun</SelectItem>
-</SelectContent>
-
-// A deliberate exception for a wider control picker:
-<SelectContent width={46} maxWidth={46} height={18} maxHeight={18}>
-  {/* options */}
-</SelectContent>
+<>
+  <SelectContent
+    width="auto"
+    height="auto"
+    minWidth="trigger"
+    maxWidth={32}
+    maxHeight={16}
+  >
+    <SelectItem value="bun">Bun</SelectItem>
+  </SelectContent>
+  // A deliberate exception for a wider control picker:
+  <SelectContent width={46} maxWidth={46} height={18} maxHeight={18}>
+    {/* options */}
+  </SelectContent>
+</>
 ```
 
 The limits are ordinary source/props. No exported Tweak JSON is loaded at runtime.

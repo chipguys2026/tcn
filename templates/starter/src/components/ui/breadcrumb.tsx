@@ -1,6 +1,6 @@
 import type { PropsWithChildren } from 'react'
 import { PartBox, PartText } from '@/lib/ui/parts'
-import { breadcrumbDefaults } from './breadcrumb.styles'
+import { breadcrumbDefaults } from '@/lib/ui/styles'
 import { Button, type ButtonProps } from './button'
 
 export function Breadcrumb({ children }: PropsWithChildren) {

@@ -7,7 +7,7 @@ import {
   type ReviewStyle,
   type ReviewValue,
 } from '@/lib/ui/style-review'
-import { type ThemeName, themes } from '@/lib/ui/theme/tokens'
+import { type ThemeName, themes } from '@/lib/ui/styles'
 
 export type ReviewDocument = {
   version: 1

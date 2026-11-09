@@ -6,8 +6,8 @@ import {
 } from 'react'
 import { PartBox, PartText } from '@/lib/ui/parts'
 import { useComponentStyles } from '@/lib/ui/style-review'
+import { itemDefaults } from '@/lib/ui/styles'
 import { useTheme } from '@/lib/ui/theme/use-theme'
-import { itemDefaults } from './item.styles'
 import { Separator } from './separator'
 
 export function Item({

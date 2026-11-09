@@ -52,9 +52,7 @@ const sources = all.filter((p) =>
   items: Record<string, RegistryItem> = {}
 for (const path of sources) {
   const name = path.startsWith('src/components/ui/')
-    ? path
-        .slice('src/components/ui/'.length)
-        .replace(/\.styles\.ts$|\.tsx?$/, '')
+    ? path.slice('src/components/ui/'.length).replace(/\.tsx?$/, '')
     : `_${path.slice('src/'.length).replace(/\.tsx?$/, '')}`
   owner.set(path, name)
   items[name] ??= {

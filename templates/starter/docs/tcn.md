@@ -1,11 +1,50 @@
-# TCN source management
+# Manage component source with TCN
 
-This application owns its component source. TCN copies files into src/components/ui and src/lib/ui; normal application startup has no TCN runtime dependency.
+This application owns its component source. TCN copies files into `src/components/ui` and `src/lib/ui`; application startup does not require the CLI.
 
-A project generated/configured by the CLI contains tcn.json and .tcn/manifest.json. The former configures placement/import aliases; the latter tracks original installed source, revisions and dependency ownership for diff/update/remove. Commit them with .tcn/schema.json. The canonical template itself does not need CLI metadata to run.
+Run the commands below from a project created or configured with TCN. If you copied the starter manually, run `tcn init` first.
 
-Use the installed TCN CLI to list/add/diff/remove component source. Review an update with diff and add --dry-run before replacing local edits with add --force. The manifest distinguishes local edits from upstream changes. A default promoted from Tweak is a normal local source edit and is preserved when that upstream file is unchanged.
+## Add components
 
-Removal requires clearing usages in application source, Gallery and tests. The CLI does not rewrite these features for you. Components needed by retained components and shared helpers remain protected even with force. Npm dependencies are retained. Template/router changes require an application migration, not a component add operation.
+```sh
+tcn list
+tcn add button dialog
+```
 
-Tweak remains a development tool for proposing and promoting source defaults. It never uses tcn.json or installed metadata as runtime style configuration.
+A generated starter already includes all 51 component families. Use `add` to restore missing source or update it from your installed CLI's bundled snapshot. Required shared helpers and package dependencies are included automatically.
+
+## Review updates
+
+Install the desired CLI release, commit your application's current work, then inspect the selected components:
+
+```sh
+tcn diff button
+tcn add button --dry-run
+tcn add button
+bun run check
+```
+
+The manifest distinguishes your edits from changes since the installed baseline. Local edits are preserved when the corresponding upstream file is unchanged; competing changes stop with a conflict. Merge manually or use `--force` when replacing local source is intentional.
+
+Forced replacement includes required shared source, so inspect `tcn add button --force --dry-run` first. Defaults you apply after using Tweak are ordinary local source edits.
+
+## Remove unused source
+
+```sh
+tcn remove dialog --dry-run
+tcn remove dialog
+```
+
+Remove usages from application screens, Gallery and tests first. TCN protects source needed by retained components and reports remaining module references. Force does not bypass those checks. Package dependencies remain installed for you to review separately.
+
+## Commit tracking files
+
+| File | Purpose |
+| --- | --- |
+| `tcn.json` | Component paths and import aliases. |
+| `.tcn/manifest.json` | Installed baselines, revisions and dependency ownership. |
+| `.tcn/schema.json` | Editor schema for the configuration. |
+
+Commit all three with your source. Ignore only the temporary `.tcn/transaction.lock`.
+
+Component updates do not replace routes, application features or tooling. Migrate starter architecture changes separately. For the full CLI and update guides, see the [TCN documentation](https://github.com/chipguys2026/tcn/tree/main/docs).

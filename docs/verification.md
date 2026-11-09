@@ -1,25 +1,27 @@
-# Local verification
+# Verification
 
-Verified on Windows, 2026-11-09, with Node 24.18.0, npm 12.0.2 and Bun 1.4.4.
+TCN's CI validates both the development source and the package users install. See the [workflow runs](https://github.com/chipguys2026/tcn/actions/workflows/ci-release.yml) for current results.
 
-| Check | Result |
+## Automated checks
+
+| Area | What is checked |
 | --- | --- |
-| CLI typecheck and lint | Passed. |
-| CLI/source-management and local CI/release integration suites | 64 tests passed. |
-| Canonical starter typecheck, lint and tests | 322 tests passed. |
-| Latest snapshot registry/init checks | 2 selected integration tests passed after the template watcher fix. |
-| npm-compatible package payload | Bun pack produced the tarball; extracted executable ran directly under Node. |
-| App created by packed executable | Generated 51 families, Home/Gallery/Tweak, tcn.json, schema and installed baselines. |
-| Generated app installation and checks | Bun install, typecheck, lint and all 322 tests passed. |
-| Generated production build | dist/main.js built successfully. |
-| Installed-source comparison | Packed CLI reported no differences for the generated Button. |
+| CLI | TypeScript, Biome and source-management integration tests. |
+| Starter | TypeScript, Biome, component behavior, routing, interaction, styling and Tweak tests. |
+| Package | Required archive members, checksums, metadata and the Node-compatible executable. |
+| Generated application | Creation from the packed CLI, dependency installation, application checks and production build on Ubuntu and Windows. |
+| Release | Version/changelog policy, commit identity, draft recovery and published-asset consistency. |
 
-The package contains a Node executable, bundled registry/template data, schema, documentation, third-party notices and license. Template dependencies/build outputs, local Tweak drafts/backups and environment files were excluded. No npm publication or remote repository push was performed.
+The built CLI is exercised on Node 22. The main build uses Node 24 and Bun 1.4.4. Frozen lockfile installs make dependency changes explicit.
 
-Local CI/release setup was checked without accessing or changing a Git remote or GitHub settings. Release tests use local temporary Git histories and an in-memory API. They cover missing bumps, stale branches, docs exemptions, SemVer, initial-history bootstrapping, exact commit tags, immutable published versions, partial draft recovery, checksums and blocked local/PR/fork publishing. Workflow YAML parsing, dependency gates, pinned actions and ruleset check names are tested locally. The actual hosted workflow and ruleset have not been run/applied; those require the owner's later GitHub setup.
+## Source-management coverage
 
-The cache-only packed-app smoke used `bun run smoke:release --offline`: all 322 app tests, typecheck/lint and production build passed. The catalog route test still mounts every family; its per-test timeout is 15 seconds to accommodate native/highlighter startup on cold Windows runners, with all assertions retained.
+Integration tests cover dependency resolution, existing-source adoption, repeated operations, local/upstream conflicts, forced replacement, shared helpers, custom paths/aliases, line endings, retired source, references before removal, path checks, concurrent edits and rollback.
 
-Two earlier generated-app checks exposed an existing Windows route-watch race: a child directory disappeared between listing and traversal. The canonical scanner now retries a fresh whole discovery snapshot for child ENOENT/ENOTDIR errors, with a bounded retry count. It preserves genuine errors. A deterministic rename-during-read test and a permission-error test were added; the final packed app passed the watcher test and the complete suite.
+Release tests use temporary Git histories and an in-memory GitHub API to check version gates and publishing behavior without creating live releases. The hosted workflow then tests and publishes the actual artifact.
 
-Integration coverage includes graph resolution, adoption, idempotence, local/upstream conflicts, force, shared impact, custom paths/aliases, CRLF/LF comparisons, retired files/components, source references before removal, path/junction checks, concurrent modifications and transaction rollback. Tests do not establish automatic merging or compatibility with arbitrary application customizations. Review diffs and run application checks when taking updates.
+## Run checks locally
+
+Follow the [contribution guide](https://github.com/chipguys2026/tcn/blob/main/CONTRIBUTING.md) for setup and the [release guide](releasing.md#validate-locally) for package verification commands.
+
+For UI changes, also inspect the relevant Gallery examples in a real terminal. Headless tests validate cell geometry, colors and input behavior; glyph rasterization, terminal shortcuts and font support depend on the user's environment. Automated checks do not establish compatibility with arbitrary application customizations or perform source merges.

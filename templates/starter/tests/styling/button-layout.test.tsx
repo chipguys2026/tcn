@@ -30,8 +30,8 @@ import {
   StyleReviewProvider,
   sharedStyleTarget,
 } from '@/lib/ui/style-review'
+import { themes } from '@/lib/ui/styles'
 import { ThemeProvider } from '@/lib/ui/theme/provider'
-import { themes } from '@/lib/ui/theme/tokens'
 
 test('accordion preview height follows inherited vertical padding instead of its padded default height', async () => {
   let updatePadding = (_value: number) => {}

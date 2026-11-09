@@ -1,37 +1,64 @@
-# Styling and component defaults
+# Customize appearance
 
-## Agreed contract
+Use semantic theme tokens for application colors, component props for supported per-instance changes, and local source defaults for changes across your application. Dimensions and spacing are measured in terminal cells.
 
-The intended styling order is:
+## Select a theme
 
-1. Semantic theme tokens resolve colors.
-2. Each component defines its source defaults in one place, eventually in a colocated `<name>.styles.ts`.
-3. A normal typed `styles` prop lets the caller override individual parts.
+The root layout in `src/app/layout.tsx` wraps the application in `ThemeProvider`. Change its `theme` to `"light"` or `"dark"`.
 
-Tweak will use that same override API for previews. Exported data proposes new source defaults. It must not become application runtime configuration.
+Read colors in a screen or component with `useTheme`:
 
-## Implementation status
+```tsx
+import { useTheme } from '@/lib/ui/theme/use-theme'
 
-**The complete contract above is not implemented yet.** Component-wide `styles` props are not currently available across the kit. Do not copy a hypothetical `styles={{ ... }}` example and expect it to work.
+export function Status() {
+  const theme = useTheme()
 
-The 37 draft parameters from 16 component families have been promoted into colocated `<name>.styles.ts` source defaults. Rendering and style observations consume those same constants. Other parts still declare defaults in their implementations. `button.styles.ts` also holds the semantic color resolver reused by Badge. Components call the opt-in adapter in `lib/ui/style-review.tsx`; outside its providers, this adapter returns no overrides.
+  return <text fg={theme.mutedForeground}>Ready</text>
+}
+```
 
-Only the Tweak preview mounts those providers. Explicit shared-button edits, observed part IDs and one-line geometry calculations remain in that adapter. An empty proposal no longer invents Button padding or normalizes every trigger to a fabricated baseline; the actual source defaults remain visible. The adapter is still an implementation detail being replaced, not an application style API.
+A nested `ThemeProvider` can select another theme for a section. Edit `src/lib/ui/styles.ts` to change the palettes. Components use semantic roles such as `primary`, `muted`, `destructive`, `popover` and `ring`.
 
-This release preparation reorganizes those features and documents their actual behavior. It does not silently declare the styling migration complete. The remaining work is listed in [roadmap](roadmap.md).
+## Use component props
 
-## Theme
+Each component reference lists its supported props. For example:
 
-`lib/ui/theme/tokens.ts` contains light/dark semantic tokens. `ThemeProvider` selects a theme and `useTheme()` reads it. The root layout currently chooses dark. Components use semantic roles such as primary, muted, destructive, popover and ring; do not introduce a second palette for a feature.
+```tsx
+import { Button } from '@/components/ui/button'
 
-## Dimensions and visual states
+<Button variant="secondary" paddingX={2} width={20} onPress={save}>
+  Save
+</Button>
+```
 
-Select and DropdownMenu default to auto width/height, minWidth="trigger", maxWidth=32, minHeight=3 and maxHeight=16. Limits include padding; minimums are clamped by maximums and available terminal space. Tooltip defaults to auto width/height, minWidth=3, maxWidth=32 and minHeight=3; it wraps and clips without scrollbars. See [popup sizing](popup-sizing.md).
+Here `save` is an application handler. Props differ by component; there is no kit-wide `styles` prop in this version. Consult the [component reference](ui/README.md) before passing overrides.
 
-Dimensions and spacing are terminal cells. Native glyphs are not CSS shapes. Kbd/Badge use semicircle glyphs within their padding; Switch uses a four-cell track and a two-cell rounded thumb. Input remains one content row; Textarea has an inset text viewport within a continuous surface.
+## Change source defaults
 
-Focus visuals are independent from focus ownership. A final paint pass renders rings; they do not reserve layout space. Avoid placing text immediately in the ring's one-cell expansion area. Validation state does not perform validation by itself.
+Theme palettes and shared component defaults live in `src/lib/ui/styles.ts`. The file groups defaults by component and also provides the Button variant color resolver used by Badge. Components import these values directly.
 
-## Reuse
+Edit this shared file when a change should apply to every use of a component. Shared components inherit their own defaults: changing Button can also affect modal actions and other compositions that use Button.
 
-Combobox reuses Input through Command; modal actions reuse Button; common activation uses Pressable/usePress. A reused component should inherit its own source defaults. A deliberate part override must be explicit and documented. The current Tweak inheritance graph is useful for reviewing drafts but must not define application geometry.
+After editing defaults:
+
+1. Check the component and its compositions in Gallery.
+2. Compare light/dark themes and enabled, disabled and focused states.
+3. Run `bun run check`.
+4. Commit the source changes with any relevant tests.
+
+TCN treats these edits as local changes during future component updates. See [source management](tcn.md).
+
+The shared stylesheet is installed once and retained while any installed component needs it. An update that also changes this file can conflict with your custom defaults, so review the whole stylesheet when taking an upstream change. Adding an unrelated component preserves edits when the bundled stylesheet has not changed.
+
+## Preview with Tweak
+
+Open `/tweak` to try dimensions, spacing and colors against real components. Export a proposal, review it and apply the chosen values to source. Preview overrides do not change ordinary application screens. See [Tweak](tweak.md).
+
+The preview adapter in `src/lib/ui/style-review.tsx`, including `styleSource` and `stylePart` identifiers, supports the design tool. Use documented component props and source defaults for application customization.
+
+## Account for terminal layout
+
+A terminal row and column are not physically square, and glyph shapes depend on the font. Keep spacing around controls whose focus ring extends one cell beyond their surface; rings do not reserve layout space.
+
+Select and Dropdown Menu use content-driven sizing with default maximums of 32 columns and 16 rows. Tooltip wraps within its available region. Explicit dimensions can require explicit maximum overrides; see [popup sizing](popup-sizing.md).

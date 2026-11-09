@@ -4,9 +4,9 @@ import { createStrictContext } from '@/lib/ui/create-context'
 import { icons } from '@/lib/ui/icons'
 import { Pressable } from '@/lib/ui/pressable'
 import { useComponentStyles } from '@/lib/ui/style-review'
+import { collapsibleDefaults } from '@/lib/ui/styles'
 import { useTheme } from '@/lib/ui/theme/use-theme'
 import { useControllable } from '@/lib/ui/use-controllable'
-import { collapsibleDefaults } from './collapsible.styles'
 
 const [Context, useCollapsible] = createStrictContext<{
   open: boolean

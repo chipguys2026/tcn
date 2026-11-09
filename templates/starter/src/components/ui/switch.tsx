@@ -1,9 +1,9 @@
 import { pillCaps } from '@/lib/ui/icons'
 import { Pressable } from '@/lib/ui/pressable'
 import { useComponentStyles } from '@/lib/ui/style-review'
+import { switchDefaults } from '@/lib/ui/styles'
 import { useTheme } from '@/lib/ui/theme/use-theme'
 import { useControllable } from '@/lib/ui/use-controllable'
-import { switchDefaults } from './switch.styles'
 export type SwitchProps = {
   checked?: boolean
   defaultChecked?: boolean

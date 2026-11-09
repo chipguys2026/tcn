@@ -1,46 +1,77 @@
-# GitHub-only releases
+# Release process
 
-The public distribution target is `chipguys2026/tcn` on GitHub. No npm publication, npm account, npm token or OIDC configuration is required. The CLI is distributed as an npm-compatible `.tgz` attachment on GitHub Releases.
+TCN is distributed as an npm-compatible `.tgz` asset on [GitHub Releases](https://github.com/chipguys2026/tcn/releases). Maintainers merge reviewed changes into `main`; CI builds, tests and publishes the versioned package. There is no npm publish step.
 
-## Workflows
+## Prepare a release
 
-`.github/workflows/ci-release.yml` runs on PRs to main, pushes to main and manual dispatch. It has no path filters, so required checks do not remain pending on documentation-only PRs.
+1. Create a branch from the current `main`.
+2. Change CLI or starter source and update the corresponding documentation.
+3. Increase the version in the root `package.json`.
+4. Add a nonempty `## X.Y.Z` section to the root `CHANGELOG.md`.
+5. Run the checks below, open a PR and pass `version-check` and `ci`.
+6. Merge the PR. The main workflow publishes `vX.Y.Z` after all checks pass.
 
-1. **version-check** compares committed head/base versions. The base must be an ancestor of the head. All non-documentation changes, including tests, config and workflows, require a strictly greater SemVer. Markdown and docs-only changes are exempt. Downgrades are always rejected; build-metadata-only changes are not bumps. The current version needs nonempty notes under its exact CHANGELOG.md heading, and a bump must change that file.
-2. **build** uses Bun 1.4.4 and Node 24, installs from lockfiles, checks CLI/starter, builds and packs once. The package, SHA256SUMS and release.json are uploaded as one artifact.
-3. **packed-app** downloads that exact artifact on Linux and Windows, runs its CLI on Node 22, creates an app, installs locked dependencies and runs app checks/build. Checksums/archive members are validated first.
-4. **ci** always runs and fails if any preceding check failed, was cancelled or skipped. Require stable checks `version-check` and `ci` in the main ruleset.
-5. **release** runs only on main pushes/manual dispatch in chipguys2026/tcn after all checks pass. Only this job receives contents:write. It consumes the tested artifact and checks its commit matches the workflow SHA. PRs/forks cannot publish.
+The nested starter's package version does not determine the CLI release version. Published packages are immutable; corrections require a new version.
 
-The publisher creates vVERSION at the tested commit. It uploads into a draft and publishes only after asset sizes/digests match. Published versions remain untouched, including on later docs-only commits. Failed draft uploads can resume from the original run's artifacts; different uploaded bytes or a tag at another commit are refused. Rerun the failed job in the original Actions run. GitHub chooses Latest automatically; prereleases are not marked Latest.
+## Version policy
 
-The initial push (all-zero base SHA) accepts the initial valid version/changelog. Later PRs must update from current main. Repository files cannot activate hosted branch protection: import the local ruleset after the first checks, as described in [GitHub setup](github-setup.md).
+The version check compares committed base/head revisions. Non-documentation changes, including tests, configuration and workflows, require a strictly greater SemVer. Markdown and `docs/` changes are exempt.
 
-## Maintainer flow
+A bump must update `CHANGELOG.md`, and the current version must have a nonempty section. Downgrades and build-metadata-only bumps are rejected. The base must be an ancestor of the head, so update stale branches from `main` before merging.
 
-1. Create a feature branch.
-2. Edit CLI or templates/starter source; test/review Gallery and Tweak.
-3. Increase root package.json version and add nonempty `## X.Y.Z` notes to CHANGELOG.md. The nested starter version does not control CLI releases.
-4. Open a PR, update from main and pass version-check/ci.
-5. Merge. The main workflow builds, tests and publishes the GitHub Release.
+Initial history accepts the first valid version and changelog. Branch rules must be active on GitHub to enforce these checks; see [GitHub administration](github-setup.md).
 
-## Local verification
+## Validate locally
 
 ```sh
-bun install --frozen-lockfile --offline
+bun install --frozen-lockfile
 bun run check
-bun install --frozen-lockfile --offline --cwd templates/starter
+bun install --frozen-lockfile --cwd templates/starter
 bun run template:check
 bun run pack:release
-bun run smoke:release --offline
+bun run smoke:release
 ```
 
-Omit --offline when dependency downloads are allowed. Check committed local refs with:
+The `smoke:release` command includes generated-application installation, checks and a production build. For a package/CLI-only check without installing app dependencies:
+
+```sh
+bun scripts/smoke.ts
+```
+
+Use `--offline` for smoke verification only when dependencies are cached. Use `--keep` to retain the generated application for inspection.
+
+Check the version policy against local committed refs:
 
 ```sh
 bun run version:check --base <BASE_COMMIT> --head <HEAD_COMMIT>
 ```
 
-Pack runs Bun's npm-compatible pack with lifecycle scripts disabled after an explicit build. Output is artifacts/release (git-ignored). `bun scripts/smoke.ts` checks package creation without app dependency installs; --full adds app checks/build, --offline restricts installs to cache, --keep preserves its temporary app. Smoke never contacts GitHub.
+## CI stages
 
-The publisher refuses ordinary local execution. Publisher tests use an in-memory API, with no remote release/settings changes. First execution of the actual hosted workflow still needs verification after you publish the repository.
+| Stage | Validation |
+| --- | --- |
+| `version-check` | Committed version, changelog and branch ancestry. |
+| `build` | Frozen installs, CLI/starter checks, then one build and package. Uses Bun 1.4.4 and Node 24. |
+| `packed-app` | The exact package on Ubuntu and Windows with Node 22; generates, installs, checks and builds an app. |
+| `ci` | Requires every preceding stage to succeed. |
+| `release` | Publishes the tested artifact on main pushes or manual dispatch in this repository. |
+
+The release job receives `contents: write`; other jobs use read-only repository permissions. PRs and forks do not publish.
+
+## Release assets
+
+`bun run pack:release` writes these assets to `artifacts/release/`:
+
+- `tcn-X.Y.Z.tgz`: CLI executable, bundled registry/template, schema, documentation and license notices.
+- `SHA256SUMS`: package checksum.
+- `release.json`: version, source commit and artifact metadata.
+
+CI uploads the package once and downloads that artifact for testing and publishing. The publisher verifies the source commit and assets before making a draft public. Consumers install the release tarball using npm, Bun or pnpm.
+
+## Retry a failed workflow
+
+If setup or a download fails temporarily, rerun failed jobs in the original Actions run. If source needs a fix, submit a new version through the normal PR flow.
+
+A failed release upload can resume its draft using the original run's artifacts. The publisher refuses different bytes for an existing asset and refuses a tag pointing at another commit. Already published versions are left unchanged, including after documentation-only commits.
+
+The publishing script is restricted to the hosted release environment. Run `pack:release` and smoke checks locally rather than invoking the publisher.

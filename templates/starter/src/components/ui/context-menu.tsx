@@ -7,7 +7,7 @@ import {
 import type { FloatingContentProps, FloatingRootProps } from '@/lib/ui/floating'
 import { createMenuFamily } from '@/lib/ui/menu'
 import { Pressable } from '@/lib/ui/pressable'
-import { contextMenuDefaults } from './context-menu.styles'
+import { contextMenuDefaults } from '@/lib/ui/styles'
 
 const menu = createMenuFamily(
   'ContextMenu',

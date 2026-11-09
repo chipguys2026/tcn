@@ -1,6 +1,6 @@
 # Project configuration
 
-TCN uses `tcn.json`, serving the CLI configuration role of shadcn's components.json without unrelated browser, CSS, Tailwind or server-component settings.
+TCN reads `tcn.json` in your application root to decide where component files go and how their imports are written. `tcn init` creates it with these defaults:
 
 ```json
 {
@@ -19,19 +19,55 @@ TCN uses `tcn.json`, serving the CLI configuration role of shadcn's components.j
 }
 ```
 
-| Field | Meaning |
+## Choose paths and aliases
+
+`paths` are physical destinations relative to the project root. `aliases` are the import prefixes used by the copied source.
+
+| Field | Purpose |
 | --- | --- |
-| version | Configuration format, currently 1. |
-| registry | Currently bundled: immutable source shipped with this CLI package. |
-| packageManager | Currently bun, matching the application runtime. |
-| paths.ui / paths.lib | Physical destinations relative to the application root. |
-| aliases.ui / aliases.lib | Import prefixes used in generated source. |
-| $schema | Local JSON Schema installed by init for editor completion. |
+| `paths.ui` | Component source destination. |
+| `paths.lib` | Shared theme, interaction and composition helpers. |
+| `aliases.ui` | Import prefix for component files. |
+| `aliases.lib` | Import prefix for shared helpers. |
+| `$schema` | Local schema for editor completion and validation. |
+| `version` | Configuration format; use `1`. |
+| `registry` | Source snapshot; use `"bundled"`. |
+| `packageManager` | Dependency installer; use `"bun"`. |
 
-Destinations cannot overlap or point outside the project. Symlinks/junctions in managed target paths are rejected. Internal imports and re-exports, including type imports, are rewritten from the compiled source graph. Relative imports remain relative and are recalculated for the chosen destinations.
+For example, to use `src/ui` and `src/shared/ui`, set:
 
-The application's TypeScript/runtime alias resolution must already match the chosen aliases. Init provides the default `@/* -> src/*` mapping in new projects; configuring an existing project does not rewrite its tsconfig. Change paths/aliases before adding components. Once files are installed, restore the original layout or explicitly migrate files, imports and metadata together.
+```json
+{
+  "paths": {
+    "ui": "src/ui",
+    "lib": "src/shared/ui"
+  },
+  "aliases": {
+    "ui": "@/ui",
+    "lib": "@/shared/ui"
+  }
+}
+```
 
-`.tcn/manifest.json` records installed units, explicit/transitive ownership, source revision, dependency graph and original installed content/hash. CLI commands use it to preserve edited source, detect upstream changes and avoid deleting shared dependencies. It is project history and should be committed; do not hand-edit it. Adopting existing source uses the current bundled registry as a comparison baseline and preserves every local byte.
+These fields replace the corresponding sections in the full configuration. TCN rewrites imports between managed source files for the selected layout.
 
-The generated schema is `.tcn/schema.json`. `.tcn/transaction.lock` is temporary and must not be committed. A live lock prevents concurrent writes. If a process crashes, verify it has exited before removing its stale lock. Neither tcn.json nor installed metadata is imported by normal TUI startup or by Tweak.
+Your TypeScript and runtime alias resolution must match. New starters include `@/* -> src/*`. In an existing project, configure this mapping yourself; `init` does not rewrite its `tsconfig.json`.
+
+Choose your layout **before adding components**. Moving installed files requires migrating their imports and tracking metadata together; changing `tcn.json` alone does not move them. Destinations must stay inside the project, must not overlap, and cannot traverse symlinks or junctions.
+
+## Keep project metadata in Git
+
+| File | Purpose | Commit? |
+| --- | --- | --- |
+| `tcn.json` | Paths, aliases and CLI settings. | Yes |
+| `.tcn/manifest.json` | Installed source baseline and dependency ownership. | Yes |
+| `.tcn/schema.json` | JSON Schema for the project configuration. | Yes |
+| `.tcn/transaction.lock` | Temporary lock during a source operation. | No |
+
+The manifest lets TCN distinguish local edits from changes in a newer CLI's bundled source. It also tracks shared helpers so removing one component does not remove another component's dependencies. Let the CLI maintain this file.
+
+These files are used by CLI commands. Your application reads its component source directly at runtime.
+
+## Source availability
+
+Each CLI release includes its own registry and starter snapshot. `init` and `add` can write source offline with `--no-install`; installing package dependencies still requires network access or a populated Bun cache. Remote registries are not supported in this release.

@@ -1,16 +1,8 @@
-# Development
+# Develop and build your application
 
-## Requirements
+Run commands from your application root, where `package.json` lives. Use Bun 1.3.14 or newer and configure your terminal with a Nerd Font for icons.
 
-- Bun on PATH. The package requires Bun >= 1.3.14 and records the development package manager version in `package.json`.
-- A terminal configured with a Nerd Font, preferably a Mono variant.
-- Native OpenTUI dependencies installed for the platform where the application will run.
-
-The development workflow has been exercised on Windows/PowerShell. Check installation, tests, renderer startup and terminal cleanup on other platforms before claiming support for them.
-
-## Commands
-
-Run all commands from the opentui-starter directory:
+## Development commands
 
 ```sh
 bun install
@@ -22,24 +14,50 @@ bun run dev
 | `bun run dev` | Watch source, regenerate routes and restart the app. |
 | `bun run start` | Generate routes and run source once. |
 | `bun run routes:generate` | Update the static route manifest. |
+| `bun run typecheck` | Generate routes and check TypeScript. |
+| `bun run lint` | Check source with Biome. |
 | `bun run format` | Apply Biome formatting and safe fixes. |
-| `bun run check` | TypeScript, lint and tests. |
 | `bun run test` | Generate routes and run Bun tests. |
-| `bun run build` | Generate routes, typecheck and bundle. |
+| `bun run check` | Run TypeScript, lint and tests. |
+| `bun run build` | Generate routes, typecheck and bundle the application. |
 | `bun run start:prod` | Run `dist/main.js`. |
 
-The dev process restarts on source changes; it does not provide React Fast Refresh or preserve arbitrary component state across restarts. Stop it before moving/renaming the project on Windows.
+The dev process restarts on source changes. It does not preserve component state across restarts. Stop it before moving or renaming the project directory on Windows.
 
-## Tests
+## Edit screens and components
 
-Tests are grouped under `tests/components`, `router`, `runtime`, `styling` and `tweak`. Type-only component API fixtures are checked by TypeScript. Headless render tests use the OpenTUI test renderer and mock keyboard/mouse input.
+Start with `src/features/home/home-page.tsx` for your Home screen. Add features under `src/features` and routes under `src/app`; see [routing](routing.md).
 
-Verify the behavior affected by a change. For interaction or layout regressions, use real native geometry and observable input/render behavior. Wrap updates and render passes that trigger React state in `act`.
+Components in `src/components/ui` and helpers in `src/lib/ui` are local source. Edit them to fit your application. If you use TCN updates, keep its manifest in Git so it can identify your changes.
 
-The watcher tests create temporary directories and exercise file additions, renames, conflicts and recovery. Do not weaken them to make an unrelated UI edit pass.
+## Run tests
 
-## Build and distribution
+Tests are grouped under `tests/components`, `router`, `runtime`, `styling` and `tweak`. Type-only API fixtures are checked by TypeScript. Headless component tests use OpenTUI's test renderer and simulated keyboard/mouse input.
 
-The bundle is a Bun entry point with external OpenTUI, React and Zustand dependencies. It requires an installed runtime dependency tree; it is not a standalone executable. The package remains `private: true` to prevent accidental npm publication of an application starter. Publishing the repository is separate from publishing an npm package.
+Run a specific suite while working:
 
-Do not commit `node_modules`, `dist`, coverage or local drafts. Keep the lockfile. Follow [CONTRIBUTING](../CONTRIBUTING.md) when changing the public component contract.
+```sh
+bun test tests/components/button.test.tsx
+```
+
+For layout or interaction changes, test observable rendering and input behavior and inspect the result in a real terminal. Wrap updates that trigger React state in `act`. The routing/watcher tests exercise additions, renames and recovery using temporary directories.
+
+When removing the sample Gallery or Tweak features, update the tests that depend on them, including starter structure assertions.
+
+## Build for deployment
+
+```sh
+bun run check
+bun run build
+bun run start:prod
+```
+
+The bundle at `dist/main.js` keeps OpenTUI, React and Zustand external. Deploy it with `package.json` and `bun.lock`, install runtime dependencies for the target platform, and run it with Bun. It is not a standalone binary.
+
+The starter package is private by default. If you choose to distribute your application, define its installation and packaging separately.
+
+## Files to commit
+
+Keep source, tests, documentation, `bun.lock` and the generated route manifest in Git. For projects configured with TCN, also keep `tcn.json`, `.tcn/manifest.json` and `.tcn/schema.json`.
+
+Dependencies, build output, coverage and local Tweak drafts are ignored. An explicit `design/component-review.json` export can be committed when it helps review a design.

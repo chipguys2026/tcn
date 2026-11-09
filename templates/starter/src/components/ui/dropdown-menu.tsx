@@ -1,6 +1,6 @@
 import type { ComponentProps } from 'react'
 import { createMenuFamily } from '@/lib/ui/menu'
-import { dropdownMenuDefaults } from './dropdown-menu.styles'
+import { dropdownMenuDefaults } from '@/lib/ui/styles'
 
 const menu = createMenuFamily(
   'DropdownMenu',

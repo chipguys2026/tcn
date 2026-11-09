@@ -1,7 +1,7 @@
 import type { PropsWithChildren } from 'react'
+import type { ThemeName } from '@/lib/ui/styles'
+import { themes } from '@/lib/ui/styles'
 import { ThemeContext } from './context'
-import type { ThemeName } from './tokens'
-import { themes } from './tokens'
 
 type ThemeProviderProps = PropsWithChildren<{ theme?: ThemeName }>
 

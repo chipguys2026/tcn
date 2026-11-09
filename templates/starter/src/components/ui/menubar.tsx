@@ -13,8 +13,8 @@ import { createMenuFamily } from '@/lib/ui/menu'
 import { PartBox, PartText } from '@/lib/ui/parts'
 import { Pressable, type PressableHandle } from '@/lib/ui/pressable'
 import { RovingGroup, useRovingItem } from '@/lib/ui/roving-group'
+import { menubarDefaults as d } from '@/lib/ui/styles'
 import { useControllable } from '@/lib/ui/use-controllable'
-import { menubarDefaults as d } from './menubar.styles'
 
 type Entry = {
   value: string

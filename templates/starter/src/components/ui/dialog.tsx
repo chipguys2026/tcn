@@ -1,5 +1,5 @@
 import { createFloatingFamily } from '@/lib/ui/floating'
-import { dialogDefaults } from './dialog.styles'
+import { dialogDefaults } from '@/lib/ui/styles'
 
 const family = createFloatingFamily('Dialog', {
   modal: true,

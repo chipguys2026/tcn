@@ -20,8 +20,8 @@ import {
 } from '@/lib/ui/focus/use-focusable'
 import { createFocusRing, useFocusRing } from '@/lib/ui/focus-ring'
 import { useComponentStyles } from '@/lib/ui/style-review'
+import { inputDefaults } from '@/lib/ui/styles'
 import { useTheme } from '@/lib/ui/theme/use-theme'
-import { inputDefaults } from './input.styles'
 
 export type InputHandle = FocusableHandle
 type SharedProps = {

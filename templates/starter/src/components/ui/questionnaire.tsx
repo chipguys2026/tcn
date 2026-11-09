@@ -3,11 +3,11 @@ import { type PropsWithChildren, useRef, useState } from 'react'
 import { createStrictContext } from '@/lib/ui/create-context'
 import { useFocusScope } from '@/lib/ui/focus/focus-scope'
 import { PartBox, PartText } from '@/lib/ui/parts'
+import { questionnaireDefaults as d } from '@/lib/ui/styles'
 import { useControllable } from '@/lib/ui/use-controllable'
 import { Button } from './button'
 import { Checkbox } from './checkbox'
 import { Input } from './input'
-import { questionnaireDefaults as d } from './questionnaire.styles'
 import { RadioGroup, RadioGroupItem } from './radio-group'
 
 export type QuestionnaireAnswer = { choices: string[]; text: string }

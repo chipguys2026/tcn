@@ -5,8 +5,8 @@ import { act } from 'react'
 import { Input } from '@/components/ui/input'
 import { emptyProfile } from '@/features/tweak/storage'
 import { ComponentStylesProvider } from '@/lib/ui/style-review'
+import { themes } from '@/lib/ui/styles'
 import { ThemeProvider } from '@/lib/ui/theme/provider'
-import { themes } from '@/lib/ui/theme/tokens'
 
 for (const theme of ['light', 'dark'] as const)
   for (const disabled of [false, true])

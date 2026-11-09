@@ -11,9 +11,9 @@ import { useFocusable } from '@/lib/ui/focus/use-focusable'
 import { useFocusRing } from '@/lib/ui/focus-ring'
 import { PartBox } from '@/lib/ui/parts'
 import { useComponentStyles } from '@/lib/ui/style-review'
+import { messageScrollerDefaults as d } from '@/lib/ui/styles'
 import { useTheme } from '@/lib/ui/theme/use-theme'
 import { Button } from './button'
-import { messageScrollerDefaults as d } from './message-scroller.styles'
 
 type Snapshot = {
   top: number

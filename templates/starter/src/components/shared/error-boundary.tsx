@@ -1,5 +1,5 @@
 import { Component, type ErrorInfo, type PropsWithChildren } from 'react'
-import { themes } from '@/lib/ui/theme/tokens'
+import { themes } from '@/lib/ui/styles'
 
 type ErrorState = { failed: boolean }
 

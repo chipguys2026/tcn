@@ -1,10 +1,24 @@
 # Menubar
 
-[Source](../../src/components/ui/menubar.tsx) · [Defaults](../../src/components/ui/menubar.styles.ts) · Gallery: `/gallery/menubar`
+Group application actions into top-level menus with optional nested submenus.
 
-Native TUI menu composition with the shadcn compound shape. Imports come from `@/components/ui/menubar`.
+[Source](../../src/components/ui/menubar.tsx) · [Defaults](../../src/lib/ui/styles.ts) · Gallery: `/gallery/menubar`
+
+## Usage
 
 ```tsx
+import {
+  Menubar,
+  MenubarContent,
+  MenubarItem,
+  MenubarMenu,
+  MenubarSeparator,
+  MenubarSub,
+  MenubarSubContent,
+  MenubarSubTrigger,
+  MenubarTrigger,
+} from '@/components/ui/menubar'
+
 <Menubar>
   <MenubarMenu value="file">
     <MenubarTrigger>File</MenubarTrigger>
@@ -22,8 +36,36 @@ Native TUI menu composition with the shadcn compound shape. Imports come from `@
 </Menubar>
 ```
 
-Menubar owns the open menu ID: `value`, `defaultValue=''`, `onValueChange`. Every top-level Menu needs a unique value. Disabled triggers are excluded from navigation. Left/Right/Home/End move between top-level triggers, switching an already open menu. Down/Up/Enter/Space open; vertical arrows/Home/End and typeahead navigate menu items. Right opens a submenu; Left/Escape closes its level. Escape at the top closes and restores its trigger. Tab exits the popup scope.
+Supply `createProject` and `exportJSON` from your application.
 
-Group, Label, Separator and Shortcut compose content. Item accepts React children, optional `textValue` for typeahead, `disabled`, `onSelect`, `closeOnSelect=true`. Shortcut displays a hint; the app binds actual accelerators. CheckboxItem supports checked/defaultChecked/onCheckedChange; RadioGroup supports value/defaultValue/onValueChange and RadioItem requires value. Use closeOnSelect=false to keep check/radio menus open.
+## API
 
-Sub/SubTrigger/SubContent can nest. Menu selection closes the bar. Popup sizing is auto with minWidth=trigger, maxWidth=40 and maxHeight=20. Content accepts the shared popup sizing/placement props. Menubar reuses the shared DropdownMenu/ContextMenu selection, roving, floating placement and overlay primitives. Source defaults do not load Tweak JSON at runtime.
+| Part | Key props |
+| --- | --- |
+| `Menubar` | Open menu ID through `value` or `defaultValue=""`, with `onValueChange`. |
+| `MenubarMenu` | Unique required `value` for each top-level menu. |
+| `MenubarTrigger` | Trigger content and disabled state. |
+| `MenubarItem` | Children, `textValue` for typeahead, `disabled`, `onSelect`, `closeOnSelect=true`. |
+| `MenubarCheckboxItem` | `checked` or `defaultChecked`, with `onCheckedChange`. |
+| `MenubarRadioGroup`, `MenubarRadioItem` | Group value/defaultValue/onValueChange; each item requires `value`. |
+| `MenubarGroup`, `MenubarLabel`, `MenubarSeparator` | Group and label related items. |
+| `MenubarShortcut` | Display a shortcut hint; bind the actual shortcut in your application. |
+| `MenubarSub`, `MenubarSubTrigger`, `MenubarSubContent` | Compose nested submenus. |
+
+Set `closeOnSelect=false` to keep a menu open while changing checkbox/radio values. Selecting a normal action closes the menu bar.
+
+## Keyboard behavior
+
+| Key | Behavior |
+| --- | --- |
+| Left/Right, Home/End on top-level triggers | Move between enabled triggers and switch an open menu. |
+| Down/Up, Enter/Space on a trigger | Open its menu. |
+| Arrows, Home/End, typeahead inside a menu | Move between enabled items. |
+| Right on a submenu trigger | Open the submenu. |
+| Left/Escape in a submenu | Close that level. |
+| Escape in the top-level menu | Close and restore trigger focus. |
+| Tab | Exit the popup scope. |
+
+## Sizing
+
+Content uses auto sizing, a trigger-width minimum, a maximum width of 40 columns and maximum height of 20 rows. It accepts the shared popup sizing and placement props. See [popup sizing](../popup-sizing.md) for how bounds interact.

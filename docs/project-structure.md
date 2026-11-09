@@ -1,10 +1,12 @@
 # Repository structure
 
+This guide is for contributors working on TCN. For a generated application, see the [application structure](https://github.com/chipguys2026/tcn/blob/main/templates/starter/docs/project-structure.md).
+
 ```text
 tcn/
 ├── .github/
-│   ├── workflows/ci-release.yml # Local definition; runs after publishing to GitHub
-│   └── main-ruleset.json       # Import on GitHub later; not active from this file alone
+│   ├── workflows/ci-release.yml # Build, test and release pipeline
+│   └── main-ruleset.json       # Branch ruleset for GitHub administration
 ├── package.json              # npm package and tcn executable
 ├── src/                      # Node-compatible CLI implementation
 │   ├── main.ts               # Arguments and command dispatch
@@ -34,6 +36,6 @@ tcn/
 └── dist/                     # Generated npm payload
 ```
 
-There is one maintained source for components: the starter. The registry compiler uses TypeScript module resolution to collect file ownership, imports, dependencies and package requirements. Component styles belong to their component unit. Shared helper files are internal units, copied once per project and reference-counted through explicit root reachability.
+There is one maintained source for components: the starter. The registry compiler uses TypeScript module resolution to collect file ownership, imports, dependencies and package requirements. Theme palettes and component defaults live in `templates/starter/src/lib/ui/styles.ts`. Shared files are internal units, copied once per project and retained while installed components need them.
 
-Generated registry JSON is not manually maintained. Build reads only this repository, never the earlier sibling starter. The application UI has no dependency on CLI code and does not read tcn.json or .tcn metadata at runtime. Root CLI tests and template tests have separate commands, dependency scopes and tsconfig files.
+Generated registry JSON is not manually maintained. The application UI has no dependency on CLI code and does not read tcn.json or .tcn metadata at runtime. Root CLI tests and template tests have separate commands, dependency scopes and tsconfig files.

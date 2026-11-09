@@ -4,10 +4,10 @@ import { useRef } from 'react'
 import { useFocusable } from '@/lib/ui/focus/use-focusable'
 import { useFocusRing } from '@/lib/ui/focus-ring'
 import { useComponentStyles } from '@/lib/ui/style-review'
+import { sliderDefaults } from '@/lib/ui/styles'
 import { useTheme } from '@/lib/ui/theme/use-theme'
 import { useBoxSize } from '@/lib/ui/use-box-size'
 import { useControllable } from '@/lib/ui/use-controllable'
-import { sliderDefaults } from './slider.styles'
 
 export type SliderProps = {
   id?: string

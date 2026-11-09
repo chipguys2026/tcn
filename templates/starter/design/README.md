@@ -1,10 +1,12 @@
 # Design proposals
 
-This directory belongs to the Tweak development workflow. It is not read by ordinary application startup.
+Tweak saves design work here. The application uses component source defaults; it does not load these files as runtime settings.
 
-- `component-review.draft.json`: local autosave, ignored by git.
-- `component-review.json`: explicit proposal export, optionally committed for design discussion.
-- Temporary write files are ignored.
-- `component-review.defaults-<timestamp>.backup.json`: preserved draft before source-default promotion; ignored by git.
+| File | Purpose | Commit? |
+| --- | --- | --- |
+| `component-review.draft.json` | Local autosave. | No |
+| `component-review.json` | Explicit proposal export for review. | Optional |
+| `*.backup.json` | Local backups of design work. | No |
+| `*.tmp` | Temporary writes. | No |
 
-Review exported parameters and apply approved changes to component source defaults. Exporting a proposal does not modify runtime defaults. See [Tweak](../docs/tweak.md) and [styling status](../docs/styling.md).
+To apply a proposal, review the values, edit the corresponding component defaults and verify the result in Gallery. See [Tweak](../docs/tweak.md) and [styling](../docs/styling.md).

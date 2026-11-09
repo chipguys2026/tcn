@@ -1,8 +1,8 @@
 import type { PropsWithChildren } from 'react'
 import { type IconName, icons } from '@/lib/ui/icons'
 import { useComponentStyles } from '@/lib/ui/style-review'
+import { emptyDefaults } from '@/lib/ui/styles'
 import { useTheme } from '@/lib/ui/theme/use-theme'
-import { emptyDefaults } from './empty.styles'
 export function Empty({ children }: PropsWithChildren) {
   const componentStyle = useComponentStyles('empty')
 

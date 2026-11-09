@@ -1,8 +1,8 @@
-# progress
+# Progress
 
 A determinate progress indicator.
 
-[Source](../../src/components/ui/progress.tsx) · Gallery: `/gallery/progress` · [Styling status](../styling.md)
+[Source](../../src/components/ui/progress.tsx) · Gallery: `/gallery/progress` · [Customization](../styling.md)
 
 ## Usage
 
@@ -12,9 +12,7 @@ import { Progress } from '@/components/ui/progress'
 <Progress value={45} max={100} showValue />
 ```
 
-Examples use surrounding application state/handlers where shown; they do not add persistence or business behavior.
-
-## Public API
+## API
 
 Exports: `Progress`.
 
@@ -26,13 +24,11 @@ Exports: `Progress`.
 
 No focus or activation; the owner updates value.
 
-Stateful components follow the [controlled/uncontrolled conventions](../architecture.md#state).
-
-## Source defaults and appearance
+## Appearance
 
 Cell-based bar with optional value text. Values are clamped to the accepted range.
 
-Declared parameter defaults (expressions refer to the linked source):
+Defaults from the linked source:
 
 | Parameter | Default |
 | --- | --- |
@@ -40,14 +36,10 @@ Declared parameter defaults (expressions refer to the linked source):
 | Progress.width | `24` |
 | Progress.showValue | `true` |
 
-The universal per-part `styles` override API is not complete yet; default-file migration is in progress. Current Tweak parameters are preview proposals, not a stable application style contract. See [styling](../styling.md) before customizing or promoting defaults.
-
 ## Reuse
 
 Uses semantic theme tokens.
 
-## TUI boundaries
+## Notes
 
 No indeterminate animation. Operation state belongs to the caller.
-
-All dimensions are terminal cells. Native glyph appearance depends on the terminal font; browser accessibility/DOM behavior is not implied.

@@ -32,8 +32,8 @@ import {
   sharedStyleTarget,
   styleOwner,
 } from '@/lib/ui/style-review'
+import { type ThemeName, themes } from '@/lib/ui/styles'
 import { ThemeProvider } from '@/lib/ui/theme/provider'
-import { type ThemeName, themes } from '@/lib/ui/theme/tokens'
 import { useTheme } from '@/lib/ui/theme/use-theme'
 import { useRouter } from '@/router'
 import { exportDefaults } from './export'

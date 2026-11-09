@@ -1,19 +1,30 @@
 # Button Group
 
-Composition of existing buttons, inspired by [shadcn Button Group](https://ui.shadcn.com/docs/components/button-group).
+Arrange related buttons horizontally or vertically, with optional text and separators.
 
-[Source](../../src/components/ui/button-group.tsx) · [Defaults](../../src/components/ui/button-group.styles.ts) · Gallery: `/gallery/button-group`
+[Source](../../src/components/ui/button-group.tsx) · [Defaults](../../src/lib/ui/styles.ts) · Gallery: `/gallery/button-group`
+
+## Usage
 
 ```tsx
+import {
+  ButtonGroup,
+  ButtonGroupText,
+  ButtonGroupSeparator,
+} from '@/components/ui/button-group'
+import { Button } from '@/components/ui/button'
+
 <ButtonGroup>
   <ButtonGroupText>Changes</ButtonGroupText>
   <Button onPress={save}>Save</Button>
   <ButtonGroupSeparator />
-  <Button variant="secondary" onPress={preview}>Preview</Button>
+  <Button variant="secondary" onPress={preview}>
+    Preview
+  </Button>
 </ButtonGroup>
 ```
 
-Import from `@/components/ui/button-group`; import Button from its own module.
+## API and behavior
 
 | Part | Contract |
 | --- | --- |
@@ -21,6 +32,8 @@ Import from `@/components/ui/button-group`; import Button from its own module.
 | ButtonGroupText | String children; muted surface, one cell horizontal padding |
 | ButtonGroupSeparator | No props; separator perpendicular to the containing group's orientation |
 
+## Layout and interaction
+
 The source gap is zero; horizontal groups wrap at the available width. Nested groups scope their own orientation. ButtonGroupSeparator reuses Separator. The group creates no focus target: ordinary Tab order, disabled handling, Enter/Space/click activation and focus rings come from each Button. This is a visual grouping, not a ToggleGroup or a roving-focus toolbar.
 
-All three parts are editable in Tweak; buttons keep shared Button defaults and preview inheritance. No size or round variant is introduced. See [styling](../styling.md).
+Buttons keep their own variants and source defaults. See [styling](../styling.md) to customize appearance.

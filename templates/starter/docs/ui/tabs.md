@@ -1,20 +1,29 @@
-# tabs
+# Tabs
 
 A selection group that reveals one associated panel.
 
-[Source](../../src/components/ui/tabs.tsx) · Gallery: `/gallery/tabs` · [Styling status](../styling.md)
+[Source](../../src/components/ui/tabs.tsx) · Gallery: `/gallery/tabs` · [Customization](../styling.md)
 
 ## Usage
 
 ```tsx
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs'
 
-<Tabs defaultValue="overview"><TabsList><TabsTrigger value="overview">Overview</TabsTrigger><TabsTrigger value="settings">Settings</TabsTrigger></TabsList><TabsContent value="overview"><text>Overview</text></TabsContent><TabsContent value="settings"><text>Settings</text></TabsContent></Tabs>
+<Tabs defaultValue="overview">
+  <TabsList>
+    <TabsTrigger value="overview">Overview</TabsTrigger>
+    <TabsTrigger value="settings">Settings</TabsTrigger>
+  </TabsList>
+  <TabsContent value="overview">
+    <text>Overview</text>
+  </TabsContent>
+  <TabsContent value="settings">
+    <text>Settings</text>
+  </TabsContent>
+</Tabs>
 ```
 
-Examples use surrounding application state/handlers where shown; they do not add persistence or business behavior.
-
-## Public API
+## API
 
 Exports: `Tabs`, `TabsList`, `TabsTrigger`, `TabsContent`.
 
@@ -29,15 +38,13 @@ Exports: `Tabs`, `TabsList`, `TabsTrigger`, `TabsContent`.
 
 Arrows/Home/End navigate triggers. Automatic mode activates on movement; manual mode waits for Enter/Space. Hidden panel controls leave traversal.
 
-Stateful components follow the [controlled/uncontrolled conventions](../architecture.md#state).
+## Appearance
 
-## Source defaults and appearance
-
-Promoted defaults are defined in [tabs.styles.ts](../../src/components/ui/tabs.styles.ts) and consumed by the real component and its observations. No Tweak JSON is loaded here.
+Defaults are defined in [styles.ts](../../src/lib/ui/styles.ts). Edit this local file to change appearance across your application.
 
 Horizontal or vertical trigger lists with semantic active state.
 
-Declared parameter defaults (expressions refer to the linked source):
+Defaults from the linked source:
 
 | Parameter | Default |
 | --- | --- |
@@ -48,14 +55,10 @@ Declared parameter defaults (expressions refer to the linked source):
 | TabsTrigger.label | `value` |
 | TabsContent.forceMount | `false` |
 
-The universal per-part `styles` override API is not complete yet; default-file migration is in progress. Current Tweak parameters are preview proposals, not a stable application style contract. See [styling](../styling.md) before customizing or promoting defaults.
-
 ## Reuse
 
 Uses RovingGroup and controlled string selection.
 
-## TUI boundaries
+## Notes
 
 Tabs are local component state, not application routes. Values must match their panel values.
-
-All dimensions are terminal cells. Native glyph appearance depends on the terminal font; browser accessibility/DOM behavior is not implied.

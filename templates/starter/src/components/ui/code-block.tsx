@@ -6,10 +6,10 @@ import { useFocusable } from '@/lib/ui/focus/use-focusable'
 import { useFocusRing } from '@/lib/ui/focus-ring'
 import { PartBox, PartText } from '@/lib/ui/parts'
 import { useComponentStyles } from '@/lib/ui/style-review'
+import { codeBlockDefaults as d } from '@/lib/ui/styles'
 import { useTheme } from '@/lib/ui/theme/use-theme'
 import { useSyntaxStyle } from '@/lib/ui/use-syntax-style'
 import { Button } from './button'
-import { codeBlockDefaults as d } from './code-block.styles'
 export function CodeBlock({ children }: PropsWithChildren) {
   const theme = useTheme()
   return (

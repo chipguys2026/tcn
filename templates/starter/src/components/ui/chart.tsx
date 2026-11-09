@@ -18,9 +18,9 @@ import { useFocusable } from '@/lib/ui/focus/use-focusable'
 import { useFocusRing } from '@/lib/ui/focus-ring'
 import { PartBox, PartText } from '@/lib/ui/parts'
 import { useComponentStyles } from '@/lib/ui/style-review'
+import { chartDefaults as d } from '@/lib/ui/styles'
 import { useTheme } from '@/lib/ui/theme/use-theme'
 import { useBoxSize } from '@/lib/ui/use-box-size'
-import { chartDefaults as d } from './chart.styles'
 export type ChartConfig = Record<string, { label?: string; color?: string }>
 type Data = { data: ChartDatum[]; keys: string[]; indexKey: string }
 const [Context, useChart] = createStrictContext<{

@@ -13,9 +13,9 @@ import {
 import { useFocusRing } from '@/lib/ui/focus-ring'
 import { icons } from '@/lib/ui/icons'
 import { useComponentStyles } from '@/lib/ui/style-review'
+import { checkboxDefaults } from '@/lib/ui/styles'
 import { useTheme } from '@/lib/ui/theme/use-theme'
 import { usePress } from '@/lib/ui/use-press'
-import { checkboxDefaults } from './checkbox.styles'
 
 export type CheckedState = boolean | 'indeterminate'
 export type CheckboxHandle = FocusableHandle

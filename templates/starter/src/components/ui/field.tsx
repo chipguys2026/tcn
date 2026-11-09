@@ -5,7 +5,7 @@ import {
   useContext,
 } from 'react'
 import { PartBox, PartText } from '@/lib/ui/parts'
-import { fieldDefaults } from './field.styles'
+import { fieldDefaults } from '@/lib/ui/styles'
 import { Label } from './label'
 import { Separator } from './separator'
 

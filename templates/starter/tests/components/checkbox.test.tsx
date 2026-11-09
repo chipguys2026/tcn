@@ -12,8 +12,8 @@ import {
 import { Input } from '@/components/ui/input'
 import { FocusScope } from '@/lib/ui/focus/focus-scope'
 import { icons } from '@/lib/ui/icons'
+import { type ThemeName, themes } from '@/lib/ui/styles'
 import { ThemeProvider } from '@/lib/ui/theme/provider'
-import { type ThemeName, themes } from '@/lib/ui/theme/tokens'
 import { createNavigationStore } from '@/router/navigation-store'
 import { RouterView } from '@/router/router-view'
 

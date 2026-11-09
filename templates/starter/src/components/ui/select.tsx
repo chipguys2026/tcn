@@ -4,9 +4,9 @@ import { Overlay, type PopupSizing } from '@/lib/ui/overlay'
 import { Pressable, type PressableHandle } from '@/lib/ui/pressable'
 import { RovingGroup, useRovingItem } from '@/lib/ui/roving-group'
 import { useComponentStyles, useStyleReview } from '@/lib/ui/style-review'
+import { selectDefaults } from '@/lib/ui/styles'
 import { useTheme } from '@/lib/ui/theme/use-theme'
 import { useControllable } from '@/lib/ui/use-controllable'
-import { selectDefaults } from './select.styles'
 
 const [Context, useSelect] = createStrictContext<{
   value: string
