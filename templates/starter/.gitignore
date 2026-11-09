@@ -1,0 +1,19 @@
+node_modules/
+dist/
+.tcn/transaction.lock
+coverage/
+.env
+.env.*
+!.env.example
+design/component-review.draft.json
+design/*.tmp
+design/*.backup.json
+
+# Temporary files from CLI writes and route generation
+*.tcn-*.tmp
+src/router/routes.generated.ts.tmp
+
+# Logs and OS files
+*.log
+.DS_Store
+Thumbs.db

@@ -1,0 +1,37 @@
+{
+  "name": "opentui-starter",
+  "module": "src/main.tsx",
+  "type": "module",
+  "private": true,
+  "packageManager": "bun@1.4.4",
+  "engines": {
+    "bun": ">=1.3.14"
+  },
+  "scripts": {
+    "routes:generate": "bun scripts/generate-routes.ts",
+    "dev": "bun scripts/dev.ts",
+    "start": "bun run routes:generate && bun src/main.tsx",
+    "build": "bun scripts/build.ts",
+    "start:prod": "bun dist/main.js",
+    "typecheck": "bun run routes:generate && tsc --noEmit",
+    "lint": "biome check .",
+    "format": "biome check --write .",
+    "test": "bun run routes:generate && bun test",
+    "check": "bun run typecheck && bun run lint && bun run test"
+  },
+  "dependencies": {
+    "@opentui/core": "^0.8.1",
+    "@opentui/react": "^0.8.1",
+    "react": "^19.3.1",
+    "zustand": "^5.0.0"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^2.0.0",
+    "@types/bun": "1.4.4",
+    "@types/react": "^19.0.0",
+    "typescript": "^5.9.3"
+  },
+  "description": "A React and OpenTUI starter with reusable components, gallery, and development tools.",
+  "version": "0.1.0",
+  "license": "MIT"
+}

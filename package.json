@@ -1,0 +1,51 @@
+{
+  "name": "tcn",
+  "version": "0.1.0",
+  "description": "Source-owned React and OpenTUI components and starter CLI.",
+  "type": "module",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/chipguys2026/tcn.git"
+  },
+  "homepage": "https://github.com/chipguys2026/tcn#readme",
+  "bugs": {
+    "url": "https://github.com/chipguys2026/tcn/issues"
+  },
+  "bin": {
+    "tcn": "dist/cli.js"
+  },
+  "files": [
+    "dist",
+    "docs",
+    ".github/main-ruleset.json",
+    "README.md",
+    "LICENSE",
+    "CHANGELOG.md"
+  ],
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "build": "bun scripts/build.ts",
+    "cli": "node dist/cli.js",
+    "typecheck": "tsc --noEmit",
+    "lint": "biome check src scripts tests schemas .github/main-ruleset.json package.json tsconfig.json biome.json",
+    "format": "biome check --write src scripts tests schemas .github/main-ruleset.json package.json tsconfig.json biome.json",
+    "test": "bun run build && bun test --timeout 30000 ./tests",
+    "check": "bun run typecheck && bun run lint && bun run test",
+    "template:install": "bun install --cwd templates/starter",
+    "template:check": "bun run --cwd templates/starter check",
+    "version:check": "bun scripts/check-version.ts",
+    "pack:release": "bun run build && bun scripts/pack.ts",
+    "smoke:release": "bun scripts/smoke.ts --full",
+    "dev": "bun run --cwd templates/starter dev",
+    "prepack": "bun run build"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^2.0.0",
+    "@types/bun": "1.4.4",
+    "typescript": "^5.9.3",
+    "diff": "^8.0.2"
+  }
+}

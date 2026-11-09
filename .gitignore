@@ -1,0 +1,22 @@
+node_modules/
+dist/
+registry/index.json
+coverage/
+*.tgz
+.verification/
+artifacts/
+.env
+.env.*
+!.env.example
+templates/starter/design/component-review.draft.json
+templates/starter/design/*.backup.json
+templates/starter/design/*.tmp
+
+# Temporary files from CLI writes and route generation
+*.tcn-*.tmp
+src/router/routes.generated.ts.tmp
+
+# Logs and OS files
+*.log
+.DS_Store
+Thumbs.db

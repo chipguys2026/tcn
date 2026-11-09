@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "TCN project configuration",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["version", "registry", "packageManager", "paths", "aliases"],
+  "properties": {
+    "$schema": { "type": "string" },
+    "version": { "const": 1 },
+    "registry": { "const": "bundled" },
+    "packageManager": { "const": "bun" },
+    "paths": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["ui", "lib"],
+      "properties": {
+        "ui": { "type": "string", "minLength": 1 },
+        "lib": { "type": "string", "minLength": 1 }
+      }
+    },
+    "aliases": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["ui", "lib"],
+      "properties": {
+        "ui": { "type": "string", "minLength": 1 },
+        "lib": { "type": "string", "minLength": 1 }
+      }
+    }
+  }
+}
