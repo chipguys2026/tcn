@@ -1,6 +1,6 @@
 import type { PropsWithChildren } from 'react'
 import { PartBox, PartText } from '@/lib/ui/parts'
-import { markerDefaults as d } from './marker.styles'
+import { markerDefaults as d } from '@/lib/ui/styles'
 import { Separator } from './separator'
 export function Marker({
   children,

@@ -13,6 +13,7 @@ import {
 import { createStrictContext } from '@/lib/ui/create-context'
 import { PartBox, PartText } from '@/lib/ui/parts'
 import { useComponentStyles } from '@/lib/ui/style-review'
+import { sidebarDefaults } from '@/lib/ui/styles'
 import { useTheme } from '@/lib/ui/theme/use-theme'
 import { useBoxSize } from '@/lib/ui/use-box-size'
 import { useControllable } from '@/lib/ui/use-controllable'
@@ -20,7 +21,6 @@ import { Badge } from './badge'
 import { Button, type ButtonHandle, type ButtonProps } from './button'
 import { Input, type InputProps } from './input'
 import { Separator } from './separator'
-import { sidebarDefaults } from './sidebar.styles'
 import { Skeleton } from './skeleton'
 
 const [Context, readSidebar] = createStrictContext<{

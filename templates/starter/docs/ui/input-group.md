@@ -2,7 +2,7 @@
 
 Add prefix/suffix content and actions around a single-line or multiline editor.
 
-[Source](../../src/components/ui/input-group.tsx) · [Defaults](../../src/components/ui/input-group.styles.ts) · Gallery: `/gallery/input-group`
+[Source](../../src/components/ui/input-group.tsx) · [Defaults](../../src/lib/ui/styles.ts) · Gallery: `/gallery/input-group`
 
 ## Usage
 

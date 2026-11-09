@@ -10,9 +10,9 @@ import { createStrictContext } from '@/lib/ui/create-context'
 import { Overlay, type PopupSizing, type Side } from '@/lib/ui/overlay'
 import { Pressable, type PressableHandle } from '@/lib/ui/pressable'
 import { useComponentStyles, useStyleReview } from '@/lib/ui/style-review'
+import { tooltipDefaults } from '@/lib/ui/styles'
 import { useTheme } from '@/lib/ui/theme/use-theme'
 import { useControllable } from '@/lib/ui/use-controllable'
-import { tooltipDefaults } from './tooltip.styles'
 
 const Delay = createContext(350)
 const [Context, useTooltip] = createStrictContext<{

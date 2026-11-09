@@ -1,6 +1,6 @@
 import { PartBox } from '@/lib/ui/parts'
+import { skeletonDefaults } from '@/lib/ui/styles'
 import { useTheme } from '@/lib/ui/theme/use-theme'
-import { skeletonDefaults } from './skeleton.styles'
 
 export function Skeleton({
   width = skeletonDefaults.width,

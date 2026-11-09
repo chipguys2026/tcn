@@ -65,6 +65,12 @@ Package dependencies remain in `package.json`; review them separately because ot
 
 ## Update the starter architecture
 
+### Centralized styles in 0.1.1
+
+Version 0.1.1 replaces the former `*.styles.ts` files and `lib/ui/theme/tokens.ts` with `src/lib/ui/styles.ts`. Update the components you use, move any custom palette/default values into the shared file, and update application imports that referenced the old modules. Review the diff before applying changes.
+
+TCN retains former component style files as retired source during an update. Once your application no longer imports a former file and its custom values have been migrated, you can delete that file; a subsequent `add` drops missing retired files from that component's tracking. Keep application metadata under CLI management.
+
 Component updates do not upgrade routes, screens, configuration or development scripts. Compare starter changes and migrate those files explicitly when you need them. Running `init --force` in an existing project reinitializes CLI configuration/adoption; it does not replace the application with a new starter.
 
 If dependency installation fails after source was saved, run `bun install` in the application and retry its checks. See [troubleshooting](troubleshooting.md).

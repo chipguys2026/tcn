@@ -36,6 +36,6 @@ tcn/
 └── dist/                     # Generated npm payload
 ```
 
-There is one maintained source for components: the starter. The registry compiler uses TypeScript module resolution to collect file ownership, imports, dependencies and package requirements. Component styles belong to their component unit. Shared helper files are internal units, copied once per project and reference-counted through explicit root reachability.
+There is one maintained source for components: the starter. The registry compiler uses TypeScript module resolution to collect file ownership, imports, dependencies and package requirements. Theme palettes and component defaults live in `templates/starter/src/lib/ui/styles.ts`. Shared files are internal units, copied once per project and retained while installed components need them.
 
 Generated registry JSON is not manually maintained. The application UI has no dependency on CLI code and does not read tcn.json or .tcn metadata at runtime. Root CLI tests and template tests have separate commands, dependency scopes and tsconfig files.

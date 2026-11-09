@@ -47,7 +47,7 @@ Tab stays inside; Escape/outside click/corner close request dismissal. Focus ret
 
 ## Appearance
 
-Defaults are defined in [dialog.styles.ts](../../src/components/ui/dialog.styles.ts). Edit this local file to change appearance across your application.
+Defaults are defined in [styles.ts](../../src/lib/ui/styles.ts). Edit this local file to change appearance across your application.
 
 Centered, width 48, auto height clamped to the terminal. Borderless background, compact Header, right-aligned Footer and a fixed corner close button with one-cell horizontal padding. Dims underlying content 55%.
 

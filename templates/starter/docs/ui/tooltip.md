@@ -39,7 +39,7 @@ Focus/hover opens after a delay (default 350 ms). Blur/leave/activation hides. T
 
 Auto sizing and min/max behavior: [popup sizing](../popup-sizing.md).
 
-Defaults are defined in [tooltip.styles.ts](../../src/components/ui/tooltip.styles.ts). Edit this local file to change appearance across your application.
+Defaults are defined in [styles.ts](../../src/lib/ui/styles.ts). Edit this local file to change appearance across your application.
 
 No dimming. Placement avoids the trigger, flips sides or shrinks to prevent hover flicker at edges.
 

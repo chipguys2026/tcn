@@ -28,7 +28,7 @@ Export validation rejects unsupported fields or invalid values. Keep exports as 
 
 ## Apply the design
 
-Use the component reference's source/default links to find the relevant values. Edit a colocated `*.styles.ts` file where available, or the defaults in the component implementation. Consider compositions that reuse the changed component.
+Use the component reference's defaults link to open `src/lib/ui/styles.ts`. Find the matching component section and apply the chosen values there. Consider compositions that reuse the changed component.
 
 Then open Gallery, compare the result and commit the source change. Source edits are tracked by TCN like any other local customization. See [styling](styling.md) and [source management](tcn.md).
 

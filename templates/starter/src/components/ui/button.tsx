@@ -7,13 +7,13 @@ import {
 import { useFocusRing } from '@/lib/ui/focus-ring'
 import { type IconName, icons } from '@/lib/ui/icons'
 import { useComponentStyles } from '@/lib/ui/style-review'
-import { useTheme } from '@/lib/ui/theme/use-theme'
-import { usePress } from '@/lib/ui/use-press'
 import {
   type ButtonVariant,
   buttonDefaults,
   buttonStyles,
-} from './button.styles'
+} from '@/lib/ui/styles'
+import { useTheme } from '@/lib/ui/theme/use-theme'
+import { usePress } from '@/lib/ui/use-press'
 
 export type ButtonHandle = FocusableHandle
 type SharedProps = {

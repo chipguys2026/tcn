@@ -2,7 +2,7 @@
 
 Collect choices and free-text answers across a sequence of validated questions.
 
-[Source](../../src/components/ui/questionnaire.tsx) · [Defaults](../../src/components/ui/questionnaire.styles.ts) · Gallery: `/gallery/questionnaire`
+[Source](../../src/components/ui/questionnaire.tsx) · [Defaults](../../src/lib/ui/styles.ts) · Gallery: `/gallery/questionnaire`
 
 ## Usage
 

@@ -40,7 +40,7 @@ Arrows/Home/End navigate triggers. Automatic mode activates on movement; manual 
 
 ## Appearance
 
-Defaults are defined in [tabs.styles.ts](../../src/components/ui/tabs.styles.ts). Edit this local file to change appearance across your application.
+Defaults are defined in [styles.ts](../../src/lib/ui/styles.ts). Edit this local file to change appearance across your application.
 
 Horizontal or vertical trigger lists with semantic active state.
 

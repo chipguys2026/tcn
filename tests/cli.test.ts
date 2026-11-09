@@ -203,7 +203,7 @@ test('unmodified installed source upgrades without force and keeps a new baselin
   const next = upgrade('button')
   await commit(await planAdd(root, next, ['button'], { install: false }))
   expect(
-    (await read(root, 'src/components/ui/button.styles.ts'))?.toString(),
+    (await read(root, 'src/components/ui/button.tsx'))?.toString(),
   ).toContain('upstream revision')
   expect((await manifest(root)).items.button?.revision).toBe(
     next.items.button?.revision,
@@ -227,11 +227,28 @@ test('shared helper updates identify affected installed component roots', async 
   await commit(
     await planAdd(root, registry, ['button', 'input'], { install: false }),
   )
-  const id = '_lib/ui/focus/use-focusable',
+  const id = '_lib/ui/styles',
     next = upgrade(id),
     plan = await planAdd(root, next, ['button'], { install: false })
   expect(plan.messages.join()).toContain('also affects:')
   expect(plan.messages.join()).toContain('input')
+})
+
+test('a shared stylesheet preserves application edits and remains until its last component is removed', async () => {
+  const root = await fixture(),
+    path = 'src/lib/ui/styles.ts'
+  await commit(await planAdd(root, registry, ['button'], { install: false }))
+  const original = (await read(root, path))?.toString() ?? ''
+  expect(original).toContain('export const themes')
+  const customized = `${original}\n// application palette\n`
+  await writeFile(join(root, path), customized)
+  await commit(await planAdd(root, registry, ['input'], { install: false }))
+  expect((await read(root, path))?.toString()).toBe(customized)
+  await commit(await planRemove(root, registry, ['button']))
+  expect((await read(root, path))?.toString()).toBe(customized)
+  await expect(planRemove(root, registry, ['input'])).rejects.toThrow('--force')
+  await commit(await planRemove(root, registry, ['input'], { force: true }))
+  expect(await read(root, path)).toBeNull()
 })
 test('custom destinations rewrite aliases and relative imports, including type imports', async () => {
   const config = structuredClone(defaultConfig)
@@ -386,9 +403,18 @@ test('existing dependency versions remain app owned', async () => {
   ).toBe('99.0.0')
 })
 test('files retired upstream retain ownership and remain removable with their component', async () => {
-  const root = await fixture()
-  await commit(await planAdd(root, registry, ['button'], { install: false }))
-  const next = structuredClone(registry),
+  const root = await fixture(),
+    previous = structuredClone(registry),
+    legacyPath = 'src/components/ui/button.legacy.ts',
+    legacyContent = 'export const legacy = true\n'
+  previous.items.button?.files.push({
+    path: legacyPath,
+    content: legacyContent,
+    hash: hash(legacyContent),
+    imports: [],
+  })
+  await commit(await planAdd(root, previous, ['button'], { install: false }))
+  const next = structuredClone(previous),
     item = next.items.button
   if (!item) throw new Error('Missing button')
   item.files = item.files.filter((file) => file.path.endsWith('.tsx'))
@@ -397,17 +423,13 @@ test('files retired upstream retain ownership and remain removable with their co
     file.hash = hash(file.content)
     file.imports = []
   }
-  item.revision = 'retired-style'
+  item.revision = 'retired-file'
   const plan = await planAdd(root, next, ['button'], { install: false })
   expect(plan.messages.join()).toContain('no longer distributes')
   await commit(plan)
-  expect(
-    (await manifest(root)).items.button?.files[
-      'src/components/ui/button.styles.ts'
-    ],
-  ).toBeDefined()
+  expect((await manifest(root)).items.button?.files[legacyPath]).toBeDefined()
   await commit(await planRemove(root, next, ['button']))
-  expect(await read(root, 'src/components/ui/button.styles.ts')).toBeNull()
+  expect(await read(root, legacyPath)).toBeNull()
 })
 test('Windows line endings are not local edits, while transaction guards still compare exact bytes', async () => {
   const root = await fixture()

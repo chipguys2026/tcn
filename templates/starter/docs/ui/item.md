@@ -2,7 +2,7 @@
 
 Compose a list entry with media, descriptive content and actions.
 
-[Source](../../src/components/ui/item.tsx) · [Defaults](../../src/components/ui/item.styles.ts) · Gallery: `/gallery/item`
+[Source](../../src/components/ui/item.tsx) · [Defaults](../../src/lib/ui/styles.ts) · Gallery: `/gallery/item`
 
 ## Usage
 

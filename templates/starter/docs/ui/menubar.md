@@ -2,7 +2,7 @@
 
 Group application actions into top-level menus with optional nested submenus.
 
-[Source](../../src/components/ui/menubar.tsx) · [Defaults](../../src/components/ui/menubar.styles.ts) · Gallery: `/gallery/menubar`
+[Source](../../src/components/ui/menubar.tsx) · [Defaults](../../src/lib/ui/styles.ts) · Gallery: `/gallery/menubar`
 
 ## Usage
 

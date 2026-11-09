@@ -69,8 +69,8 @@ Your application owns these files. See the [component reference](docs/ui/README.
 ## Customize the application
 
 - Change light/dark theme selection in `src/app/layout.tsx`.
-- Edit semantic colors in `src/lib/ui/theme/tokens.ts`.
-- Adjust component defaults in their source and colocated `*.styles.ts` files.
+- Edit semantic colors in the `themes` section of `src/lib/ui/styles.ts`.
+- Adjust shared component defaults in `src/lib/ui/styles.ts`.
 - Use Tweak to preview a design and export a proposal, then apply the chosen values to source.
 
 See [styling](docs/styling.md) and [Tweak](docs/tweak.md) for details. Tweak exports do not automatically change application defaults.

@@ -2,7 +2,7 @@
 
 Compose page navigation controls around application-owned page state.
 
-[Source](../../src/components/ui/pagination.tsx) · [Defaults](../../src/components/ui/pagination.styles.ts) · Gallery: `/gallery/pagination`
+[Source](../../src/components/ui/pagination.tsx) · [Defaults](../../src/lib/ui/styles.ts) · Gallery: `/gallery/pagination`
 
 ## Usage
 

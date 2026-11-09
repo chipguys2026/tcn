@@ -66,7 +66,7 @@ Rows with onSelect use shared keyboard/mouse activation. selected is owner-contr
 
 ## Appearance
 
-Defaults are defined in [table.styles.ts](../../src/components/ui/table.styles.ts). Edit this local file to change appearance across your application.
+Defaults are defined in [styles.ts](../../src/lib/ui/styles.ts). Edit this local file to change appearance across your application.
 
 Bottom row dividers replace background differentiation. Footer has no default fill. Selected row text uses the primary color; interactive row highlight is suppressed.
 

@@ -8,7 +8,7 @@ import {
   useRef,
 } from 'react'
 import { Button, type ButtonProps } from '@/components/ui/button'
-import type { ButtonVariant } from '@/components/ui/button.styles'
+import type { ButtonVariant } from '@/lib/ui/styles'
 import { createStrictContext } from './create-context'
 import type { IconName } from './icons'
 import { Overlay, type OverlayProps, type PopupSizing } from './overlay'

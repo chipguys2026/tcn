@@ -18,10 +18,10 @@ import { getFocusCoordinator } from '@/lib/ui/focus/coordinator'
 import { icons } from '@/lib/ui/icons'
 import { PartBox, PartText } from '@/lib/ui/parts'
 import { useComponentStyles, useStyleReview } from '@/lib/ui/style-review'
+import { toastDefaults } from '@/lib/ui/styles'
 import { useTheme } from '@/lib/ui/theme/use-theme'
 import { useControllable } from '@/lib/ui/use-controllable'
 import { Button, type ButtonProps } from './button'
-import { toastDefaults } from './toast.styles'
 
 export type ToastOptions = {
   title: string

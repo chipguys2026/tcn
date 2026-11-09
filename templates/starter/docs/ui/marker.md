@@ -2,7 +2,7 @@
 
 Separate conversation events or display a compact system note.
 
-[Source](../../src/components/ui/marker.tsx) · [Defaults](../../src/components/ui/marker.styles.ts) · Gallery: `/gallery/marker`
+[Source](../../src/components/ui/marker.tsx) · [Defaults](../../src/lib/ui/styles.ts) · Gallery: `/gallery/marker`
 
 ## Usage
 

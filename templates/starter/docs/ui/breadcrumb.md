@@ -2,7 +2,7 @@
 
 Show the user's place in a hierarchy and provide actions for navigating to parent screens.
 
-[Source](../../src/components/ui/breadcrumb.tsx) · [Defaults](../../src/components/ui/breadcrumb.styles.ts) · Gallery: `/gallery/breadcrumb`
+[Source](../../src/components/ui/breadcrumb.tsx) · [Defaults](../../src/lib/ui/styles.ts) · Gallery: `/gallery/breadcrumb`
 
 ## Usage
 

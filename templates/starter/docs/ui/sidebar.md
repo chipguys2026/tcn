@@ -2,7 +2,7 @@
 
 Build scrollable navigation with collapsible sections and a main content region.
 
-[Source](../../src/components/ui/sidebar.tsx) · [Defaults](../../src/components/ui/sidebar.styles.ts) · Gallery: `/gallery/sidebar`
+[Source](../../src/components/ui/sidebar.tsx) · [Defaults](../../src/lib/ui/styles.ts) · Gallery: `/gallery/sidebar`
 
 ## Usage
 

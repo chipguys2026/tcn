@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.1.1 — 2026-11-09
+
+- Consolidate theme palettes and component defaults into `src/lib/ui/styles.ts` for application-wide customization.
+- Distribute styles as a shared source dependency, preserving local edits and retaining the file while installed components need it.
+
 ## 0.1.0 — 2026-11-09
 
 - Create React/OpenTUI terminal applications with filesystem routing, themes, Gallery examples and Tweak design previews.

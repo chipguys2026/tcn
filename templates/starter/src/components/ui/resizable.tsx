@@ -18,10 +18,10 @@ import {
 } from '@/lib/ui/panel-layout'
 import { PartText } from '@/lib/ui/parts'
 import { useComponentStyles } from '@/lib/ui/style-review'
+import { resizableDefaults } from '@/lib/ui/styles'
 import { useTheme } from '@/lib/ui/theme/use-theme'
 import { useBoxSize } from '@/lib/ui/use-box-size'
 import { useControllable } from '@/lib/ui/use-controllable'
-import { resizableDefaults } from './resizable.styles'
 
 type PanelProps = PropsWithChildren<{
   id?: string

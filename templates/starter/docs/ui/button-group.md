@@ -2,7 +2,7 @@
 
 Arrange related buttons horizontally or vertically, with optional text and separators.
 
-[Source](../../src/components/ui/button-group.tsx) · [Defaults](../../src/components/ui/button-group.styles.ts) · Gallery: `/gallery/button-group`
+[Source](../../src/components/ui/button-group.tsx) · [Defaults](../../src/lib/ui/styles.ts) · Gallery: `/gallery/button-group`
 
 ## Usage
 

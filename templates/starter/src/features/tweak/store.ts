@@ -5,7 +5,7 @@ import type {
   ReviewField,
   ReviewValue,
 } from '@/lib/ui/style-review'
-import type { ThemeName } from '@/lib/ui/theme/tokens'
+import type { ThemeName } from '@/lib/ui/styles'
 import {
   emptyProfile,
   emptyReview,

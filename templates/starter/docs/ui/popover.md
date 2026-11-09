@@ -36,7 +36,7 @@ Escape, outside click or Tab beyond the last control closes and continues focus 
 
 ## Appearance
 
-Defaults are defined in [popover.styles.ts](../../src/components/ui/popover.styles.ts). Edit this local file to change appearance across your application.
+Defaults are defined in [styles.ts](../../src/lib/ui/styles.ts). Edit this local file to change appearance across your application.
 
 Borderless anchored popup with placement/clamping and 28% dimming.
 

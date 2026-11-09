@@ -18,7 +18,7 @@ export function Status() {
 }
 ```
 
-A nested `ThemeProvider` can select another theme for a section. Edit `src/lib/ui/theme/tokens.ts` to change the palettes. Components use semantic roles such as `primary`, `muted`, `destructive`, `popover` and `ring`.
+A nested `ThemeProvider` can select another theme for a section. Edit `src/lib/ui/styles.ts` to change the palettes. Components use semantic roles such as `primary`, `muted`, `destructive`, `popover` and `ring`.
 
 ## Use component props
 
@@ -36,9 +36,9 @@ Here `save` is an application handler. Props differ by component; there is no ki
 
 ## Change source defaults
 
-Component source is under `src/components/ui`. Many families have a colocated `<name>.styles.ts` file containing their defaults; other defaults are declared directly in the component implementation.
+Theme palettes and shared component defaults live in `src/lib/ui/styles.ts`. The file groups defaults by component and also provides the Button variant color resolver used by Badge. Components import these values directly.
 
-Edit these local files when a change should apply to every use of the component. Shared components inherit their own defaults: changing Button can also affect modal actions and other compositions that use Button.
+Edit this shared file when a change should apply to every use of a component. Shared components inherit their own defaults: changing Button can also affect modal actions and other compositions that use Button.
 
 After editing defaults:
 
@@ -48,6 +48,8 @@ After editing defaults:
 4. Commit the source changes with any relevant tests.
 
 TCN treats these edits as local changes during future component updates. See [source management](tcn.md).
+
+The shared stylesheet is installed once and retained while any installed component needs it. An update that also changes this file can conflict with your custom defaults, so review the whole stylesheet when taking an upstream change. Adding an unrelated component preserves edits when the bundled stylesheet has not changed.
 
 ## Preview with Tweak
 

@@ -2,7 +2,7 @@
 
 Compose form labels, controls, descriptions and validation messages.
 
-[Source](../../src/components/ui/field.tsx) · [Defaults](../../src/components/ui/field.styles.ts) · Gallery: `/gallery/field`
+[Source](../../src/components/ui/field.tsx) · [Defaults](../../src/lib/ui/styles.ts) · Gallery: `/gallery/field`
 
 ## Usage
 

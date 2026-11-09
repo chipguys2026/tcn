@@ -1,5 +1,5 @@
 import { createFloatingFamily } from '@/lib/ui/floating'
-import { popoverDefaults } from './popover.styles'
+import { popoverDefaults } from '@/lib/ui/styles'
 
 const family = createFloatingFamily('Popover', {
   modal: false,

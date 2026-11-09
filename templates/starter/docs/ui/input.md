@@ -57,7 +57,7 @@ Typing and paste edit the value; Enter invokes onSubmit. Read-only fields allow 
 
 ## Appearance
 
-Defaults are defined in [input.styles.ts](../../src/components/ui/input.styles.ts). Edit this local file to change appearance across your application.
+Defaults are defined in [styles.ts](../../src/lib/ui/styles.ts). Edit this local file to change appearance across your application.
 
 One content row, width 100% by default. The outer surface paints the muted background once; native editor backgrounds are transparent. invalid is a visual destructive ring.
 

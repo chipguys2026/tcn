@@ -2,8 +2,8 @@ import { TextAttributes } from '@opentui/core'
 import { createContext, type PropsWithChildren, useContext } from 'react'
 import { type IconName, icons } from '@/lib/ui/icons'
 import { useComponentStyles } from '@/lib/ui/style-review'
+import { alertDefaults } from '@/lib/ui/styles'
 import { useTheme } from '@/lib/ui/theme/use-theme'
-import { alertDefaults } from './alert.styles'
 
 const AlertContext = createContext(false)
 export function Alert({

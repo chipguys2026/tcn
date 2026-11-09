@@ -2,7 +2,7 @@
 
 Keep new messages in view while preserving the reader's position when browsing history.
 
-[Source](../../src/components/ui/message-scroller.tsx) · [Defaults](../../src/components/ui/message-scroller.styles.ts) · Gallery: `/gallery/message-scroller`
+[Source](../../src/components/ui/message-scroller.tsx) · [Defaults](../../src/lib/ui/styles.ts) · Gallery: `/gallery/message-scroller`
 
 ## Usage
 

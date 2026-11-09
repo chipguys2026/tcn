@@ -53,7 +53,7 @@ Enter inserts a newline. Ctrl/Meta+Enter invokes onSubmit. Read-only allows navi
 
 ## Appearance
 
-Defaults are defined in [textarea.styles.ts](../../src/components/ui/textarea.styles.ts). Edit this local file to change appearance across your application.
+Defaults are defined in [styles.ts](../../src/lib/ui/styles.ts). Edit this local file to change appearance across your application.
 
 Default width 100%, height 4 with minimum 2. Padding insets the text viewport inside a continuous surface; background and focus ring retain the outer bounds.
 

@@ -2,7 +2,7 @@
 
 Present execution steps and expandable details using application-owned status.
 
-[Source](../../src/components/ui/trace.tsx) · [Defaults](../../src/components/ui/trace.styles.ts) · Gallery: `/gallery/trace`
+[Source](../../src/components/ui/trace.tsx) · [Defaults](../../src/lib/ui/styles.ts) · Gallery: `/gallery/trace`
 
 ## Usage
 

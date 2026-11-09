@@ -42,7 +42,7 @@ Enter/Space and clicks on caps, thumb or label toggle. Disabled controls are ski
 
 Track is four cells wide and one row high. The rounded thumb uses two cells: left for Off, right for On. Track changes muted/primary; label is alongside.
 
-Track-to-label spacing is a real layout gap, defaulting to one cell in [switch.styles.ts](../../src/components/ui/switch.styles.ts). The Tweak `Switch.gap` field controls the entire spacing; no fixed spacer is inserted.
+Track-to-label spacing is a real layout gap, defaulting to one cell in [styles.ts](../../src/lib/ui/styles.ts). The Tweak `Switch.gap` field controls the entire spacing; no fixed spacer is inserted.
 
 Defaults from the linked source:
 

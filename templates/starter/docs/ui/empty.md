@@ -47,7 +47,7 @@ Only child controls participate in focus/activation.
 
 ## Appearance
 
-Defaults are defined in [empty.styles.ts](../../src/components/ui/empty.styles.ts). Edit this local file to change appearance across your application.
+Defaults are defined in [styles.ts](../../src/lib/ui/styles.ts). Edit this local file to change appearance across your application.
 
 Header/media/title/description/content are independently composed parts with semantic text colors.
 

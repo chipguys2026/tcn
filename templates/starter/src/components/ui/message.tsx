@@ -8,7 +8,7 @@ import {
   useState,
 } from 'react'
 import { PartBox } from '@/lib/ui/parts'
-import { messageDefaults as d } from './message.styles'
+import { messageDefaults as d } from '@/lib/ui/styles'
 
 const Align = createContext<'start' | 'end'>('start')
 const AvatarAlignment = createContext<{

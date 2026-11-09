@@ -66,12 +66,12 @@ my-app/
    ├─ components/
    │  ├─ ui/                 # Source-owned reusable components
    │  │  ├─ button.tsx
-   │  │  ├─ button.styles.ts
    │  │  └─ …
    │  └─ shared/             # Shared application support, e.g. ErrorBoundary
    ├─ lib/ui/                # Interaction, composition, theme and focus helpers
    │  ├─ focus/
-   │  ├─ theme/
+   │  ├─ theme/              # Theme provider, context and hook
+   │  ├─ styles.ts           # Shared palettes and component defaults
    │  ├─ overlay.tsx
    │  ├─ pressable.tsx
    │  └─ …
@@ -87,9 +87,9 @@ Gallery and Tweak use the same real components and examples. Tweak is allowed to
 
 Keep small features flat. Do not create empty `hooks`, `services` or `model` directories. Extract a directory when actual code needs it.
 
-## Defaults and style files
+## Shared styles
 
-Many components keep their defaults in colocated `<name>.styles.ts` files; others declare defaults directly in their implementation. `button.styles.ts` also contains the color resolver reused by Badge. Context Menu inherits Dropdown Menu defaults with its own minimum width. See [styling](styling.md) for customization guidance.
+Edit `src/lib/ui/styles.ts` for theme palettes and shared component defaults. Button and Badge use its common variant color resolver. Context Menu inherits Dropdown Menu defaults with its own minimum width. The theme provider and hook remain under `lib/ui/theme`. See [styling](styling.md) for customization guidance.
 
 Passive composition parts reuse `lib/ui/parts.tsx`. Input Group shares visual ownership with existing Input/Textarea through `lib/ui/editor-group.ts`; editing, focus coordination and activation stay in their existing primitives.
 

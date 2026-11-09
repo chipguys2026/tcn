@@ -2,7 +2,7 @@
 
 Open actions for an item using a right click or keyboard context-menu command.
 
-[Source](../../src/components/ui/context-menu.tsx) · [Defaults](../../src/components/ui/context-menu.styles.ts) · Gallery: `/gallery/context-menu`
+[Source](../../src/components/ui/context-menu.tsx) · [Defaults](../../src/lib/ui/styles.ts) · Gallery: `/gallery/context-menu`
 
 ## Usage
 

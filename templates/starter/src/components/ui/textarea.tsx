@@ -22,8 +22,8 @@ import {
 } from '@/lib/ui/focus/use-focusable'
 import { createFocusRing, useFocusRing } from '@/lib/ui/focus-ring'
 import { useComponentStyles } from '@/lib/ui/style-review'
+import { textareaDefaults } from '@/lib/ui/styles'
 import { useTheme } from '@/lib/ui/theme/use-theme'
-import { textareaDefaults } from './textarea.styles'
 export type TextareaHandle = FocusableHandle
 const paddingFields = [
   'paddingX',

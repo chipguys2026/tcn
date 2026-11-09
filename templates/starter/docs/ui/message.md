@@ -2,7 +2,7 @@
 
 Compose a conversation entry with an avatar, content and action footer.
 
-[Source](../../src/components/ui/message.tsx) · [Defaults](../../src/components/ui/message.styles.ts) · Gallery: `/gallery/message`
+[Source](../../src/components/ui/message.tsx) · [Defaults](../../src/lib/ui/styles.ts) · Gallery: `/gallery/message`
 
 ## Usage
 

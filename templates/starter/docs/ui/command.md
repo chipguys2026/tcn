@@ -51,7 +51,7 @@ Input retains native focus while Up/Down changes the active result; Enter invoke
 
 ## Appearance
 
-Defaults are defined in [command.styles.ts](../../src/components/ui/command.styles.ts). Edit this local file to change appearance across your application.
+Defaults are defined in [styles.ts](../../src/lib/ui/styles.ts). Edit this local file to change appearance across your application.
 
 Group headings, empty state, separators and shortcut hints. CommandDialog provides a dimmed modal palette; a plain Command can be embedded.
 

@@ -4,7 +4,7 @@ TCN's starter includes 51 component families, filesystem routing, themes, Galler
 
 ## Styling API
 
-Planned work includes a consistent typed per-part `styles` prop, colocated default definitions for remaining parts, and Tweak previews built on the same public override API.
+Planned work includes a consistent typed per-part `styles` prop and Tweak previews built on the same public override API. Theme palettes and shared defaults are centralized in `src/lib/ui/styles.ts`.
 
 These APIs are not available across the kit today. Customize components through their documented props and local source defaults.
 

@@ -1,7 +1,7 @@
 import { createContext, type PropsWithChildren, useContext } from 'react'
 import { PartBox, PartText } from '@/lib/ui/parts'
+import { buttonGroupDefaults } from '@/lib/ui/styles'
 import { useTheme } from '@/lib/ui/theme/use-theme'
-import { buttonGroupDefaults } from './button-group.styles'
 import { Separator } from './separator'
 
 const Orientation = createContext<'horizontal' | 'vertical'>('horizontal')

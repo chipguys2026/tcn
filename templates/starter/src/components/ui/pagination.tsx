@@ -1,7 +1,7 @@
 import type { PropsWithChildren } from 'react'
 import { PartBox, PartText } from '@/lib/ui/parts'
+import { paginationDefaults } from '@/lib/ui/styles'
 import { Button, type ButtonProps } from './button'
-import { paginationDefaults } from './pagination.styles'
 
 export function Pagination({ children }: PropsWithChildren) {
   return (

@@ -1,8 +1,8 @@
 import { TextAttributes } from '@opentui/core'
 import type { PropsWithChildren } from 'react'
 import { useComponentStyles } from '@/lib/ui/style-review'
+import { cardDefaults } from '@/lib/ui/styles'
 import { useTheme } from '@/lib/ui/theme/use-theme'
-import { cardDefaults } from './card.styles'
 export function Card({
   children,
   width = '100%',

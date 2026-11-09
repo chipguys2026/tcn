@@ -39,7 +39,7 @@ The compact right-hand button toggles on Enter/Space/click. The title is separat
 
 ## Appearance
 
-Defaults are defined in [collapsible.styles.ts](../../src/components/ui/collapsible.styles.ts). Edit this local file to change appearance across your application.
+Defaults are defined in [styles.ts](../../src/lib/ui/styles.ts). Edit this local file to change appearance across your application.
 
 Full-width label/header, small chevron button on the right and no enclosing border or automatic item separator.
 

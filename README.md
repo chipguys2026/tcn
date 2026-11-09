@@ -8,10 +8,10 @@ Use buttons, forms, dialogs, menus, tables, charts and conversation layouts with
 
 You need **Node.js 22 or newer** for the CLI and **Bun 1.3.14 or newer** to install dependencies and run your application. Configure your terminal with a Nerd Font for icons.
 
-Install TCN from the [v0.1.0 GitHub Release](https://github.com/chipguys2026/tcn/releases/tag/v0.1.0):
+Install TCN from the [v0.1.1 GitHub Release](https://github.com/chipguys2026/tcn/releases/tag/v0.1.1):
 
 ```sh
-npm install -g https://github.com/chipguys2026/tcn/releases/download/v0.1.0/tcn-0.1.0.tgz
+npm install -g https://github.com/chipguys2026/tcn/releases/download/v0.1.1/tcn-0.1.1.tgz
 tcn init my-app
 cd my-app
 bun run dev

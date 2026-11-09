@@ -51,7 +51,7 @@ Enter/Space opens; arrows can open the trigger. Arrows/Home/End/typeahead move t
 
 Auto sizing and min/max behavior: [popup sizing](../popup-sizing.md).
 
-Defaults are defined in [select.styles.ts](../../src/components/ui/select.styles.ts). Edit this local file to change appearance across your application.
+Defaults are defined in [styles.ts](../../src/lib/ui/styles.ts). Edit this local file to change appearance across your application.
 
 Trigger/value and borderless popup/item/group/label/separator parts are composed separately. Popup dims underlying content 28%.
 

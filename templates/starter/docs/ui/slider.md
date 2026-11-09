@@ -2,7 +2,7 @@
 
 Choose one or more stepped numeric values with keyboard and pointer input.
 
-[Source](../../src/components/ui/slider.tsx) · [Defaults](../../src/components/ui/slider.styles.ts) · Gallery: `/gallery/slider`
+[Source](../../src/components/ui/slider.tsx) · [Defaults](../../src/lib/ui/styles.ts) · Gallery: `/gallery/slider`
 
 ## Usage
 

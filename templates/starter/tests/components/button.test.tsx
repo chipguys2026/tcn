@@ -9,11 +9,11 @@ import {
 import { testRender } from '@opentui/react/test-utils'
 import { act, createRef, type ReactNode, useState } from 'react'
 import { Button, type ButtonHandle } from '@/components/ui/button'
-import type { ButtonVariant } from '@/components/ui/button.styles'
 import { FocusScope } from '@/lib/ui/focus/focus-scope'
 import { icons } from '@/lib/ui/icons'
+import type { ButtonVariant } from '@/lib/ui/styles'
+import { type ThemeName, themes } from '@/lib/ui/styles'
 import { ThemeProvider } from '@/lib/ui/theme/provider'
-import { type ThemeName, themes } from '@/lib/ui/theme/tokens'
 import { createNavigationStore } from '@/router/navigation-store'
 import { RouterView } from '@/router/router-view'
 

@@ -31,7 +31,7 @@ Nonmodal and noninteractive unless callers supply controls.
 
 ## Appearance
 
-Defaults are defined in [alert.styles.ts](../../src/components/ui/alert.styles.ts). Edit this local file to change appearance across your application.
+Defaults are defined in [styles.ts](../../src/lib/ui/styles.ts). Edit this local file to change appearance across your application.
 
 No enclosing character border. Supports default/destructive variants and an optional typed Nerd Font icon; destructive uses a subtle tint.
 

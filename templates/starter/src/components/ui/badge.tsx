@@ -1,7 +1,7 @@
 import { Pill } from '@/lib/ui/pill'
 import { useComponentStyles } from '@/lib/ui/style-review'
+import { type ButtonVariant, buttonStyles } from '@/lib/ui/styles'
 import { useTheme } from '@/lib/ui/theme/use-theme'
-import { type ButtonVariant, buttonStyles } from './button.styles'
 export function Badge({
   children,
   variant = 'default',

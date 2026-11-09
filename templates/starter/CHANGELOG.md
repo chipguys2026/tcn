@@ -1,5 +1,9 @@
 # Changelog
 
+## TCN 0.1.1 — 2026-11-09
+
+- Move theme palettes and component defaults into `src/lib/ui/styles.ts`, replacing per-component style files.
+
 ## 0.1.0 — 2026-11-09
 
 - Provide a React/OpenTUI application with generated filesystem routing, strict TypeScript and Biome.

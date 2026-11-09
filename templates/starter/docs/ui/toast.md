@@ -2,7 +2,7 @@
 
 Show temporary notifications with optional descriptions and actions.
 
-[Source](../../src/components/ui/toast.tsx) · [Defaults](../../src/components/ui/toast.styles.ts) · Gallery: `/gallery/toast`
+[Source](../../src/components/ui/toast.tsx) · [Defaults](../../src/lib/ui/styles.ts) · Gallery: `/gallery/toast`
 
 ## Usage
 

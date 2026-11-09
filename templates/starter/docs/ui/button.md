@@ -55,7 +55,7 @@ Enter/Space or left click invokes onPress. Disabled buttons do not activate or r
 
 ## Appearance
 
-Defaults are defined in [button.styles.ts](../../src/components/ui/button.styles.ts). Edit this local file to change appearance across your application.
+Defaults are defined in [styles.ts](../../src/lib/ui/styles.ts). Edit this local file to change appearance across your application.
 
 Variants are default, secondary, ghost, destructive and link. Horizontal padding defaults to one cell; vertical padding is zero. There are no size/rounded variants. Focus has a separate outer ring.
 
@@ -74,7 +74,7 @@ Defaults from the linked source:
 
 ## Reuse
 
-Uses usePress, useFocusable, the shared final ring pass and button.styles.ts. Modal actions reuse Button.
+Uses usePress, useFocusable, the shared final ring pass and styles.ts. Modal actions reuse Button.
 
 ## Notes
 

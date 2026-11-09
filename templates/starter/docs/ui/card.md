@@ -50,7 +50,7 @@ The surface has no activation policy; children keep their own interactions.
 
 ## Appearance
 
-Defaults are defined in [card.styles.ts](../../src/components/ui/card.styles.ts). Edit this local file to change appearance across your application.
+Defaults are defined in [styles.ts](../../src/lib/ui/styles.ts). Edit this local file to change appearance across your application.
 
 Borderless card background with semantic foreground and grouped spacing. Header, title, description, content and footer are separate parts.
 

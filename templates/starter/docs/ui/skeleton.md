@@ -2,7 +2,7 @@
 
 Reserve space for loading content with a static placeholder.
 
-[Source](../../src/components/ui/skeleton.tsx) · [Defaults](../../src/components/ui/skeleton.styles.ts) · Gallery: `/gallery/skeleton`
+[Source](../../src/components/ui/skeleton.tsx) · [Defaults](../../src/lib/ui/styles.ts) · Gallery: `/gallery/skeleton`
 
 ## Usage
 

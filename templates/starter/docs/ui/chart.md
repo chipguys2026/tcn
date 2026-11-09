@@ -2,7 +2,7 @@
 
 Display numeric series with native Bar and Line charts, a legend and keyboard or pointer value inspection.
 
-[Source](../../src/components/ui/chart.tsx) · [Defaults](../../src/components/ui/chart.styles.ts) · Gallery: `/gallery/chart`
+[Source](../../src/components/ui/chart.tsx) · [Defaults](../../src/lib/ui/styles.ts) · Gallery: `/gallery/chart`
 
 ## Usage
 

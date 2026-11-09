@@ -10,8 +10,8 @@ import {
 } from 'react'
 import { Pressable } from '@/lib/ui/pressable'
 import { useComponentStyles } from '@/lib/ui/style-review'
+import { tableDefaults } from '@/lib/ui/styles'
 import { useTheme } from '@/lib/ui/theme/use-theme'
-import { tableDefaults } from './table.styles'
 
 const Columns = createContext<readonly number[] | undefined>(undefined)
 const SelectedRow = createContext(false)

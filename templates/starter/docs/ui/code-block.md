@@ -2,7 +2,7 @@
 
 Display syntax-highlighted code, numbered or diff lines, and an optional copy action.
 
-[Source](../../src/components/ui/code-block.tsx) · [Defaults](../../src/components/ui/code-block.styles.ts) · Gallery: `/gallery/code-block`
+[Source](../../src/components/ui/code-block.tsx) · [Defaults](../../src/lib/ui/styles.ts) · Gallery: `/gallery/code-block`
 
 ## Usage
 

@@ -55,7 +55,7 @@ Arrows/Home/End/typeahead navigate; Enter/Space activates. Disabled items are sk
 
 Auto sizing and min/max behavior: [popup sizing](../popup-sizing.md).
 
-Defaults are defined in [dropdown-menu.styles.ts](../../src/components/ui/dropdown-menu.styles.ts). Edit this local file to change appearance across your application.
+Defaults are defined in [styles.ts](../../src/lib/ui/styles.ts). Edit this local file to change appearance across your application.
 
 Borderless popup with semantic active/disabled items, labels, shortcuts and separators. Dims underlying content 28%.
 

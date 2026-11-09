@@ -2,7 +2,7 @@
 
 Split a screen into panels with keyboard-accessible, draggable dividers.
 
-[Source](../../src/components/ui/resizable.tsx) · [Defaults](../../src/components/ui/resizable.styles.ts) · Gallery: `/gallery/resizable`
+[Source](../../src/components/ui/resizable.tsx) · [Defaults](../../src/lib/ui/styles.ts) · Gallery: `/gallery/resizable`
 
 ## Usage
 

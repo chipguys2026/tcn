@@ -45,7 +45,7 @@ Space and left click on the mark or label toggle; Enter does not. Activating ind
 
 ## Appearance
 
-Defaults are defined in [checkbox.styles.ts](../../src/components/ui/checkbox.styles.ts). Edit this local file to change appearance across your application.
+Defaults are defined in [styles.ts](../../src/lib/ui/styles.ts). Edit this local file to change appearance across your application.
 
 The outer focus ring surrounds the indicator, not the entire label. Supports checked, unchecked and indeterminate glyph states.
 

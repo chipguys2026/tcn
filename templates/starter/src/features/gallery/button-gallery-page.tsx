@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Button } from '@/components/ui/button'
-import type { ButtonVariant } from '@/components/ui/button.styles'
 import { FocusScope } from '@/lib/ui/focus/focus-scope'
+import type { ButtonVariant } from '@/lib/ui/styles'
 import { useTheme } from '@/lib/ui/theme/use-theme'
 import { useRouter } from '@/router'
 

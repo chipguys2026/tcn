@@ -1,12 +1,12 @@
 import { createContext, type PropsWithChildren, useContext } from 'react'
 import { PartBox, PartText } from '@/lib/ui/parts'
+import { traceDefaults as d } from '@/lib/ui/styles'
 import { useTheme } from '@/lib/ui/theme/use-theme'
 import {
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
 } from './collapsible'
-import { traceDefaults as d } from './trace.styles'
 
 const Status = createContext<'pending' | 'running' | 'complete' | 'error'>(
   'complete',
