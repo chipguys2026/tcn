@@ -1,80 +1,108 @@
-# opentui-starter
+# TCN application starter
 
-A React and OpenTUI starter for terminal applications, with a source-owned UI kit, component gallery and development tool for designing component defaults.
+A React/OpenTUI terminal application with local component source, filesystem routing, themes and development tools. Use it as the starting point for your own terminal app.
 
-This directory is the standalone project. It can be copied or published independently of the parent discussion repository.
+## Run the application
 
-This is the canonical starter template distributed by TCN. Generated projects own their source and use CLI-only tcn.json/installed metadata for source updates. See [TCN source management](docs/tcn.md).
-
-## Start
-
-Requirements: Bun >= 1.3.14 and a terminal using a Nerd Font, preferably Mono. Run from this directory:
+You need Bun 1.3.14 or newer and a terminal configured with a Nerd Font for icons.
 
 ```sh
 bun install
 bun run dev
 ```
 
-The application opens at Home. Tab/Shift+Tab moves focus; Enter/Space activates buttons; Ctrl+C exits. Text editors retain their documented typing keys.
+If `tcn init` already installed dependencies, start directly with `bun run dev`. Use Tab and Shift+Tab to move focus, Enter or Space to activate buttons, and Ctrl+C to exit.
+
+The development process restarts the application when source changes. Component state resets on restart.
+
+## Make your first change
+
+Edit `src/features/home/home-page.tsx`. The root route at `src/app/page.tsx` already renders this feature.
+
+For example, replace the Home feature with a name field and a greeting:
+
+```tsx
+import { useState } from 'react'
+import { Input } from '@/components/ui/input'
+import { useTheme } from '@/lib/ui/theme/use-theme'
+
+export default function HomePage() {
+  const [name, setName] = useState('')
+  const theme = useTheme()
+
+  return (
+    <box flexDirection="column" padding={2} gap={1}>
+      <Input
+        label="Name"
+        placeholder="Your name"
+        value={name}
+        onValueChange={setName}
+      />
+      <text fg={theme.foreground}>Hello, {name || 'world'}!</text>
+    </box>
+  )
+}
+```
+
+Use the [routing guide](docs/routing.md) to add screens. Keep screen implementations under `src/features/<feature>` and connect them through route files in `src/app`.
+
+## Explore the components
+
+The starter includes all 51 component families. Open Gallery from Home to see examples before using them in your screens.
 
 | Route | Purpose |
 | --- | --- |
-| `/` | Introduction and entry points. |
-| `/gallery` | Catalog of 51 component families. |
+| `/` | Home; replace this with your application's entry screen. |
+| `/gallery` | Component catalog. |
 | `/gallery/:name` | A component's examples, such as `/gallery/button`. |
-| `/gallery/showcase` | Form, table, selection and command-palette composition. |
-| `/tweak` | Development previews, parameter edits and proposal export. |
+| `/gallery/showcase` | Components composed into larger interfaces. |
+| `/tweak` | Preview spacing, dimensions and color changes. |
 
-The root layout uses dark theme. Gallery examples support local light/dark review. Configure the terminal font to render Nerd Font icons and rounded glyph shapes correctly.
+Import components from local source:
 
-## Included
+```tsx
+import { Button } from '@/components/ui/button'
+```
 
-- Bun, TypeScript strict mode, React, OpenTUI and Biome.
-- Generated filesystem routing with page/layout/error/loading conventions.
-- Local React state and Zustand-backed navigation/editing state.
-- Source-owned [UI components](docs/ui/README.md), semantic light/dark theme tokens and shared input/focus/overlay primitives.
-- Feature-based Home, Gallery and Tweak pages.
-- Source defaults promoted from the existing draft, with auto-sized and bounded selection/menu/tooltip popups.
-- Headless native rendering, keyboard/mouse, router, lifecycle and tooling tests.
+Your application owns these files. See the [component reference](docs/ui/README.md) for usage, props and keyboard behavior.
 
-The kit follows shadcn-inspired naming/composition, adapted to terminal rendering and interaction. It is not a DOM compatibility layer and does not depend on shadcn, Radix or Tailwind.
+## Customize the application
 
-## Tweak designs defaults
+- Change light/dark theme selection in `src/app/layout.tsx`.
+- Edit semantic colors in `src/lib/ui/theme/tokens.ts`.
+- Adjust component defaults in their source and colocated `*.styles.ts` files.
+- Use Tweak to preview a design and export a proposal, then apply the chosen values to source.
 
-The workflow is **preview parameters → export a proposal → review → update source defaults → verify in Gallery**.
+See [styling](docs/styling.md) and [Tweak](docs/tweak.md) for details. Tweak exports do not automatically change application defaults.
 
-Tweak does not rewrite component source or configure ordinary application startup. Local drafts under `design/` are ignored; explicit exports can be committed for discussion. See [Tweak](docs/tweak.md).
+When the examples are no longer needed, remove their route modules under `src/app/gallery` and `src/app/tweak` and the corresponding features. Review tests that reference those screens. Reusable UI and shared helpers do not depend on them.
 
-The universal per-part `styles` prop and colocated default-definition migration are agreed but **not completed yet**. The existing preview adapter is not the final public styling API. Read [styling status](docs/styling.md) and [roadmap](docs/roadmap.md) before relying on it.
-
-## Develop and build
+## Check and build
 
 ```sh
-bun run format
 bun run check
 bun run build
 bun run start:prod
 ```
 
-The build outputs `dist/main.js` with external runtime dependencies. Bun and installed dependencies are still required; this is not a standalone executable. `private: true` prevents accidental npm publication of the application starter.
+`check` runs TypeScript, lint and tests. `build` writes `dist/main.js`. The built application requires Bun and its installed runtime dependencies; when moving it to another machine, include `package.json` and `bun.lock`, install dependencies there and run the bundle.
+
+For all available commands and test guidance, see [development](docs/development.md).
 
 ## Documentation
 
-| Document | Contents |
+| Guide | Contents |
 | --- | --- |
-| [Project structure](docs/project-structure.md) | Folders, feature ownership and dependency boundaries. |
-| [Architecture](docs/architecture.md) | Lifecycle, state and reusable foundations. |
-| [Routing](docs/routing.md) | Route conventions and navigation API. |
-| [UI components](docs/ui/README.md) | Per-family API, examples, appearance and interaction. |
-| [Styling](docs/styling.md) | Current implementation and agreed default/override contract. |
-| [Interaction](docs/interaction.md) | Keyboard, mouse, focus rings and popup behavior. |
-| [Popup sizing](docs/popup-sizing.md) | Auto dimensions, min/max bounds and scroll/wrap behavior. |
-| [Development](docs/development.md) | Commands, verification and distribution boundaries. |
-| [Tweak](docs/tweak.md) | Editing, drafts and exporting proposals. |
-| [Roadmap](docs/roadmap.md) | Implemented, agreed-but-pending and future work. |
-| [Contributing](CONTRIBUTING.md) | How to change components and documentation together. |
-
-To start a product application, replace Home, add feature routes and remove the sample Gallery/Tweak features if unused. Reusable UI and `lib/ui` do not import those features.
+| [Project structure](docs/project-structure.md) | Files to edit and where application features belong. |
+| [Routing](docs/routing.md) | Pages, layouts, navigation and error handling. |
+| [Components](docs/ui/README.md) | Examples, props and interaction reference. |
+| [Styling](docs/styling.md) | Themes, supported props and source defaults. |
+| [Interaction](docs/interaction.md) | Keyboard, focus and overlay conventions. |
+| [Popup sizing](docs/popup-sizing.md) | Content sizing, bounds and overflow. |
+| [Tweak](docs/tweak.md) | Design previews, local drafts and exports. |
+| [TCN source management](docs/tcn.md) | Updating and removing copied source. |
+| [Architecture](docs/architecture.md) | Lifecycle, state and dependency boundaries. |
+| [Contributing](CONTRIBUTING.md) | Guidelines for component and tooling changes. |
 
 ## License
 

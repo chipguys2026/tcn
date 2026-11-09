@@ -12,11 +12,19 @@ The router uses a Zustand navigation store and a generated static manifest. File
 | `/gallery/showcase` | `app/gallery/showcase/page.tsx` | Composed examples |
 | `/tweak` | `app/tweak/page.tsx` | Development parameter editor |
 
-`showcase` is a static route and takes precedence over `[name]`. Legacy `/gallery/components` and `/gallery/style-editor` routes have been replaced, not retained as aliases.
+Static routes such as `showcase` take precedence over dynamic segments such as `[name]`.
 
 ## Add a route
 
-Create `src/app/settings/page.tsx` and export a React component. Prefer delegating to a feature:
+Create `src/features/settings/settings-page.tsx`:
+
+```tsx
+export default function SettingsPage() {
+  return <text>Settings</text>
+}
+```
+
+Then create `src/app/settings/page.tsx` to connect it to the router:
 
 ```tsx
 export { default } from '@/features/settings/settings-page'
@@ -27,14 +35,20 @@ Use `[id]/page.tsx` for dynamic parameters. A `(group)` directory organizes rout
 ## Navigate
 
 ```tsx
-import { useParams, usePathname, useRouter } from '@/router'
+import { useRouter } from '@/router'
 
-const { navigate, replace, back, forward } = useRouter()
-const { id } = useParams()
-const pathname = usePathname()
+import { Button } from '@/components/ui/button'
+
+export function SettingsLink() {
+  const { navigate } = useRouter()
+
+  return <Button onPress={() => navigate('/settings')}>Settings</Button>
+}
 ```
 
-Invoke navigation from handlers or effects, not as a render side effect. Global `navigate`, `replace`, `back` and `forward` actions are also exported for non-component handlers.
+The router also exposes `replace`, `back` and `forward`. Use `useParams()` for dynamic parameters and `usePathname()` for the current path; import both from `@/router`.
+
+Invoke navigation from handlers or effects. Global `navigate`, `replace`, `back` and `forward` actions are exported for non-component handlers.
 
 ## Layout, errors and loading
 

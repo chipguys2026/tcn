@@ -1,43 +1,43 @@
-# Tweak
+# Preview designs with Tweak
 
-`/tweak` is a development tool for designing component defaults. It is not an application settings page or a runtime theme/configuration loader.
+Tweak lets you try component spacing, dimensions and colors before changing source. Open it from Home or navigate to `/tweak`.
 
-## Workflow
+## Preview a change
 
-1. Choose a component and a named part.
-2. Adjust spacing, dimensions and colors in the real preview.
-3. Compare light/dark themes and representative states.
-4. Add notes and export the proposal.
-5. Review the proposal, then update component source defaults.
-6. Verify the result in `/gallery` and update component documentation.
+1. Choose a component and one of its named parts.
+2. Adjust the available spacing, dimension and color controls.
+3. Compare light/dark themes and the states shown in the preview.
+4. Add review notes and export the proposal.
+5. Apply the chosen values to component source defaults.
+6. Check the result in Gallery and run `bun run check`.
 
-Changing a value in Tweak does not change ordinary Gallery screens or application startup defaults. Export does not rewrite source files. Source promotion is deliberately a separate reviewed implementation step.
+The previews use the same components as Gallery. Tweak changes stay inside the preview until you implement them in source. Exporting saves a proposal; it does not rewrite component files.
 
-## Feature files
+## Save and share a proposal
 
-`tweak-page.tsx` owns the page UI and preview session. `parts.tsx` maps named parts to shared examples. `schema.ts` validates the document; `store.ts` owns history/state; `session.ts` serializes draft saves; `storage.ts` handles filesystem I/O; `export.ts` writes a proposal without live baseline observations.
+Paths are relative to your application's working directory:
 
-Gallery and Tweak share the catalog and examples under `features/gallery`. Some targeted preview fixtures live in `parts.tsx` where a particular state must be exposed. They use the real UI components.
-
-## Saved data
-
-Paths are relative to the starter working directory:
-
-| Path | Purpose |
+| File | Purpose |
 | --- | --- |
-| `design/component-review.draft.json` | Local autosave; ignored by git. |
-| `design/component-review.json` | Explicit proposal export; may be committed for discussion. |
+| `design/component-review.draft.json` | Local autosave, ignored by Git. |
+| `design/component-review.json` | Explicit export that you can commit for review. |
 
-Legacy filenames are retained to preserve existing drafts. The document uses version 1, partsVersion 2, terminal-cell units and the legacy shared-with-overrides mode. Schema validation rejects unknown fields or invalid values. Baselines are recaptured from live components instead of trusted as imported styling.
+Undo/redo, notes and reviewed flags help track a design session. Baseline values are captured from live components when reviewing them, so source edits can be checked against the current implementation.
 
-Undo/Redo, notes and reviewed flags belong to the editing session. Exporting/importing proposals is separate from applying source defaults. Do not import storage or proposal files from `components/ui`, `lib/ui` or the root layout.
+Export validation rejects unsupported fields or invalid values. Keep exports as design documents rather than importing them into your application's layout or theme.
 
-The existing 37 parameters have now been applied to source defaults. Their exact previous document is saved as `design/component-review.defaults-<timestamp>.backup.json` (ignored by git). Only matching, consumed overrides were cleared; notes and review flags were preserved. Baselines will be recaptured from source defaults when reopening Tweak.
+## Apply the design
 
-Popup width/height accept `auto`; the editor also supports minWidth/maxWidth/minHeight/maxHeight. minWidth accepts `trigger` for anchored popups. The control pickers inside Tweak can explicitly use larger caps; component previews use the normal component caps. See [popup sizing](popup-sizing.md).
+Use the component reference's source/default links to find the relevant values. Edit a colocated `*.styles.ts` file where available, or the defaults in the component implementation. Consider compositions that reuse the changed component.
 
-## Current behavior and migration
+Then open Gallery, compare the result and commit the source change. Source edits are tracked by TCN like any other local customization. See [styling](styling.md) and [source management](tcn.md).
 
-The existing preview adapter still observes parts, shares selected parameters between reused components and supports explicit local overrides. Some popup preview state is still driven by that adapter. This is isolated from ordinary screens, but it is not the final normal-prop styling architecture.
+## Resize popups
 
-The agreed replacement is documented in [styling](styling.md). Per-component `styles` props and centralized source defaults remain migration work; this tool's current observation API is not a stable public application API.
+Popup controls support `auto` width/height and minimum/maximum bounds. Anchored popups can use `minWidth="trigger"`. To make a popup larger than its default maximum, change the maximum as well as the requested size. See [popup sizing](popup-sizing.md).
+
+## Maintain the design tool
+
+The feature lives in `src/features/tweak`. Page/part previews, schema, store, save session, filesystem storage and export are separate modules. Gallery supplies the shared catalog and examples.
+
+The preview adapter supports part observation and shared overrides for reused components. It is internal to the design tool; application styling uses documented props and local defaults.

@@ -1,12 +1,28 @@
 # Marker
 
+Separate conversation events or display a compact system note.
+
 [Source](../../src/components/ui/marker.tsx) · [Defaults](../../src/components/ui/marker.styles.ts) · Gallery: `/gallery/marker`
 
+## Usage
+
 ```tsx
+import { Marker, MarkerContent, MarkerIcon } from '@/components/ui/marker'
+
 <Marker variant="separator">
-  <MarkerIcon><text>✓</text></MarkerIcon>
+  <MarkerIcon>
+    <text>✓</text>
+  </MarkerIcon>
   <MarkerContent>Session started</MarkerContent>
 </Marker>
 ```
 
-Import Marker, MarkerIcon and MarkerContent from `@/components/ui/marker`. Variant default renders an inline note; separator adds existing Separators on both sides; border adds a separator below. Icon is an arbitrary nonshrinking slot. String content uses muted text; React children compose a row. Gap=1, paddingX=0, width=100%. No status store, focus or activation is added. Tweak observes the three parts and reused Separator. Defaults remain source-owned.
+## API
+
+| Part | Purpose |
+| --- | --- |
+| `Marker` | `variant="default"` for an inline note, `"separator"` for separators on both sides, or `"border"` for a separator below. |
+| `MarkerIcon` | Nonshrinking slot for an application-provided icon or text. |
+| `MarkerContent` | Muted string content or composed React children. |
+
+The layout uses full width, zero horizontal padding and a gap of one cell. Markers are passive content: use application state to select their text/status and regular controls for actions.

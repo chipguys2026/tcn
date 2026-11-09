@@ -1,10 +1,14 @@
 # Skeleton
 
-A loading placeholder inspired by [shadcn Skeleton](https://ui.shadcn.com/docs/components/skeleton).
+Reserve space for loading content with a static placeholder.
 
 [Source](../../src/components/ui/skeleton.tsx) · [Defaults](../../src/components/ui/skeleton.styles.ts) · Gallery: `/gallery/skeleton`
 
+## Usage
+
 ```tsx
+import { Skeleton } from '@/components/ui/skeleton'
+
 <box gap={1}>
   <Skeleton width="60%" />
   <Skeleton width="90%" />
@@ -12,7 +16,7 @@ A loading placeholder inspired by [shadcn Skeleton](https://ui.shadcn.com/docs/c
 </box>
 ```
 
-Import from `@/components/ui/skeleton`.
+## API and behavior
 
 | Prop | Contract |
 | --- | --- |
@@ -21,4 +25,4 @@ Import from `@/components/ui/skeleton`.
 
 Skeleton renders a muted background rectangle. It owns no focus target, timer or animation, and does not imitate rounded browser geometry. Choose dimensions matching the loaded content to reduce layout movement; use Spinner when an animated busy indicator is needed.
 
-Tweak exposes Skeleton dimensions, spacing and background on the real component. Defaults remain in source; see [styling](../styling.md).
+Customize dimensions through props and colors through source defaults; see [styling](../styling.md).

@@ -1,30 +1,70 @@
-# Updating owned source
+# Update and remove components
 
-Install and update component source with a chosen CLI release. The bundled snapshot is immutable for that release. Reproducible updates use an exact package version after publication, rather than always using latest.
+Your application owns its copied component source. TCN uses the installed baseline to help you review changes from a newer CLI release without silently replacing conflicting edits.
 
-1. Commit the application's current state, including Tweak-promoted component defaults.
-2. Run `tcn diff <components>` using the desired CLI release. This includes shared dependencies.
-3. Run `tcn add <components> --dry-run` to inspect the plan.
-4. Apply ordinary updates, or review/merge conflicting changes manually. Use `--force` when replacement with registry source is intentional.
-5. Run the application's typecheck/tests and review its Gallery/Tweak behavior.
+## Update the CLI first
 
-| Local vs installed baseline | Upstream vs baseline | add behavior |
+Install the desired release's `.tgz` asset using your package manager, as described in [installation](installation.md). Each CLI contains one component snapshot. Updating the executable alone leaves your application unchanged.
+
+## Review and apply an update
+
+Commit your application's current state, then run these commands inside it:
+
+```sh
+tcn diff button
+tcn add button --dry-run
+tcn add button
+bun run check
+```
+
+`diff` shows local-to-registry changes, including shared dependencies. `--dry-run` validates the operation without writing; conflicting replacements stop the command. Review the affected paths and test the screens that use them after applying an update.
+
+Use `--all` to select every public component. This can install components that were not previously in your application.
+
+## How local edits are handled
+
+TCN compares each file with the baseline recorded when it was installed.
+
+| Local file | Incoming source | Result of `add` |
 | --- | --- | --- |
-| Unmodified | Changed | Update and advance the baseline. |
-| Modified | Unchanged | Keep local edits, unless forced. |
-| Modified | Changed | Refuse overlapping file replacement; show paths and require review/force. |
-| Same as upstream | Any | Leave bytes untouched and update tracking. |
-| Missing | Any | Restore from registry. |
-| Existing but untracked and different | Any | Refuse replacement unless forced. |
+| Unchanged from baseline | Changed | Update the file. |
+| Locally edited | Unchanged from baseline | Preserve your edits. |
+| Locally edited | Also changed | Stop and report a conflict. |
+| Already matches incoming source | Any baseline | Keep the file and refresh tracking. |
+| Missing | Available | Restore the file. |
+| Untracked and different | Available | Stop and report a conflict. |
 
-The comparison is per file; edits within one conflicting file are not automatically merged. The manifest retains original installed content so local/upstream differences remain distinguishable. Explicit root ownership persists even if the component also becomes another component's dependency.
+Comparison ignores CRLF/LF-only differences. Conflicts are detected per file; the CLI does not merge individual edits within a conflicting file.
 
-CRLF/LF-only differences are ignored when comparing source, so a Windows checkout does not create false local edits. File transaction guards still compare exact bytes. The repository and generated starter also include .gitattributes for consistent LF checkouts.
+For a conflict, review `tcn diff` and merge the relevant changes manually. If you want to replace local source with the bundled version, inspect the forced plan first:
 
-Files no longer shipped by an upstream component are retained, reported and kept in that component's ownership record. Add never silently deletes retired source. Its previous dependencies remain protected while the retired file exists; migrate usages and remove the component when appropriate. Components retired from the registry can still be removed using installed metadata.
+```sh
+tcn add button --force --dry-run
+tcn add button --force
+```
 
-Template changes are separate. An application does not pull new routing/features/configuration automatically when adding UI. Describe architectural changes as migrations; `init --force` on an existing project only reinitializes CLI configuration/adoption and preserves application source/baselines.
+`--force` also covers required source dependencies, including shared helpers used elsewhere in your app. A default you edited after using Tweak is a local source edit and follows the same rules.
 
-Removal checks the installed graph and quoted literal module paths across application source, including test/gallery files. It cannot prove the absence of computed imports assembled at runtime. It conservatively treats matching quoted paths as references. It only deletes tracked source, retains shared units reachable from other explicit components, and retains npm dependencies. Clear application usages before removing source; `--force` never bypasses these checks.
+## Files removed upstream
 
-File plans are checked before mutation, guarded against concurrent changes, and written through temporary-file renames under a project lock. I/O errors trigger file-byte rollback; created empty directories may remain. This is not a crash-recovery journal or a filesystem sandbox against another process racing path replacement. If Bun dependency installation fails after source is saved, retry installation in the project.
+When a newer snapshot stops shipping a previously installed file, `add` retains it and reports it. Its dependencies remain protected while the retired file exists. Migrate your usages before removing the component. Components retired from the registry can still be removed using their installed metadata.
+
+## Remove unused components
+
+Remove imports and usages from application screens, Gallery examples and tests, then inspect the removal:
+
+```sh
+tcn remove dialog --dry-run
+tcn remove dialog
+bun run check
+```
+
+TCN checks installed dependencies and quoted module references before deleting managed source. It retains shared helpers needed by other components. Locally modified files require `--force` to delete, but force never bypasses references or dependency requirements.
+
+Package dependencies remain in `package.json`; review them separately because other application code may still use them. Reference checking cannot identify every computed import, so run your application's checks after removal.
+
+## Update the starter architecture
+
+Component updates do not upgrade routes, screens, configuration or development scripts. Compare starter changes and migrate those files explicitly when you need them. Running `init --force` in an existing project reinitializes CLI configuration/adoption; it does not replace the application with a new starter.
+
+If dependency installation fails after source was saved, run `bun install` in the application and retry its checks. See [troubleshooting](troubleshooting.md).

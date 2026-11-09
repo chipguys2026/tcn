@@ -1,11 +1,11 @@
 # Contributing
 
-Work from the opentui-starter directory. This directory is a self-contained application; its parent discussion repository is not needed to run or maintain it.
+Run commands from the application root. These guidelines apply when changing local components, routing or development tools.
 
 ## Workflow
 
 1. Install dependencies with `bun install`.
-2. Discuss API, interaction and appearance changes before extending the component contract.
+2. Describe the expected behavior before extending a component's API.
 3. Implement reusable UI in `src/components/ui` and application features in `src/features`.
 4. Add or update a shared gallery example. Tweak must preview the real component, not a second implementation.
 5. Update the relevant `docs/ui/<component>.md` and any affected architecture or interaction documentation.
@@ -27,7 +27,7 @@ Use TypeScript strict mode, named component exports, two-space indentation, sing
 
 Check light and dark themes, narrow terminals, disabled controls, focus rings, popup placement and embedded controls where relevant. Test observable behavior and regressions rather than reproducing implementation details.
 
-The component style API is still being standardized. Read [styling.md](docs/styling.md) before introducing another styling mechanism. Do not describe a planned `styles` prop as implemented.
+Use documented component props and local source defaults for appearance changes. See [styling](docs/styling.md) for the supported customization model.
 
 ## Changes to routing and tooling
 

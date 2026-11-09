@@ -1,20 +1,23 @@
-# input
+# Input
 
 A controlled or uncontrolled single-line native editor.
 
-[Source](../../src/components/ui/input.tsx) · Gallery: `/gallery/input` · [Styling status](../styling.md)
+[Source](../../src/components/ui/input.tsx) · Gallery: `/gallery/input` · [Customization](../styling.md)
 
 ## Usage
 
 ```tsx
 import { Input } from '@/components/ui/input'
 
-<Input label="Name" value={name} onValueChange={setName} placeholder="Your name" />
+<Input
+  label="Name"
+  value={name}
+  onValueChange={setName}
+  placeholder="Your name"
+/>
 ```
 
-Examples use surrounding application state/handlers where shown; they do not add persistence or business behavior.
-
-## Public API
+## API
 
 Exports: `Input`.
 
@@ -22,7 +25,7 @@ Exports: `Input`.
 | --- | --- |
 | Input | `InputProps` |
 
-### Declared prop types
+### Prop types
 
 ```ts
 type InputHandle = FocusableHandle
@@ -52,15 +55,13 @@ type InputProps = SharedProps &
 
 Typing and paste edit the value; Enter invokes onSubmit. Read-only fields allow focus/navigation/selection; disabled fields are skipped. Programmatic value changes do not emit edit callbacks.
 
-Stateful components follow the [controlled/uncontrolled conventions](../architecture.md#state).
+## Appearance
 
-## Source defaults and appearance
-
-Promoted defaults are defined in [input.styles.ts](../../src/components/ui/input.styles.ts) and consumed by the real component and its observations. No Tweak JSON is loaded here.
+Defaults are defined in [input.styles.ts](../../src/components/ui/input.styles.ts). Edit this local file to change appearance across your application.
 
 One content row, width 100% by default. The outer surface paints the muted background once; native editor backgrounds are transparent. invalid is a visual destructive ring.
 
-Declared parameter defaults (expressions refer to the linked source):
+Defaults from the linked source:
 
 | Parameter | Default |
 | --- | --- |
@@ -72,14 +73,10 @@ Declared parameter defaults (expressions refer to the linked source):
 | Input.autoFocus | `false` |
 | Input.defaultValue | `''` |
 
-The universal per-part `styles` override API is not complete yet; default-file migration is in progress. Current Tweak parameters are preview proposals, not a stable application style contract. See [styling](../styling.md) before customizing or promoting defaults.
-
 ## Reuse
 
 Uses the native editor, useFocusable and shared rings. CommandInput and Combobox search reuse Input.
 
-## TUI boundaries
+## Notes
 
 value and defaultValue are mutually exclusive. Native text editing and selection follow OpenTUI behavior. invalid does not validate data.
-
-All dimensions are terminal cells. Native glyph appearance depends on the terminal font; browser accessibility/DOM behavior is not implied.

@@ -1,9 +1,9 @@
 # Project structure
 
-This document describes the runnable `opentui-starter` directory. It can be copied or published as its own repository. The parent `tui-base` documentation is discussion/reference material and is not a runtime dependency.
+Start with `src/features/home/home-page.tsx` for your entry screen. Add screens through `src/app`, keep feature logic under `src/features`, and customize the local component source under `src/components/ui`.
 
 ```text
-opentui-starter/
+my-app/
 ├─ README.md
 ├─ LICENSE
 ├─ CONTRIBUTING.md
@@ -89,7 +89,7 @@ Keep small features flat. Do not create empty `hooks`, `services` or `model` dir
 
 ## Defaults and style files
 
-Thirty-seven component families have colocated `<name>.styles.ts` definitions, including the promoted draft values and the new composition/navigation/panel families. The component render and its style observations use the same constants. `button.styles.ts` also contains the color resolver reused by Badge. ContextMenu inherits DropdownMenu defaults with an explicit minimum-width exception. Remaining parts still define defaults in their implementations; the full migration is tracked in [styling](styling.md). Empty placeholder files are not part of this structure.
+Many components keep their defaults in colocated `<name>.styles.ts` files; others declare defaults directly in their implementation. `button.styles.ts` also contains the color resolver reused by Badge. Context Menu inherits Dropdown Menu defaults with its own minimum width. See [styling](styling.md) for customization guidance.
 
 Passive composition parts reuse `lib/ui/parts.tsx`. Input Group shares visual ownership with existing Input/Textarea through `lib/ui/editor-group.ts`; editing, focus coordination and activation stay in their existing primitives.
 

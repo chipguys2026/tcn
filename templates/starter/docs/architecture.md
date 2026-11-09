@@ -1,6 +1,6 @@
 # Architecture
 
-opentui-starter is a Bun application rendered by React and OpenTUI. It includes reusable component source and developer-facing example features. It does not require a browser, React DOM, Tailwind, Next.js or shadcn runtime packages.
+The application runs on Bun with React and OpenTUI. Screens compose local UI components, while shared foundations provide theme, focus, navigation and renderer lifecycle.
 
 ## Application lifecycle
 
@@ -30,7 +30,7 @@ Route modules under `app/` are composition points, not feature implementations. 
 
 ## State
 
-Use React state for local component/feature state. Use a Zustand store when state needs a shared owner; routing and the Tweak editing session already use this pattern. A workspace registry, view framework or global application store is not required.
+Use React state for local component/feature state. Use a Zustand store when state needs a shared owner; routing and the Tweak editing session use this pattern.
 
 Stateful components accept controlled values with change callbacks or uncontrolled defaults. Controlled callbacks propose a change; the owner can reject it by leaving the value unchanged. Defaults only initialize state. Programmatic value replacement does not represent user input.
 
@@ -44,4 +44,4 @@ Dimensions are terminal cells. A terminal row and column are not physically squa
 
 Only Tweak reads or writes `design/`. Its draft/export documents are proposals for source defaults. Normal application startup does not load these documents or mount the Tweak styling provider.
 
-The current optional styling adapter still contains editor-era observation and inheritance behavior. Its replacement by a normal typed `styles` API is unfinished; see [styling](styling.md). The structural reorganization does not claim that migration is complete.
+Tweak mounts the optional preview adapter for part observation and overrides. Customize application screens through documented component props and source defaults; see [styling](styling.md).

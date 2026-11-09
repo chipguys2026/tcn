@@ -26,7 +26,7 @@ See individual [component documents](ui/README.md) for details and boundaries.
 
 The shared final paint pass draws focused-control rings above normal content and popup surfaces. A ring may extend one cell beyond an ancestor clip, but fully hidden controls have no ring. Terminal bounds still apply. The pass creates no hit region and owns no focus policy.
 
-Unfocused invalid outlines remain local. The indicator of Checkbox has its own ring target; other composites choose their documented surface. No full hierarchical product FocusManager is supplied yet.
+Unfocused invalid outlines remain local. The indicator of Checkbox has its own ring target; other composites choose their documented surface. Use nested FocusScope boundaries when a screen needs its own traversal region.
 
 ## Overlays
 

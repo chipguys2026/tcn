@@ -1,20 +1,25 @@
-# combobox
+# Combobox
 
 A searchable single-selection adapter.
 
-[Source](../../src/components/ui/combobox.tsx) · Gallery: `/gallery/combobox` · [Styling status](../styling.md)
+[Source](../../src/components/ui/combobox.tsx) · Gallery: `/gallery/combobox` · [Customization](../styling.md)
 
 ## Usage
 
 ```tsx
 import { Combobox } from '@/components/ui/combobox'
 
-<Combobox options={[{value: "bun", label: "Bun"}, {value: "node", label: "Node.js"}]} value={runtime} onValueChange={setRuntime} />
+<Combobox
+  options={[
+    { value: 'bun', label: 'Bun' },
+    { value: 'node', label: 'Node.js' },
+  ]}
+  value={runtime}
+  onValueChange={setRuntime}
+/>
 ```
 
-Examples use surrounding application state/handlers where shown; they do not add persistence or business behavior.
-
-## Public API
+## API
 
 Exports: `Combobox`.
 
@@ -22,7 +27,7 @@ Exports: `Combobox`.
 | --- | --- |
 | Combobox | `{ options: readonly ComboboxOption[] value?: string defaultValue?: string onValueChange?: (value: string) => void placeholder?: string searchPlaceholder?: string emptyText?: string disabled?: boolean width?: number }` |
 
-### Declared prop types
+### Prop types
 
 ```ts
 type ComboboxOption = {
@@ -37,13 +42,11 @@ type ComboboxOption = {
 
 Open the popup, type to filter, navigate enabled results and commit one value. Escape/outside dismissal uses the nonmodal overlay behavior.
 
-Stateful components follow the [controlled/uncontrolled conventions](../architecture.md#state).
-
-## Source defaults and appearance
+## Appearance
 
 Trigger plus borderless search/list popup; underlying content dims 28%.
 
-Declared parameter defaults (expressions refer to the linked source):
+Defaults from the linked source:
 
 | Parameter | Default |
 | --- | --- |
@@ -54,14 +57,10 @@ Declared parameter defaults (expressions refer to the linked source):
 | Combobox.disabled | `false` |
 | Combobox.width | `34` |
 
-The universal per-part `styles` override API is not complete yet; default-file migration is in progress. Current Tweak parameters are preview proposals, not a stable application style contract. See [styling](../styling.md) before customizing or promoting defaults.
-
 ## Reuse
 
 Composes Popover and Command; search therefore reuses Input.
 
-## TUI boundaries
+## Notes
 
 Options are typed value/label/keywords/disabled records. No multiselect, arbitrary browser asChild composition or remote search engine.
-
-All dimensions are terminal cells. Native glyph appearance depends on the terminal font; browser accessibility/DOM behavior is not implied.

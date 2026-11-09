@@ -1,8 +1,8 @@
-# label
+# Label
 
 A text label that can delegate focus to a native control.
 
-[Source](../../src/components/ui/label.tsx) · Gallery: `/gallery/label` · [Styling status](../styling.md)
+[Source](../../src/components/ui/label.tsx) · Gallery: `/gallery/label` · [Customization](../styling.md)
 
 ## Usage
 
@@ -10,13 +10,13 @@ A text label that can delegate focus to a native control.
 import { Label } from '@/components/ui/label'
 import { Input } from '@/components/ui/input'
 
-<Label htmlFor="name">Name</Label>
-<Input id="name" />
+<>
+  <Label htmlFor="name">Name</Label>
+  <Input id="name" />
+</>
 ```
 
-Examples use surrounding application state/handlers where shown; they do not add persistence or business behavior.
-
-## Public API
+## API
 
 Exports: `Label`.
 
@@ -28,13 +28,11 @@ Exports: `Label`.
 
 Clicking resolves htmlFor and focuses the enabled control if the current focus scope permits it. Disabled labels do not delegate.
 
-Stateful components follow the [controlled/uncontrolled conventions](../architecture.md#state).
-
-## Source defaults and appearance
+## Appearance
 
 One-row bold text, optional required marker and disabled opacity. `invalid` uses the destructive foreground. FieldLabel reuses this component; styleSource/stylePart are internal composition hooks for its Tweak identity.
 
-Declared parameter defaults (expressions refer to the linked source):
+Defaults from the linked source:
 
 | Parameter | Default |
 | --- | --- |
@@ -44,14 +42,10 @@ Declared parameter defaults (expressions refer to the linked source):
 | Label.styleSource | `'label'` |
 | Label.stylePart | `'Label'` |
 
-The universal per-part `styles` override API is not complete yet; default-file migration is in progress. Current Tweak parameters are preview proposals, not a stable application style contract. See [styling](../styling.md) before customizing or promoting defaults.
-
 ## Reuse
 
 Uses the focus coordinator and native control IDs.
 
-## TUI boundaries
+## Notes
 
 This is native focus metadata, not browser label/ARIA parity. Keep IDs unique within a mounted application.
-
-All dimensions are terminal cells. Native glyph appearance depends on the terminal font; browser accessibility/DOM behavior is not implied.
