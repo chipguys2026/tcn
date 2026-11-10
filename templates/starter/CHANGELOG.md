@@ -1,5 +1,9 @@
 # Changelog
 
+## TCN 0.1.2 — 2026-11-10
+
+- Stabilize auto-sized popup dimensions and placement before display while preserving immediate backdrop dimming and focus restoration.
+
 ## TCN 0.1.1 — 2026-11-09
 
 - Move theme palettes and component defaults into `src/lib/ui/styles.ts`, replacing per-component style files.

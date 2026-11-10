@@ -7,6 +7,7 @@ import type {
 } from '@opentui/core'
 import {
   createPortal,
+  flushSync,
   useKeyboard,
   useRenderer,
   useTerminalDimensions,
@@ -134,8 +135,13 @@ export function Overlay({
     width: 0,
     height: 0,
     ready: false,
+    x: 0,
+    y: 0,
+    panelWidth: 0,
+    panelHeight: 0,
   })
   const measurement = useRef(measured)
+  const presented = useRef(false)
   const node = anchorPoint
     ? { screenX: anchorPoint.x, screenY: anchorPoint.y, width: 0, height: 0 }
     : anchor?.current?.getNode()
@@ -250,7 +256,20 @@ export function Overlay({
   const right = Math.min(padRight, Math.max(0, rect.width - left - 1))
   const top = Math.min(padTop, Math.max(0, rect.height - 1))
   const bottom = Math.min(padBottom, Math.max(0, rect.height - top - 1))
-  const measure = () => {
+  // Keep the real layout tree mounted, but do not expose the provisional cap
+  // or a size measured before wrapping/placement has settled at the new width.
+  const readyToShow =
+    presented.current ||
+    (!autoWidth && !autoHeight) ||
+    (measured.ready &&
+      measured.panelWidth === rect.width &&
+      measured.panelHeight === rect.height &&
+      measured.x === rect.x + originX &&
+      measured.y === rect.y + originY)
+  useLayoutEffect(() => {
+    if (readyToShow) presented.current = true
+  }, [readyToShow])
+  const measure = (beforePaint = false) => {
     const current = content.current
     if (
       !current ||
@@ -280,15 +299,26 @@ export function Overlay({
       width: Math.ceil(intrinsicWidth(current)),
       height: Math.ceil(current.height),
       ready: true,
+      x: surface.current?.screenX ?? 0,
+      y: surface.current?.screenY ?? 0,
+      panelWidth: surface.current?.width ?? 0,
+      panelHeight: surface.current?.height ?? 0,
     }
     if (
       measurement.current.ready &&
       measurement.current.width === next.width &&
-      measurement.current.height === next.height
+      measurement.current.height === next.height &&
+      measurement.current.x === next.x &&
+      measurement.current.y === next.y &&
+      measurement.current.panelWidth === next.panelWidth &&
+      measurement.current.panelHeight === next.panelHeight
     )
       return
     measurement.current = next
-    setMeasured(next)
+    // Native resize hooks run after layout and before paint. Commit the measured
+    // size now so the renderer can solve wrapping/placement in the same frame.
+    if (beforePaint) flushSync(() => setMeasured(next))
+    else setMeasured(next)
   }
   useLayoutEffect(measure)
   useLayoutEffect(() => {
@@ -319,8 +349,8 @@ export function Overlay({
       flexDirection="column"
       flexShrink={0}
       gap={Number(panelStyle.gap ?? gap)}
-      onSizeChange={measure}
-      renderBefore={measure}
+      onSizeChange={() => measure(true)}
+      renderBefore={() => measure()}
       {...componentStyle(`${stylePart}.items`, {
         gap: Number(panelStyle.gap ?? gap),
       })}
@@ -340,6 +370,8 @@ export function Overlay({
       zIndex={interactive ? undefined : 1000 + layer * 10}
       onMouseDown={interactive ? (event) => event.stopPropagation() : undefined}
       {...panelStyle}
+      opacity={readyToShow ? 1 : 0}
+      onSizeChange={() => measure(true)}
       width={rect.width}
       height={rect.height}
       minWidth={0}
@@ -396,10 +428,11 @@ export function Overlay({
       }}
     >
       <FocusScope
+        enabled={readyToShow}
         trap={modal && !review}
         loop={modal && !review}
-        autoFocus
-        restoreFocus={restoreFocus}
+        autoFocus={readyToShow}
+        restoreFocus={restoreFocus && readyToShow}
         onExit={modal && !review ? undefined : (onTabExit ?? onClose)}
       >
         {panel}
