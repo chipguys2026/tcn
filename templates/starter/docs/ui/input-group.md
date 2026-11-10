@@ -35,16 +35,18 @@ import {
 | InputGroupTextarea | Existing Textarea props; Enter inserts a newline, Ctrl+Enter submits |
 | InputGroupAddon | Children; `align="inline-start"`, `"inline-end"`, `"block-start"` or `"block-end"` |
 | InputGroupText | String children, muted foreground |
-| InputGroupButton | Existing Button props; defaults to ghost variant; no size or round prop |
+| InputGroupButton | Button props; defaults to the ghost variant |
 
 ## Composition
 
 Use one editor per group. Addons must be direct children of InputGroup. Declare the editor first; align determines where addons appear visually. Inline addons sit beside the editor; block addons sit above/below it. When inline content cannot fit, the row wraps. For multiline editors, prefer block addons.
 
-The root has zero padding/gap; addons have one cell of horizontal padding and a gap of one. Input/Textarea retain their own source text padding. The real Input/Textarea implements editing, focus, ref handles, readOnly, controlled reconciliation and submission. Disabled on the group disables its editor and InputGroupButtons; invalid is inherited by the editor. These states do not intercept arbitrary custom children.
+The group has zero padding and gap. Addons have one cell of horizontal padding and a gap of one. The editor keeps its text padding and supports the corresponding Input or Textarea props, including refs and read-only behavior.
+
+Setting `disabled` on the group disables its editor and InputGroupButtons. The editor also inherits `invalid`. Set these states separately on any additional custom controls.
 
 ## Focus and interaction
 
-An editor focus ring targets the entire group, without creating another focus manager or tab stop. Accessory buttons retain their own Button ring. Clicking passive group/addon space focuses its first enabled native editor through the focus coordinator; actions keep their own activation. Group background is shared with its editor. No frame border is added.
+When the editor is focused, the focus ring surrounds the entire group. Accessory buttons keep their own focus rings and tab stops. Clicking the group or a passive addon focuses the first enabled editor; clicking an action button activates that button. The group and editor share a continuous background.
 
 InputGroupButton uses Button defaults. See [styling](../styling.md) to customize the group's source defaults.

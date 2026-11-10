@@ -30,30 +30,26 @@ Exports: `Accordion`, `AccordionItem`, `AccordionTrigger`, `AccordionContent`.
 
 | Component | Props contract |
 | --- | --- |
-| Accordion | `PropsWithChildren< SelectionProps & { disabled?: boolean; collapsible?: boolean } >` |
+| Accordion | Children; `type="single"` or `"multiple"`; controlled `value` or initial `defaultValue`; `onValueChange`; `disabled`; `collapsible` for single mode |
 | AccordionItem | `PropsWithChildren<{ value: string; disabled?: boolean }>` |
 | AccordionTrigger | `PropsWithChildren<{ label: string }>` |
 | AccordionContent | `PropsWithChildren<{ forceMount?: boolean }>` |
 
 ## State and interaction
 
-Up/Down/Home/End move between enabled headings; Enter/Space or a click anywhere in the header toggles. Single mode needs collapsible to close the selected section. Hidden content leaves traversal.
+Use Up, Down, Home and End to move between enabled headings. Enter, Space or a click on the header toggles its section. In single mode, set `collapsible` to allow closing the selected section. Controls in hidden content are skipped during navigation.
 
 ## Appearance
 
-Full-width headings, right-aligned chevrons, bottom item dividers and no default background highlight. Headers default to one content row with one row of vertical padding on either side. Content aligns with the title and has top/bottom spacing.
+Headings fill the available width, with right-aligned chevrons and dividers below each item. The default appearance keeps the background unchanged. Headers default to one content row with one row of vertical padding on either side. Content aligns with the title and has top/bottom spacing.
 
-Defaults from the linked source:
+Default values:
 
 | Parameter | Default |
 | --- | --- |
 | AccordionItem.disabled | `false` |
 | AccordionContent.forceMount | `false` |
 
-## Reuse
+## Usage guidance
 
-Uses Pressable, RovingGroup and controlled selection. Trigger label/icon and content have separate inspection parts.
-
-## Notes
-
-A force-mounted closed section stays hidden. Content may contain normal controls; it is not a separate focus trap.
+Set `forceMount` to retain a closed section in the component tree; its content stays hidden until expanded. Controls inside an expanded section participate in normal keyboard navigation.

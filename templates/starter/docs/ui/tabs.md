@@ -29,22 +29,22 @@ Exports: `Tabs`, `TabsList`, `TabsTrigger`, `TabsContent`.
 
 | Component | Props contract |
 | --- | --- |
-| Tabs | `PropsWithChildren<{ value?: string defaultValue?: string onValueChange?: (value: string) => void orientation?: State['orientation'] activationMode?: State['activationMode'] }>` |
+| Tabs | Children; controlled `value` or initial `defaultValue`; `onValueChange`; `orientation="horizontal"` or `"vertical"`; `activationMode="automatic"` or `"manual"` |
 | TabsList | `PropsWithChildren` |
 | TabsTrigger | `PropsWithChildren<{ value: string; label?: string; disabled?: boolean }>` |
 | TabsContent | `PropsWithChildren<{ value: string; forceMount?: boolean }>` |
 
 ## State and interaction
 
-Arrows/Home/End navigate triggers. Automatic mode activates on movement; manual mode waits for Enter/Space. Hidden panel controls leave traversal.
+Use arrows, Home and End to navigate triggers. Automatic mode activates a tab when focus moves; manual mode waits for Enter or Space. Controls in hidden panels are skipped during navigation.
 
 ## Appearance
 
 Defaults are defined in [styles.ts](../../src/lib/ui/styles.ts). Edit this local file to change appearance across your application.
 
-Horizontal or vertical trigger lists with semantic active state.
+Arrange triggers horizontally or vertically. The active trigger is highlighted using theme colors.
 
-Defaults from the linked source:
+Default values:
 
 | Parameter | Default |
 | --- | --- |
@@ -55,10 +55,6 @@ Defaults from the linked source:
 | TabsTrigger.label | `value` |
 | TabsContent.forceMount | `false` |
 
-## Reuse
+## Usage guidance
 
-Uses RovingGroup and controlled string selection.
-
-## Notes
-
-Tabs are local component state, not application routes. Values must match their panel values.
+Match every trigger value to its panel value. Use Tabs to switch content within a screen; use the [router](../routing.md) to navigate between screens.

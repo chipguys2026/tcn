@@ -21,7 +21,7 @@ Exports: `ToggleGroup`, `ToggleGroupItem`.
 
 | Component | Props contract |
 | --- | --- |
-| ToggleGroup | `PropsWithChildren< SelectionProps & { disabled?: boolean orientation?: 'horizontal' \| 'vertical' } >` |
+| ToggleGroup | Children; `type="single"` or `"multiple"`; controlled `value` or initial `defaultValue`; `onValueChange`; `disabled`; `orientation="horizontal"` or `"vertical"` |
 | ToggleGroupItem | `PropsWithChildren<{ value: string; label?: string; disabled?: boolean }>` |
 
 ## State and interaction
@@ -32,17 +32,13 @@ Arrow navigation moves between enabled items; activation updates selection accor
 
 Selected items use the common toggle appearance.
 
-Defaults from the linked source:
+Default values:
 
 | Parameter | Default |
 | --- | --- |
 | ToggleGroupItem.disabled | `false` |
 | ToggleGroupItem.label | `value` |
 
-## Reuse
+## Usage guidance
 
-Uses shared selection contracts, RovingGroup and Toggle/Pressable composition.
-
-## Notes
-
-single uses a string; multiple uses a string array. Values must be unique.
+Use a string value for `single` mode and an array of strings for `multiple` mode. Give every item a unique value.

@@ -41,10 +41,10 @@ import {
 
 Right mouse down opens near the pointer. Shift+F10 or a terminal-reported menu key opens relative to the focused trigger. Left click only focuses the trigger. Disabled triggers do not open. Terminal support determines whether menu keys and right clicks reach the app.
 
-Arrows/Home/End/typeahead, disabled skipping, controlled checkbox/radio proposals, selection closing and Escape/outside dismissal share `lib/ui/menu.tsx` with DropdownMenu. Each family has its own context. Closing restores trigger focus through the existing overlay scope. Controlled owners may reject open or selection proposals.
+Use arrows, Home, End or typeahead to move between enabled items. Select actions with Enter or Space. Escape or an outside click dismisses the menu, and closing restores focus to the trigger. In controlled mode, apply `onOpenChange` and selection callbacks to accept changes.
 
 ## Sizing and placement
 
-Content inherits DropdownMenu source defaults, except minWidth is 12 cells rather than trigger width. Width/height are auto, capped at 32 columns/16 rows, including one-cell padding. Pointer coordinates are absolute terminal coordinates; the shared Overlay converts them into the preview region and clamps placement. Popup backdrop and scrolling match DropdownMenu.
+Content fits its items by default, with a minimum width of 12 columns and maximum dimensions of 32 columns by 16 rows. Dimensions include one cell of padding on each side. The menu opens near the pointer and stays within the available terminal region. Its backdrop and scrolling behave like [Dropdown Menu](dropdown-menu.md).
 
 Use flat groups, ordinary items, checkbox/radio items and separators. For nested application menus, see [Menubar](menubar.md). See [popup sizing](../popup-sizing.md) and [styling](../styling.md) for layout and appearance.

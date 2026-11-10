@@ -16,6 +16,8 @@ import { Button } from '@/components/ui/button'
 
 ## API
 
+The `icon` prop accepts a built-in alias or a typed glyph imported from a Nerd Fonts set. See [icons](../icons.md) for installation and usage.
+
 Exports: `Button`.
 
 | Component | Props contract |
@@ -44,38 +46,32 @@ type SharedProps = {
 
 type ButtonProps = SharedProps &
   (
-    | { children: string; icon?: IconName; label?: string }
-    | { children?: never; icon: IconName; label: string }
+    | { children: string; icon?: IconValue; label?: string }
+    | { children?: never; icon: IconValue; label: string }
   )
 ```
 
 ## State and interaction
 
-Enter/Space or left click invokes onPress. Disabled buttons do not activate or receive Tab focus. A ref exposes focus(), blur() and label.
+Enter, Space or a left click invokes `onPress`. Disabled buttons are skipped during Tab navigation and cannot be activated. A ref exposes `focus()`, `blur()` and `label`.
 
 ## Appearance
 
 Defaults are defined in [styles.ts](../../src/lib/ui/styles.ts). Edit this local file to change appearance across your application.
 
-Variants are default, secondary, ghost, destructive and link. Horizontal padding defaults to one cell; vertical padding is zero. There are no size/rounded variants. Focus has a separate outer ring.
+Variants are `default`, `secondary`, `ghost`, `destructive` and `link`. Horizontal padding defaults to one cell and vertical padding to zero. Focus is indicated by an outer ring.
 
-Width is optional layout geometry (content-sized when omitted, a cell count, auto or percentage when supplied). SidebarMenuButton uses the same Button with width 100% to fill its row. onFocus/onBlur allow compositions such as Toast to pause timers without adding focus ownership.
+Buttons fit their content by default. Set `width` to a cell count, `auto` or a percentage for explicit layout control. Use `onFocus` and `onBlur` to respond to focus changes.
 
-Defaults from the linked source:
+Default values:
 
 | Parameter | Default |
 | --- | --- |
 | Button.variant | `'default'` |
 | Button.disabled | `false` |
 | Button.autoFocus | `false` |
-| Button.styleSource | `'button'` |
-| Button.stylePart | `Button.${variant}` |
-| Button.paddingX | `buttonDefaults.paddingX` |
+| Button.paddingX | `1` |
 
-## Reuse
+## Usage guidance
 
-Uses usePress, useFocusable, the shared final ring pass and styles.ts. Modal actions reuse Button.
-
-## Notes
-
-Icon-only buttons require label. No implicit form submission. `styleSource` and `stylePart` identify parts for Tweak previews; use documented props or source defaults for appearance changes.
+Provide a descriptive `label` for icon-only buttons. Connect save or submit behavior through `onPress`. Customize appearance with the documented props and [shared source defaults](../styling.md).

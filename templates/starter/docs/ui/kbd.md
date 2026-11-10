@@ -26,16 +26,12 @@ Exports: `Kbd`, `KbdGroup`.
 
 ## State and interaction
 
-Display only. It does not register or execute a shortcut.
+Kbd displays a shortcut hint. Register the corresponding action in application code.
 
 ## Appearance
 
-One row, muted background/foreground, semicircle caps inside one-cell horizontal padding. KbdGroup spaces hints and can wrap between hints.
+Each hint occupies one row with muted colors and semicircle caps inside one-cell horizontal padding. KbdGroup adds spacing and wraps between hints when necessary.
 
-## Reuse
+## Usage guidance
 
-Uses the same Pill geometry as Badge. CommandShortcut reuses Kbd.
-
-## Notes
-
-Nerd Font required for the intended cap shapes. Application shortcut registration is separate.
+Configure a Nerd Font for the rounded cap glyphs. Register keyboard shortcuts in application code; Kbd displays their labels.

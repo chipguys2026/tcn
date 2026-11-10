@@ -8,10 +8,10 @@ Use buttons, forms, dialogs, menus, tables, charts and conversation layouts with
 
 You need **Node.js 22 or newer** for the CLI and **Bun 1.3.14 or newer** to install dependencies and run your application. Configure your terminal with a Nerd Font for icons.
 
-Install TCN from the [v0.1.2 GitHub Release](https://github.com/chipguys2026/tcn/releases/tag/v0.1.2):
+Install TCN from the [v0.2.0 GitHub Release](https://github.com/chipguys2026/tcn/releases/tag/v0.2.0):
 
 ```sh
-npm install -g https://github.com/chipguys2026/tcn/releases/download/v0.1.2/tcn-0.1.2.tgz
+npm install -g https://github.com/chipguys2026/tcn/releases/download/v0.2.0/tcn-0.2.0.tgz
 tcn init my-app
 cd my-app
 bun run dev
@@ -23,7 +23,7 @@ TCN is distributed through GitHub Releases. Use the release URL above; `npx tcn@
 
 ## Build your first screen
 
-Replace `src/features/home/home-page.tsx` in your generated application:
+Replace `src/app/page.tsx` in your generated application:
 
 ```tsx
 import { useState } from 'react'
@@ -59,6 +59,17 @@ tcn remove dialog
 A new starter already includes every component family. `add` installs missing components or takes source changes from your installed CLI release. It also includes required shared helpers and package dependencies. Before removing a component, remove its usages from your application, Gallery and tests.
 
 To use TCN in an existing React/OpenTUI application, run `tcn init` in that project, check its paths and aliases, then add the components you need. See the [CLI guide](docs/cli.md) and [configuration reference](docs/configuration.md).
+
+## Use more icons
+
+TCN 0.2.0 adds the complete Nerd Fonts catalog as optional source sets:
+
+```sh
+tcn list --icons
+tcn add icons/fa
+```
+
+Use typed glyphs such as `fa.address_book` in component icon props. Existing aliases such as `save` remain available. New starters include a browser at `/gallery/icons`. See the [icon guide](https://github.com/chipguys2026/tcn/blob/main/templates/starter/docs/icons.md) for set imports, search and clipboard actions.
 
 ## Customize and update
 

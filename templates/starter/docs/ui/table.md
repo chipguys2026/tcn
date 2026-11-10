@@ -62,15 +62,15 @@ type CellProps = {
 
 ## State and interaction
 
-Rows with onSelect use shared keyboard/mouse activation. selected is owner-controlled. Noninteractive rows have no focus policy.
+Add `onSelect` to make a row keyboard- and pointer-accessible. Set `selected` from application state to show its selection. Rows without an action are skipped during focus navigation.
 
 ## Appearance
 
 Defaults are defined in [styles.ts](../../src/lib/ui/styles.ts). Edit this local file to change appearance across your application.
 
-Bottom row dividers replace background differentiation. Footer has no default fill. Selected row text uses the primary color; interactive row highlight is suppressed.
+Bottom dividers separate rows, and the footer keeps the surrounding background. Selected rows use primary-colored text while preserving their background.
 
-Defaults from the linked source:
+Default values:
 
 | Parameter | Default |
 | --- | --- |
@@ -78,10 +78,6 @@ Defaults from the linked source:
 | TableRow.label | `'Select row'` |
 | TableRow.disabled | `false` |
 
-## Reuse
+## Usage guidance
 
-Uses shared column context, cells and Pressable for selectable rows.
-
-## Notes
-
-No sorting, filtering, pagination, editing or virtualization. Wrap wide/large tables in an appropriate ScrollArea.
+Prepare sorting, filtering and pagination in application code before passing rows to Table. Wrap large or wide tables in a [Scroll Area](scroll-area.md).

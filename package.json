@@ -1,6 +1,6 @@
 {
   "name": "tcn",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "description": "Source-owned React and OpenTUI components and starter CLI.",
   "type": "module",
   "license": "MIT",
@@ -28,6 +28,8 @@
   },
   "scripts": {
     "build": "bun scripts/build.ts",
+    "icons:generate": "bun scripts/generate-icons.ts",
+    "icons:check": "bun scripts/generate-icons.ts --check",
     "cli": "node dist/cli.js",
     "typecheck": "tsc --noEmit",
     "lint": "biome check src scripts tests schemas .github/main-ruleset.json package.json tsconfig.json biome.json",

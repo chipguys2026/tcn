@@ -17,7 +17,7 @@ const root = resolve(import.meta.dir, '..'),
   ) as {
     release: string
     revision: string
-    items: Record<string, { public: boolean }>
+    items: Record<string, { public: boolean; kind?: 'icons' }>
   }
 if (registry.release !== version)
   throw new Error('Registry is stale; run bun run build before packaging')
@@ -56,7 +56,9 @@ const info: ReleaseInfo = {
   sha256: sha,
   commit,
   registryRevision: registry.revision,
-  components: Object.values(registry.items).filter((i) => i.public).length,
+  components: Object.values(registry.items).filter(
+    (i) => i.public && i.kind !== 'icons',
+  ).length,
 }
 await writeFile(join(directory, 'SHA256SUMS'), `${sha}  ${file}\n`)
 await writeFile(

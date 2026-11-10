@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.2.0 — 2026-11-10
+
+- Implement starter screens directly in route pages, organize feature code by responsibility and share Gallery/Tweak demos without cross-feature imports.
+- Document application structure, feature development and example cleanup; include contributor conventions in repository and generated application AGENTS.md files.
+- Include the complete Nerd Fonts 3.5.1 catalog: 10,995 names across 17 independently installable sets, while preserving all 18 existing icon aliases.
+- Accept typed catalog glyphs in component icon props and add an icon browser with search, set filtering, previews, pagination and clipboard actions.
+- Generate catalog source offline from a checksum-pinned upstream snapshot and distribute notices with installed icon source.
+
 ## 0.1.2 — 2026-11-10
 
 - Resolve auto-sized popup layout before painting to avoid flashing provisional dimensions when opening menus and tooltips.

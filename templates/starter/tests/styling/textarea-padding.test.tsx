@@ -3,7 +3,7 @@ import type { BoxRenderable, TextareaRenderable } from '@opentui/core'
 import { testRender } from '@opentui/react/test-utils'
 import { act } from 'react'
 import { Textarea } from '@/components/ui/textarea'
-import { emptyProfile } from '@/features/tweak/storage'
+import { emptyProfile } from '@/features/tweak/api/review.storage'
 import { ComponentStylesProvider } from '@/lib/ui/style-review'
 import { ThemeProvider } from '@/lib/ui/theme/provider'
 

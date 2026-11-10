@@ -263,7 +263,7 @@ export async function planInit(
   plan.guards.set('.tcn/manifest.json', manifestBytes)
   const planned = new Map(plan.changes.map((c) => [c.path, c.after])),
     adopted: string[] = []
-  for (const id of resolveItems(registry, names(registry))) {
+  for (const id of resolveItems(registry, names(registry, 'all'))) {
     const candidate = installed(
         registry,
         id,
@@ -289,6 +289,20 @@ export async function planInit(
         delete manifest.items[id]
         removed = true
       }
+  }
+  // The complete catalog owns its groups; preserve only groups the user had
+  // already installed explicitly before this adoption.
+  if (manifest.items['icons/all']) {
+    for (const id of resolveItems(registry, ['icons/all'])) {
+      const item = manifest.items[id]
+      if (
+        id.startsWith('icons/') &&
+        id !== 'icons/all' &&
+        adopted.includes(id) &&
+        item
+      )
+        item.explicit = false
+    }
   }
   await change(plan, 'tcn.json', json(config))
   await change(plan, '.tcn/schema.json', Buffer.from(schema))

@@ -1,6 +1,6 @@
 # Label
 
-A text label that can delegate focus to a native control.
+A text label that focuses an associated control when clicked.
 
 [Source](../../src/components/ui/label.tsx) · Gallery: `/gallery/label` · [Customization](../styling.md)
 
@@ -26,26 +26,20 @@ Exports: `Label`.
 
 ## State and interaction
 
-Clicking resolves htmlFor and focuses the enabled control if the current focus scope permits it. Disabled labels do not delegate.
+Set `htmlFor` to a control's `id`. Clicking the label focuses that control when it is enabled and reachable within the active focus scope. A disabled label ignores clicks.
 
 ## Appearance
 
-One-row bold text, optional required marker and disabled opacity. `invalid` uses the destructive foreground. FieldLabel reuses this component; styleSource/stylePart are internal composition hooks for its Tweak identity.
+Labels use one row of bold text with an optional required marker. Disabled labels appear dimmed; `invalid` uses the destructive foreground.
 
-Defaults from the linked source:
+Default values:
 
 | Parameter | Default |
 | --- | --- |
 | Label.disabled | `false` |
 | Label.required | `false` |
 | Label.invalid | `false` |
-| Label.styleSource | `'label'` |
-| Label.stylePart | `'Label'` |
 
-## Reuse
+## Usage guidance
 
-Uses the focus coordinator and native control IDs.
-
-## Notes
-
-This is native focus metadata, not browser label/ARIA parity. Keep IDs unique within a mounted application.
+Set `htmlFor` to the target control's `id`. Keep control IDs unique within the mounted application.

@@ -47,15 +47,15 @@ Exports: `Command`, `CommandInput`, `CommandList`, `CommandEmpty`, `CommandItem`
 
 ## State and interaction
 
-Input retains native focus while Up/Down changes the active result; Enter invokes the enabled result. Filtering matches every query word against label/value/keywords.
+Focus stays in the search input while Up and Down change the active result. Enter invokes that result when enabled. Filtering matches every query word against item labels, values and keywords.
 
 ## Appearance
 
 Defaults are defined in [styles.ts](../../src/lib/ui/styles.ts). Edit this local file to change appearance across your application.
 
-Group headings, empty state, separators and shortcut hints. CommandDialog provides a dimmed modal palette; a plain Command can be embedded.
+Compose group headings, an empty state, separators and shortcut hints around the results. Use CommandDialog for a modal palette or embed Command directly in a screen.
 
-Defaults from the linked source:
+Default values:
 
 | Parameter | Default |
 | --- | --- |
@@ -70,10 +70,6 @@ Defaults from the linked source:
 | CommandItem.keywords | `[]` |
 | CommandItem.disabled | `false` |
 
-## Reuse
+## Usage guidance
 
-CommandInput reuses Input; CommandShortcut reuses Kbd. CommandDialog reuses the modal overlay foundation.
-
-## Notes
-
-Root value describes the active result, not the query. CommandInput owns its own value/onValueChange. No fuzzy ranking or global shortcut registration.
+Control the search text with `CommandInput`'s `value` and `onValueChange`. The root `value` identifies the active result. Register application shortcuts separately and use `CommandShortcut` to display their hints.

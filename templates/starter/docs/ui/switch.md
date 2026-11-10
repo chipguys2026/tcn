@@ -36,24 +36,20 @@ type SwitchProps = {
 
 ## State and interaction
 
-Enter/Space and clicks on caps, thumb or label toggle. Disabled controls are skipped. Controlled owners can reject edits.
+Press Enter or Space, or click the track, thumb or label to toggle. Disabled switches are skipped during keyboard navigation. In controlled mode, update `checked` from `onCheckedChange` to accept a change.
 
 ## Appearance
 
-Track is four cells wide and one row high. The rounded thumb uses two cells: left for Off, right for On. Track changes muted/primary; label is alongside.
+The track is four cells wide and one row high. Its two-cell thumb moves left for Off and right for On. The track uses muted or primary colors, with the label alongside it.
 
-Track-to-label spacing is a real layout gap, defaulting to one cell in [styles.ts](../../src/lib/ui/styles.ts). The Tweak `Switch.gap` field controls the entire spacing; no fixed spacer is inserted.
+The label is separated from the track by one cell. Change this gap in [styles.ts](../../src/lib/ui/styles.ts), or preview it with Tweak's `Switch.gap` control.
 
-Defaults from the linked source:
+Default values:
 
 | Parameter | Default |
 | --- | --- |
 | Switch.defaultChecked | `false` |
 
-## Reuse
+## Usage guidance
 
-Uses Pressable, useControllable and the shared Nerd Font semicircle tokens.
-
-## Notes
-
-No animation or product-level setting persistence. Label remains required for focus metadata.
+Provide a descriptive `label` and persist settings in application code when required.

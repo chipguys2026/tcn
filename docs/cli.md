@@ -47,6 +47,21 @@ tcn add button --dry-run
 
 A dry run performs the same validation without writing files or installing dependencies. It can report a conflict rather than returning a writable plan.
 
+## Install icon sets
+
+In TCN 0.2.0 and newer, list and install Nerd Fonts sets separately from UI components:
+
+```sh
+tcn list --icons
+tcn add icons/fa icons/md
+tcn diff icons/fa
+tcn remove icons/fa
+```
+
+Use `icons/all` to install the complete catalog. `tcn list` and `tcn add --all` continue to select the 51 UI families. Icon packs use the same conflict, shared-dependency and reference checks as components. New starters include all sets for Gallery; adding a component to an existing application does not pull in the full catalog.
+
+See the [icon guide](https://github.com/chipguys2026/tcn/blob/main/templates/starter/docs/icons.md) for typed imports and the browser.
+
 ## Compare source
 
 ```sh

@@ -83,6 +83,6 @@ The surface uses sidebar theme tokens with no frame border. Sidebar width is cap
 
 ## Focus and state
 
-Controls keep ordinary Button/Input focus and activation. Hiding a region that held focus attempts to focus the registered SidebarTrigger; visible menu controls retain focus during icon collapse. Hidden controls are excluded by the existing scope's ancestor-visibility checks. A controlled owner may reject toggle proposals. One trigger ref per provider is used for hidden-focus recovery.
+Controls use normal Button and Input keyboard behavior. When collapsing hides the focused control, focus returns to SidebarTrigger when available. Controls that remain visible keep their focus, and hidden controls are skipped during navigation. In controlled mode, update the provider's open value to accept a toggle request. Use one SidebarTrigger per provider for consistent focus restoration.
 
 The application owns shortcuts, active navigation, filtering and persistence. Sidebar uses Button, Input, Badge, Skeleton and Separator defaults; changing those shared controls can affect the sidebar. See [styling](../styling.md).

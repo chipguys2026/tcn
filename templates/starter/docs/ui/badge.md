@@ -22,22 +22,18 @@ Exports: `Badge`.
 
 ## State and interaction
 
-No keyboard activation or focus registration.
+Badge displays status text and is skipped during keyboard navigation.
 
 ## Appearance
 
-Single row with Nerd Font semicircle caps. A cap counts inside each side's horizontal padding: padding 1 is the cap; padding 2 adds one space; padding 0 omits the cap. Variants: default, secondary, ghost, destructive.
+Badge occupies one row with Nerd Font semicircle caps. A cap counts inside each side's horizontal padding: padding 1 is the cap; padding 2 adds one space; padding 0 omits the cap. Available variants are `default`, `secondary`, `ghost` and `destructive`.
 
-Defaults from the linked source:
+Default values:
 
 | Parameter | Default |
 | --- | --- |
 | Badge.variant | `'default'` |
 
-## Reuse
+## Usage guidance
 
-Uses Pill and the Button semantic color resolver.
-
-## Notes
-
-Transparent backgrounds have no visible caps. Long labels truncate; cap rasterization depends on the terminal font.
+Long labels truncate to the available width. Rounded caps are visible on opaque backgrounds, and their shape depends on the terminal font.

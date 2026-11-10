@@ -21,6 +21,7 @@ export type RegistryFile = {
 export type RegistryItem = {
   name: string
   public: boolean
+  kind?: 'icons'
   revision: string
   registryDependencies: string[]
   dependencies: Record<string, string>

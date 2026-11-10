@@ -22,23 +22,19 @@ Exports: `Spinner`.
 
 ## State and interaction
 
-No focus. paused stops advancement; unmount releases the renderer clock subscription.
+Set `paused` to freeze the current frame. Spinner is skipped during keyboard navigation.
 
 ## Appearance
 
-Uses a shared renderer animation clock at 8 fps and semantic text color.
+The spinner animates at eight frames per second and uses the theme primary color.
 
-Defaults from the linked source:
+Default values:
 
 | Parameter | Default |
 | --- | --- |
 | Spinner.label | `'Loading'` |
 | Spinner.paused | `false` |
 
-## Reuse
+## Usage guidance
 
-Uses the shared renderer lifecycle rather than a separate per-component interval.
-
-## Notes
-
-Indicates busy state only; it does not track an operation or its progress.
+Show Spinner while an operation is pending, and replace it with a result or error when the operation completes.

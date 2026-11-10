@@ -35,22 +35,18 @@ type ToggleProps = PropsWithChildren<{
 
 ## State and interaction
 
-Enter/Space/click proposes a pressed change; disabled controls are skipped.
+Press Enter or Space, or click the control, to change its pressed state. Disabled controls are skipped during keyboard navigation.
 
 ## Appearance
 
-Semantic pressed and interaction states; supports custom children.
+Theme colors distinguish pressed and interaction states. Supply children to customize the content.
 
-Defaults from the linked source:
+Default values:
 
 | Parameter | Default |
 | --- | --- |
 | Toggle.defaultPressed | `false` |
 
-## Reuse
+## Usage guidance
 
-Uses Pressable and useControllable.
-
-## Notes
-
-A toggle button represents pressed state rather than an editor or boolean setting field.
+Use Toggle for a pressed action, such as enabling an editor tool. Use [Switch](switch.md) for an on/off setting.

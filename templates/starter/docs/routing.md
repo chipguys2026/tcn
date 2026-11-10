@@ -10,13 +10,14 @@ The router uses a Zustand navigation store and a generated static manifest. File
 | `/gallery` | `app/gallery/page.tsx` | All 51 component families |
 | `/gallery/:name` | `app/gallery/[name]/page.tsx` | One family, e.g. `/gallery/button` |
 | `/gallery/showcase` | `app/gallery/showcase/page.tsx` | Composed examples |
+| `/gallery/icons` | `app/gallery/icons/page.tsx` | Searchable Nerd Fonts catalog |
 | `/tweak` | `app/tweak/page.tsx` | Development parameter editor |
 
 Static routes such as `showcase` take precedence over dynamic segments such as `[name]`.
 
 ## Add a route
 
-Create `src/features/settings/settings-page.tsx`:
+Create `src/app/settings/page.tsx` and implement the screen directly:
 
 ```tsx
 export default function SettingsPage() {
@@ -24,11 +25,7 @@ export default function SettingsPage() {
 }
 ```
 
-Then create `src/app/settings/page.tsx` to connect it to the router:
-
-```tsx
-export { default } from '@/features/settings/settings-page'
-```
+No separate `settings-page.tsx` is required. Extract meaningful business components and logic into `features/settings` as needed; see [feature development](features.md).
 
 Use `[id]/page.tsx` for dynamic parameters. A `(group)` directory organizes routes without adding a URL segment. Catch-all routes are not supported. Conflicting routes and repeated parameter names are rejected during generation.
 

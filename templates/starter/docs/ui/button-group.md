@@ -34,6 +34,6 @@ import { Button } from '@/components/ui/button'
 
 ## Layout and interaction
 
-The source gap is zero; horizontal groups wrap at the available width. Nested groups scope their own orientation. ButtonGroupSeparator reuses Separator. The group creates no focus target: ordinary Tab order, disabled handling, Enter/Space/click activation and focus rings come from each Button. This is a visual grouping, not a ToggleGroup or a roving-focus toolbar.
+Buttons have zero gap between them, and horizontal groups wrap at the available width. Nested groups can use their own orientation. Each button keeps its normal Tab stop, activation keys, disabled state and focus ring. Use [Toggle Group](toggle-group.md) when the controls represent a selection.
 
 Buttons keep their own variants and source defaults. See [styling](../styling.md) to customize appearance.

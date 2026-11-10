@@ -22,13 +22,13 @@ Exports: `Progress`.
 
 ## State and interaction
 
-No focus or activation; the owner updates value.
+Update `value` from application state as the operation progresses. The indicator is skipped during keyboard navigation.
 
 ## Appearance
 
-Cell-based bar with optional value text. Values are clamped to the accepted range.
+Progress renders a bar in terminal cells with optional value text. Values are clamped to the accepted range.
 
-Defaults from the linked source:
+Default values:
 
 | Parameter | Default |
 | --- | --- |
@@ -36,10 +36,6 @@ Defaults from the linked source:
 | Progress.width | `24` |
 | Progress.showValue | `true` |
 
-## Reuse
+## Usage guidance
 
-Uses semantic theme tokens.
-
-## Notes
-
-No indeterminate animation. Operation state belongs to the caller.
+Pass the operation's current value from application state. Use [Spinner](spinner.md) when progress cannot be measured.

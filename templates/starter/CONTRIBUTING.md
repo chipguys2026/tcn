@@ -6,18 +6,20 @@ Run commands from the application root. These guidelines apply when changing loc
 
 1. Install dependencies with `bun install`.
 2. Describe the expected behavior before extending a component's API.
-3. Implement reusable UI in `src/components/ui` and application features in `src/features`.
-4. Add or update a shared gallery example. Tweak must preview the real component, not a second implementation.
+3. Implement screens directly in `src/app/**/page.tsx`, business components/logic in `src/features`, and reusable controls in `src/components/ui`.
+4. For reusable UI changes, update a shared example in `src/components/shared/component-demos`. Tweak must preview the real component, not a second implementation.
 5. Update the relevant `docs/ui/<component>.md` and any affected architecture or interaction documentation.
 6. Run `bun run format`, `bun run check` and `bun run build`.
 
 Use TypeScript strict mode, named component exports, two-space indentation, single quotes and no unnecessary semicolons. Let Biome format code.
 
+Route pages use default exports. Use Conventional Commits such as `feat(users): add filtering` or `fix: preserve focus`. See [AGENTS.md](AGENTS.md) for commands, conventions and working rules, and [feature development](docs/features.md) for an application example.
+
 ## Boundaries
 
-- Route modules in `src/app` connect routes to features. Do not place editors, catalogs or application state in route files.
+- Route modules implement screens and may own local screen state. Do not add a second page module merely to forward a route.
 - UI components and `lib/ui` must not import feature implementations or read files from `design/`.
-- The Tweak feature may reuse Gallery's catalog and examples. Keep draft storage, schema, history and export inside Tweak.
+- Gallery and Tweak use the shared component demos; neither depends on the other's internals. Keep draft storage, schema, history and export inside Tweak.
 - Do not add a component-specific focus manager. Reuse the focus, activation and overlay primitives.
 - Preserve controlled/uncontrolled semantics and meaningful disabled/read-only behavior.
 - Keep visual defaults in source. Draft/export JSON is a design proposal, not runtime configuration.

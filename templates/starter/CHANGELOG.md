@@ -1,5 +1,12 @@
 # Changelog
 
+## TCN 0.2.0 — 2026-11-10
+
+- Implement screens directly in route pages and group feature code by responsibility, with shared Gallery/Tweak demos.
+- Add AGENTS.md conventions and guides for feature development, global/shared ownership and removing starter examples.
+- Add the complete typed Nerd Fonts catalog and `/gallery/icons` for finding, previewing and copying icons.
+- Preserve legacy icon names and support installing individual icon sets through TCN.
+
 ## TCN 0.1.2 — 2026-11-10
 
 - Stabilize auto-sized popup dimensions and placement before display while preserving immediate backdrop dimming and focus restoration.

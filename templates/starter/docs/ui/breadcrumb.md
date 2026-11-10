@@ -43,6 +43,6 @@ import {
 
 ## Navigation
 
-Only links enter the focus order. They reuse Button activation, disabled handling and ring rendering. The application owns routing through onPress; no href/DOM anchor is introduced. Compose a DropdownMenu within a BreadcrumbItem when a collapsed path should be interactive.
+Tab navigation visits links and skips passive path text. Links support Enter, Space and click activation, with disabled states and focus rings. Navigate from the link's `onPress` handler. To expose a collapsed path, compose a [Dropdown Menu](dropdown-menu.md) within a BreadcrumbItem.
 
 BreadcrumbLink uses Button defaults with zero horizontal padding. Customize defaults in the linked source; see [styling](../styling.md).

@@ -2,25 +2,28 @@
 import type { RouteManifest } from './types'
 import Module0 from "../app/error"
 import Module1 from "../app/gallery/[name]/page"
-import Module2 from "../app/gallery/page"
-import Module3 from "../app/gallery/showcase/page"
-import Module4 from "../app/layout"
-import Module5 from "../app/page"
-import Module6 from "../app/tweak/page"
+import Module2 from "../app/gallery/icons/page"
+import Module3 from "../app/gallery/page"
+import Module4 from "../app/gallery/showcase/page"
+import Module5 from "../app/layout"
+import Module6 from "../app/page"
+import Module7 from "../app/tweak/page"
 
-const layer0 = { id: ".", layout: Module4, error: Module0 }
+const layer0 = { id: ".", layout: Module5, error: Module0 }
 const layer1 = { id: "gallery" }
 const layer2 = { id: "gallery/[name]" }
-const layer3 = { id: "gallery/showcase" }
-const layer4 = { id: "tweak" }
+const layer3 = { id: "gallery/icons" }
+const layer4 = { id: "gallery/showcase" }
+const layer5 = { id: "tweak" }
 
 export const routeManifest = {
   root: layer0,
   routes: [
-    { path: "/", segments: [], page: Module5, layers: [] },
-    { path: "/gallery", segments: [{"kind":"static","value":"gallery"}], page: Module2, layers: [layer1] },
-    { path: "/gallery/showcase", segments: [{"kind":"static","value":"gallery"},{"kind":"static","value":"showcase"}], page: Module3, layers: [layer1, layer3] },
+    { path: "/", segments: [], page: Module6, layers: [] },
+    { path: "/gallery", segments: [{"kind":"static","value":"gallery"}], page: Module3, layers: [layer1] },
+    { path: "/gallery/icons", segments: [{"kind":"static","value":"gallery"},{"kind":"static","value":"icons"}], page: Module2, layers: [layer1, layer3] },
+    { path: "/gallery/showcase", segments: [{"kind":"static","value":"gallery"},{"kind":"static","value":"showcase"}], page: Module4, layers: [layer1, layer4] },
     { path: "/gallery/:name", segments: [{"kind":"static","value":"gallery"},{"kind":"dynamic","value":"name"}], page: Module1, layers: [layer1, layer2] },
-    { path: "/tweak", segments: [{"kind":"static","value":"tweak"}], page: Module6, layers: [layer4] },
+    { path: "/tweak", segments: [{"kind":"static","value":"tweak"}], page: Module7, layers: [layer5] },
   ],
 } satisfies RouteManifest

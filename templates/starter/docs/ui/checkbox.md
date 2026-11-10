@@ -41,15 +41,15 @@ type CheckboxProps = CheckboxStateProps &
 
 ## State and interaction
 
-Space and left click on the mark or label toggle; Enter does not. Activating indeterminate proposes true. Disabled items are skipped. Ref exposes focus/blur/label.
+Press Space or click the indicator or label to toggle. Enter leaves the value unchanged. Activating an indeterminate checkbox requests a checked value of `true`. Disabled checkboxes are skipped during keyboard navigation. A ref exposes `focus()`, `blur()` and `label`.
 
 ## Appearance
 
 Defaults are defined in [styles.ts](../../src/lib/ui/styles.ts). Edit this local file to change appearance across your application.
 
-The outer focus ring surrounds the indicator, not the entire label. Supports checked, unchecked and indeterminate glyph states.
+The outer focus ring surrounds the indicator, not the entire label. Distinct glyphs indicate checked, unchecked and indeterminate states.
 
-Defaults from the linked source:
+Default values:
 
 | Parameter | Default |
 | --- | --- |
@@ -57,10 +57,6 @@ Defaults from the linked source:
 | Checkbox.disabled | `false` |
 | Checkbox.autoFocus | `false` |
 
-## Reuse
+## Usage guidance
 
-Uses usePress and useFocusable, shared with Button without depending on Button visuals.
-
-## Notes
-
-checked/defaultChecked are mutually exclusive. An unlabeled visual control requires label for focus metadata.
+Use either `checked` with `onCheckedChange` or `defaultChecked` for an initial value. Provide `label` when the checkbox has no visible text.

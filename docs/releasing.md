@@ -4,7 +4,7 @@ TCN is distributed as an npm-compatible `.tgz` asset on [GitHub Releases](https:
 
 ## Prepare a release
 
-1. Create a branch from the current `main`.
+1. Update `dev` from the current `main` and prepare changes on `dev`.
 2. Change CLI or starter source and update the corresponding documentation.
 3. Increase the version in the root `package.json`.
 4. Add a nonempty `## X.Y.Z` section to the root `CHANGELOG.md`.

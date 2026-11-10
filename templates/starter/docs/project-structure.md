@@ -1,108 +1,127 @@
 # Project structure
 
-Start with `src/features/home/home-page.tsx` for your entry screen. Add screens through `src/app`, keep feature logic under `src/features`, and customize the local component source under `src/components/ui`.
+Edit `src/app/page.tsx` to replace the entry screen. Implement additional screens in `src/app/<route>/page.tsx`. Group related business components and logic under `src/features/<name>`.
+
+## What the starter contains
 
 ```text
 my-app/
-├─ README.md
-├─ LICENSE
-├─ CONTRIBUTING.md
-├─ CHANGELOG.md
-├─ package.json
-├─ bun.lock
-├─ tsconfig.json
-├─ biome.json
-├─ docs/
-│  ├─ project-structure.md
-│  ├─ architecture.md
-│  ├─ routing.md
-│  ├─ styling.md
-│  ├─ interaction.md
-│  ├─ development.md
-│  ├─ tweak.md
-│  ├─ roadmap.md
-│  └─ ui/                    # One document per component family
-├─ design/                   # Design proposals; never runtime configuration
-├─ scripts/
-│  ├─ dev.ts
-│  ├─ build.ts
-│  └─ generate-routes.ts
-├─ tests/
-│  ├─ components/
-│  ├─ router/
-│  ├─ runtime/
-│  ├─ styling/
-│  └─ tweak/
-└─ src/
-   ├─ main.tsx
-   ├─ app/                   # Thin route modules and root layout/error handling
-   │  ├─ layout.tsx
-   │  ├─ error.tsx
-   │  ├─ page.tsx
-   │  ├─ gallery/
-   │  │  ├─ page.tsx
-   │  │  ├─ [name]/page.tsx
-   │  │  └─ showcase/page.tsx
-   │  └─ tweak/page.tsx
-   ├─ features/
-   │  ├─ home/home-page.tsx
-   │  ├─ gallery/
-   │  │  ├─ gallery-page.tsx
-   │  │  ├─ component-page.tsx
-   │  │  ├─ button-gallery-page.tsx
-   │  │  ├─ input-gallery-page.tsx
-   │  │  ├─ checkbox-gallery-page.tsx
-   │  │  ├─ showcase-page.tsx
-   │  │  ├─ catalog.tsx
-   │  │  └─ examples/
-   │  └─ tweak/
-   │     ├─ tweak-page.tsx
-   │     ├─ parts.tsx
-   │     ├─ schema.ts
-   │     ├─ store.ts
-   │     ├─ session.ts
-   │     ├─ storage.ts
-   │     └─ export.ts
-   ├─ components/
-   │  ├─ ui/                 # Source-owned reusable components
-   │  │  ├─ button.tsx
-   │  │  └─ …
-   │  └─ shared/             # Shared application support, e.g. ErrorBoundary
-   ├─ lib/ui/                # Interaction, composition, theme and focus helpers
-   │  ├─ focus/
-   │  ├─ theme/              # Theme provider, context and hook
-   │  ├─ styles.ts           # Shared palettes and component defaults
-   │  ├─ overlay.tsx
-   │  ├─ pressable.tsx
-   │  └─ …
-   └─ router/
-      └─ routes.generated.ts # Generated; do not edit
+├── AGENTS.md                 # Contributor commands, conventions and boundaries
+├── README.md
+├── CONTRIBUTING.md
+├── CHANGELOG.md
+├── LICENSE
+├── package.json
+├── bun.lock
+├── tsconfig.json
+├── biome.json
+├── tcn.json                  # Created by tcn init
+├── .tcn/                     # Created by tcn init; tracked tooling metadata
+│   ├── manifest.json
+│   └── schema.json
+├── docs/
+├── design/                   # Optional Tweak proposals and ignored drafts
+├── scripts/                  # Development, route generation and build
+├── tests/                    # Components, routing, runtime, styling and Tweak
+└── src/
+    ├── main.tsx              # Renderer startup and shutdown
+    ├── app/
+    │   ├── layout.tsx
+    │   ├── error.tsx
+    │   ├── page.tsx
+    │   ├── gallery/
+    │   │   ├── page.tsx
+    │   │   ├── [name]/page.tsx
+    │   │   ├── showcase/page.tsx
+    │   │   └── icons/page.tsx
+    │   └── tweak/page.tsx
+    ├── features/
+    │   ├── gallery/
+    │   │   ├── components/   # Detailed interactive examples
+    │   │   └── utils/        # Icon catalog search
+    │   └── tweak/
+    │       ├── api/          # Filesystem persistence and explicit export
+    │       ├── components/   # Part previews
+    │       ├── schemas/      # Review document validation
+    │       └── stores/       # Editing state and persistence session
+    ├── components/
+    │   ├── ui/               # Source-owned reusable controls
+    │   └── shared/
+    │       ├── error-boundary.tsx
+    │       └── component-demos/
+    │           ├── catalog.tsx
+    │           └── examples/ # Shared by Gallery and Tweak
+    ├── lib/ui/
+    │   ├── styles.ts         # Shared palettes and component defaults
+    │   ├── focus/
+    │   ├── theme/
+    │   ├── nerd-fonts/       # Generated glyph sets
+    │   └── …
+    └── router/
+        ├── routes.generated.ts
+        └── …
 ```
 
-## Responsibilities
+TCN configuration and `.tcn/` files are tooling metadata; application startup does not read them. See [source management](tcn.md).
 
-`app` binds route conventions to feature entry points. `features/home` owns the introduction; `features/gallery` owns the catalog and examples; `features/tweak` owns the editor and proposal persistence.
+## Growing an application
 
-Gallery and Tweak use the same real components and examples. Tweak is allowed to depend on Gallery's catalog. Reusable components and `lib/ui` do not depend on either feature.
+These locations are available as your app grows. Create them when they contain actual code; the starter does not ship empty directories.
 
-Keep small features flat. Do not create empty `hooks`, `services` or `model` directories. Extract a directory when actual code needs it.
+```text
+src/
+├── app/users/page.tsx
+├── features/users/
+│   ├── api/
+│   │   ├── user.api.ts
+│   │   └── user.queries.ts  # Only when using a query library
+│   ├── components/
+│   │   ├── user-table.tsx
+│   │   └── user-editor.tsx
+│   ├── hooks/
+│   ├── schemas/
+│   ├── stores/
+│   ├── types/
+│   └── utils/
+├── api/client.ts            # Shared transport setup, when needed
+├── hooks/
+├── schemas/
+├── stores/
+├── types/
+├── utils/
+└── lib/
+```
 
-## Shared styles
+| Location | Responsibility |
+| --- | --- |
+| `app/` | Route screens, navigation composition, layouts and fallbacks. |
+| `features/<name>/` | A coherent user capability and its business-specific code. |
+| `components/ui/` | Reusable TCN controls and composition parts. |
+| `components/shared/` | Application components shared across screens/features. |
+| `api/` | Shared transport setup; feature-specific requests stay in the feature. |
+| `hooks/` | Reusable React logic, such as subscriptions and interaction state. |
+| `schemas/` | Runtime validation of external data, configuration or files. |
+| `stores/` | State with an explicit shared owner. |
+| `types/` | Shared types without a more specific module owner. |
+| `utils/` | Pure transformations without I/O or external mutable state. |
+| `lib/` | Integrations and supporting systems, such as terminal clipboard or UI foundations. |
 
-Edit `src/lib/ui/styles.ts` for theme palettes and shared component defaults. Button and Badge use its common variant color resolver. Context Menu inherits Dropdown Menu defaults with its own minimum width. The theme provider and hook remain under `lib/ui/theme`. See [styling](styling.md) for customization guidance.
+Each of `api`, `hooks`, `schemas`, `stores`, `types` and `utils` may exist globally or in a feature. Choose by ownership. A user-specific formatter stays in users even if several user screens call it. Avoid duplicating responsibilities between `api/client.ts` and `lib/http.ts`.
 
-Passive composition parts reuse `lib/ui/parts.tsx`. Input Group shares visual ownership with existing Input/Textarea through `lib/ui/editor-group.ts`; editing, focus coordination and activation stay in their existing primitives.
+Validate API responses, imported JSON and persisted settings at their data boundaries. Keep the schemas and inferred types with the code that owns that data.
 
-DropdownMenu, ContextMenu and Menubar share `lib/ui/menu.tsx`, with separate family contexts. Menubar adds top-level switching and nested menus around that engine. Toast owns its provider-scoped notification state and uses the renderer clock; it does not introduce application-global state or another focus manager.
+## Choosing an abstraction
 
-`lib/ui/use-box-size.ts` measures native cell dimensions for sliders and panel layouts. `lib/ui/panel-layout.ts` contains pure percentage constraints and adjacent-panel resizing. Sidebar composes existing controls and keeps its open state in a local provider.
+A feature groups related behavior, such as listing, creating and editing users. Keep these flows together so their components, data access and state have a clear owner. Introduce a separate feature for a distinct user capability.
 
-`lib/ui/chart-model.ts` owns the pure Bar/Line cell renderer and hit testing. Code Block owns renderer-scoped syntax styles through `lib/ui/use-syntax-style.ts`. Questionnaire reuses form controls; Message Scroller owns a provider-local viewport and stable message-ID registry. Message, Marker and Trace compose existing layout, separator and disclosure primitives.
+Compose simple layouts with `box`, `text` and existing controls. Extract a component when it owns a clear responsibility, manages its own interaction or is reused. For example, a user editor can own its fields and save behavior while the page coordinates navigation and data loading.
 
-Overlay composition is split into `overlay-panel.tsx`, pure placement in `overlay-placement.ts`, and intrinsic measurement/limits in `overlay-sizing.ts`. `overlay.tsx` retains the public imports.
+See [feature development](features.md) for a worked example and [architecture](architecture.md) for import and state boundaries.
 
-## Generated and local files
+## Styles, generated files and cleanup
 
-`node_modules/`, `dist/`, coverage and draft files are ignored. `bun.lock` and the route manifest are retained for reproducibility and review. `design/component-review.json` is an explicit export; `design/component-review.draft.json` is local autosave data.
+Keep shared palettes/defaults in `src/lib/ui/styles.ts` and use documented props for instance-specific appearance. Theme/focus systems stay in their existing modules. See [styling](styling.md).
 
-For a product application, replace the Home feature and remove Gallery/Tweak routes and features if they are no longer useful. Keep `components/ui`, `lib/ui`, the router and application lifecycle code you use.
+Commit source, tests, docs, `bun.lock`, the route manifest and TCN metadata. Do not hand-edit generated routes or glyph sets. Dependencies, build output, coverage and local Tweak drafts are ignored; an explicit design export can be committed for review.
+
+See [removing starter examples](cleanup.md) before preparing your product application.

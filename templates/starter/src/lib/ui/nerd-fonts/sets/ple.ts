@@ -1,0 +1,41 @@
+// Generated from Nerd Fonts v3.5.1; do not edit by hand.
+// Copyright (c) 2014 Ryan L McIntyre. MIT notice: src/lib/ui/icons.ts.
+
+import { defineIconSet } from '../../icons'
+
+export const ple = defineIconSet({
+  backslash_separator: '\u{e0b9}',
+  backslash_separator_redundant: '\u{e0bf}',
+  column_number: '\u{e0a3}',
+  current_column: '\u{e0a3}',
+  flame_thick: '\u{e0c0}',
+  flame_thick_mirrored: '\u{e0c2}',
+  flame_thin: '\u{e0c1}',
+  flame_thin_mirrored: '\u{e0c3}',
+  forwardslash_separator: '\u{e0bb}',
+  forwardslash_separator_redundant: '\u{e0bd}',
+  honeycomb: '\u{e0cc}',
+  honeycomb_outline: '\u{e0cd}',
+  ice_waveform: '\u{e0c8}',
+  ice_waveform_mirrored: '\u{e0ca}',
+  left_half_circle_thick: '\u{e0b6}',
+  left_half_circle_thin: '\u{e0b7}',
+  left_hard_divider_inverse: '\u{e0d7}',
+  lego_block_facing: '\u{e0d0}',
+  lego_block_sideways: '\u{e0d1}',
+  lego_separator: '\u{e0ce}',
+  lego_separator_thin: '\u{e0cf}',
+  lower_left_triangle: '\u{e0b8}',
+  lower_right_triangle: '\u{e0ba}',
+  pixelated_squares_big: '\u{e0c6}',
+  pixelated_squares_big_mirrored: '\u{e0c7}',
+  pixelated_squares_small: '\u{e0c4}',
+  pixelated_squares_small_mirrored: '\u{e0c5}',
+  right_half_circle_thick: '\u{e0b4}',
+  right_half_circle_thin: '\u{e0b5}',
+  right_hard_divider_inverse: '\u{e0d6}',
+  trapezoid_top_bottom: '\u{e0d2}',
+  trapezoid_top_bottom_mirrored: '\u{e0d4}',
+  upper_left_triangle: '\u{e0bc}',
+  upper_right_triangle: '\u{e0be}',
+} as const)

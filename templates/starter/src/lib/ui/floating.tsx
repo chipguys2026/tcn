@@ -10,7 +10,7 @@ import {
 import { Button, type ButtonProps } from '@/components/ui/button'
 import type { ButtonVariant } from '@/lib/ui/styles'
 import { createStrictContext } from './create-context'
-import type { IconName } from './icons'
+import type { IconValue } from './icons'
 import { Overlay, type OverlayProps, type PopupSizing } from './overlay'
 import { Pressable, type PressableHandle } from './pressable'
 import { useComponentStyles, useStyleReview } from './style-review'
@@ -157,7 +157,7 @@ export function createFloatingFamily(
     autoFocus?: boolean
     stylePart?: string
     variant?: ButtonVariant
-    icon?: IconName
+    icon?: IconValue
   }>) {
     const state = useFloating()
     const close = () => {

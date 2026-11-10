@@ -11,7 +11,11 @@ Start with [installation](installation.md) to set up the CLI and create an appli
 
 ## Build your application
 
+- [Icons](https://github.com/chipguys2026/tcn/blob/main/templates/starter/docs/icons.md): install Nerd Fonts sets and browse the complete catalog.
 - [Starter guide](https://github.com/chipguys2026/tcn/blob/main/templates/starter/README.md): development commands and your first changes.
+- [Application structure](https://github.com/chipguys2026/tcn/blob/main/templates/starter/docs/project-structure.md): routes, feature ownership and global modules.
+- [Feature development](https://github.com/chipguys2026/tcn/blob/main/templates/starter/docs/features.md): build a screen and extract meaningful components.
+- [Remove starter examples](https://github.com/chipguys2026/tcn/blob/main/templates/starter/docs/cleanup.md): keep or remove development tools and their fixtures.
 - [Components](https://github.com/chipguys2026/tcn/blob/main/templates/starter/docs/ui/README.md): examples, API and interaction reference.
 - [Routing](https://github.com/chipguys2026/tcn/blob/main/templates/starter/docs/routing.md): pages, layouts and navigation.
 - [Styling](https://github.com/chipguys2026/tcn/blob/main/templates/starter/docs/styling.md): themes, local defaults and component props.

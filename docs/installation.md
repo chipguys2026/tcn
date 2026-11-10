@@ -26,19 +26,19 @@ Choose one package manager. All three commands install the same release asset.
 ### npm
 
 ```sh
-npm install -g https://github.com/chipguys2026/tcn/releases/download/v0.1.2/tcn-0.1.2.tgz
+npm install -g https://github.com/chipguys2026/tcn/releases/download/v0.2.0/tcn-0.2.0.tgz
 ```
 
 ### Bun
 
 ```sh
-bun add -g https://github.com/chipguys2026/tcn/releases/download/v0.1.2/tcn-0.1.2.tgz
+bun add -g https://github.com/chipguys2026/tcn/releases/download/v0.2.0/tcn-0.2.0.tgz
 ```
 
 ### pnpm
 
 ```sh
-pnpm add -g https://github.com/chipguys2026/tcn/releases/download/v0.1.2/tcn-0.1.2.tgz
+pnpm add -g https://github.com/chipguys2026/tcn/releases/download/v0.2.0/tcn-0.2.0.tgz
 ```
 
 Verify the installation:
@@ -48,7 +48,7 @@ tcn --version
 tcn --help
 ```
 
-The version command should print `0.1.2`. If `tcn` is unavailable, reopen your terminal and check that your package manager's global executable directory is on `PATH`. See [troubleshooting](troubleshooting.md).
+The version command should print `0.2.0`. If `tcn` is unavailable, reopen your terminal and check that your package manager's global executable directory is on `PATH`. See [troubleshooting](troubleshooting.md).
 
 TCN is available from [GitHub Releases](https://github.com/chipguys2026/tcn/releases). It is not published to the npm registry under this project's name; `npx tcn@latest` fetches a different package.
 

@@ -27,9 +27,17 @@ export async function loadRegistry(
   }
   return registry
 }
-export function names(registry: Registry) {
+export function names(
+  registry: Registry,
+  kind: 'components' | 'icons' | 'all' = 'components',
+) {
   return Object.values(registry.items)
-    .filter((i) => i.public)
+    .filter(
+      (i) =>
+        i.public &&
+        (kind === 'all' ||
+          (kind === 'icons' ? i.kind === 'icons' : i.kind !== 'icons')),
+    )
     .map((i) => i.name)
     .sort()
 }
@@ -50,7 +58,9 @@ export function publicItems(registry: Registry, requested: string[]) {
     throw new Error('Specify component names or --all. Run tcn list.')
   for (const id of requested)
     if (!registry.items[id]?.public)
-      throw new Error(`Unknown component: ${id}. Run tcn list.`)
+      throw new Error(
+        `Unknown component or icon set: ${id}. Run tcn list or tcn list --icons.`,
+      )
   return [...new Set(requested)]
 }
 export function renderFile(file: RegistryFile, config: Config) {

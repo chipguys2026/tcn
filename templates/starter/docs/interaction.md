@@ -1,10 +1,12 @@
 # Interaction, focus and overlays
 
-## Shared foundations
+Use these keyboard and focus conventions when composing application screens. Component references describe any additional behavior specific to a control.
 
-`usePress` handles activation; `useFocusable` handles native focus lifecycle, registration and programmatic requests; FocusScope controls traversal. Components use these primitives instead of each inventing an input manager. Focus rings are separate paint-only visuals.
+## Moving focus
 
-Tab/Shift+Tab traverses enabled controls. Read-only editors remain focusable. Disabled controls are skipped. Group navigation uses native tree order and roving helpers where appropriate.
+Tab moves to the next enabled control; Shift+Tab moves to the previous one. Read-only editors remain focusable so users can navigate and select their text. Disabled and hidden controls are skipped. Groups such as radio buttons and tabs use arrow keys within a single Tab stop.
+
+Use FocusScope to define a traversal region when a screen needs one. See [architecture](architecture.md#component-foundations) when maintaining the underlying focus and activation systems.
 
 ## Keyboard conventions
 
@@ -24,18 +26,18 @@ See individual [component documents](ui/README.md) for details and boundaries.
 
 ## Focus rings
 
-The shared final paint pass draws focused-control rings above normal content and popup surfaces. A ring may extend one cell beyond an ancestor clip, but fully hidden controls have no ring. Terminal bounds still apply. The pass creates no hit region and owns no focus policy.
+Focused controls display a ring above surrounding content. Leave one cell of space where a ring extends beyond the control's surface; rings do not reserve layout space. Rings stay within terminal bounds and are hidden when their controls are fully hidden.
 
-Unfocused invalid outlines remain local. The indicator of Checkbox has its own ring target; other composites choose their documented surface. Use nested FocusScope boundaries when a screen needs its own traversal region.
+Invalid outlines remain visible independently of focus. Checkbox highlights its indicator; other composite controls use the surface described in their component reference.
 
 ## Overlays
 
-Overlays portal to the renderer root and recompute bounds on terminal resize. Modal scopes contain Tab navigation and restore previous valid focus when closing. Nonmodal Tab exit dismisses and continues after the trigger. Escape dismisses the top layer. React context remains available across portals.
+Modal dialogs keep Tab navigation inside the dialog and restore focus to the previous control when it is still available. Leaving a nonmodal popup with Tab dismisses it and continues after its trigger. Escape dismisses the topmost dismissible layer. Popup placement adjusts when the terminal resizes.
 
 Dialog, AlertDialog, Sheet and CommandDialog dim underlying foreground/background by 55%. Popover, Select, DropdownMenu and Combobox dim by 28%. Tooltip does not dim or take focus. These are color transforms, not blur.
 
 Dialog and Sheet have compact corner close buttons. AlertDialog has no corner close button, ignores outside clicks and focuses Cancel by default. Use a controlled open value when asynchronous work must finish before a close is accepted.
 
-Tooltip placement avoids its trigger to prevent native hit testing from repeatedly removing and restoring hover. It tries alternative sides, shrinks to a free region when necessary and omits the visual if there is no free region.
+Tooltips appear beside their triggers. They can switch sides or shrink to fit the available space, and remain hidden if no space is available.
 
 Interactive popup overflow scrolls and focused controls reveal themselves. Use meaningful focusable controls; an empty popup can still close with Escape.

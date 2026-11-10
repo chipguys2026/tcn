@@ -93,6 +93,43 @@ test('registry contains all 51 families and every source import resolves to a re
     ),
   ).toBe(false)
 })
+
+test('icon packs install separately without adding the full catalog to ordinary components', async () => {
+  const root = await fixture()
+  await commit(await planAdd(root, registry, ['button'], { install: false }))
+  expect(await read(root, 'src/lib/ui/nerd-fonts/index.ts')).toBeNull()
+  expect(await read(root, 'src/lib/ui/nerd-fonts/sets/fa.ts')).toBeNull()
+  await commit(await planAdd(root, registry, ['icons/fa'], { install: false }))
+  const path = 'src/lib/ui/nerd-fonts/sets/fa.ts'
+  expect(await read(root, path)).not.toBeNull()
+  expect(await read(root, 'src/lib/ui/nerd-fonts/sets/md.ts')).toBeNull()
+  expect(await read(root, 'src/lib/ui/nerd-fonts/index.ts')).toBeNull()
+  expect(await diff(root, registry, ['icons/fa'])).toContain('No differences')
+  expect(
+    (await planAdd(root, registry, ['icons/fa'], { install: false })).changes,
+  ).toHaveLength(0)
+  await commit(await planRemove(root, registry, ['icons/fa']))
+  expect(await read(root, path)).toBeNull()
+  expect(await read(root, 'src/lib/ui/icons.ts')).not.toBeNull()
+  expect(await read(root, 'src/components/ui/button.tsx')).not.toBeNull()
+})
+
+test('the complete icon pack owns its sets, honors aliases and protects dependencies during removal', async () => {
+  const config = structuredClone(defaultConfig)
+  config.paths.lib = 'src/foundation'
+  config.aliases.lib = '~/foundation'
+  const root = await fixture(config)
+  await commit(await planAdd(root, registry, ['icons/all'], { install: false }))
+  expect(
+    (await read(root, 'src/foundation/nerd-fonts/sets/md.ts'))?.toString(),
+  ).toContain("'../../icons'")
+  expect(await read(root, 'src/foundation/nerd-fonts/index.ts')).not.toBeNull()
+  await expect(
+    planRemove(root, registry, ['icons/fa'], { force: true }),
+  ).rejects.toThrow('required by icons/all')
+  await commit(await planRemove(root, registry, ['icons/all']))
+  expect(await read(root, 'src/foundation/nerd-fonts/sets/md.ts')).toBeNull()
+})
 test('init plan has no side effects and creates a self-contained starter with config and baselines', async () => {
   const parent = await temp(),
     root = join(parent, 'my-app'),
@@ -106,11 +143,30 @@ test('init plan has no side effects and creates a self-contained starter with co
   expect(await read(root, 'src/app/page.tsx')).not.toBeNull()
   expect(await read(root, 'src/app/gallery/page.tsx')).not.toBeNull()
   expect(await read(root, 'src/app/tweak/page.tsx')).not.toBeNull()
+  expect((await read(root, 'AGENTS.md'))?.toString()).toBe(
+    await readFile(
+      new URL('../templates/starter/AGENTS.md', import.meta.url),
+      'utf8',
+    ),
+  )
+  expect((await read(root, 'src/app/page.tsx'))?.toString()).toContain(
+    'export default function',
+  )
+  expect(await read(root, 'src/features/home/home-page.tsx')).toBeNull()
+  expect(await read(root, 'docs/features.md')).not.toBeNull()
+  expect(await read(root, 'docs/cleanup.md')).not.toBeNull()
   expect(
-    Object.values((await manifest(root)).items).filter((i) => i.explicit),
+    await read(root, 'src/components/shared/component-demos/catalog.tsx'),
+  ).not.toBeNull()
+  expect(
+    Object.entries((await manifest(root)).items).filter(
+      ([id, item]) => item.explicit && !id.startsWith('icons/'),
+    ),
   ).toHaveLength(51)
   expect(await diff(root, registry, ['button'])).toContain('No differences')
   expect(await read(root, '.tcn/schema.json')).not.toBeNull()
+  expect((await manifest(root)).items['icons/all']?.explicit).toBe(true)
+  expect((await manifest(root)).items['icons/fa']?.explicit).toBe(false)
 })
 test('init existing app leaves user source and package untouched', async () => {
   const root = await temp(),
@@ -473,6 +529,9 @@ test('built Node executable supports help/version/list and errors without requir
   expect(help.stdout).toContain('tcn init')
   expect(run(['--version']).stdout.trim()).toBe(registry.release)
   expect(run(['list']).stdout.trim().split('\n')).toHaveLength(51)
+  expect(run(['list', '--icons']).stdout.trim().split('\n')).toHaveLength(18)
+  expect(run(['list', '--icons']).stdout).toContain('icons/md')
+  expect(run(['add', '--icons']).status).toBe(1)
   expect(run(['--unknown']).status).toBe(1)
   expect(run(['add', 'button', '--cwd']).stderr).toContain(
     'requires a directory',

@@ -45,7 +45,7 @@ Exports: `Select`, `SelectTrigger`, `SelectValue`, `SelectContent`, `SelectItem`
 
 ## State and interaction
 
-Enter/Space opens; arrows can open the trigger. Arrows/Home/End/typeahead move through enabled items; Enter/Space commits. Escape closes and focus returns.
+Press Enter, Space or an arrow key on the trigger to open the popup. Use arrows, Home, End or typeahead to navigate enabled items. Enter or Space selects an item. Escape closes the popup and restores focus.
 
 ## Appearance
 
@@ -53,9 +53,9 @@ Auto sizing and min/max behavior: [popup sizing](../popup-sizing.md).
 
 Defaults are defined in [styles.ts](../../src/lib/ui/styles.ts). Edit this local file to change appearance across your application.
 
-Trigger/value and borderless popup/item/group/label/separator parts are composed separately. Popup dims underlying content 28%.
+Compose the trigger and selected value separately from popup items, groups, labels and separators. The popup is borderless and dims the background by 28%.
 
-Defaults from the linked source:
+Default values:
 
 | Parameter | Default |
 | --- | --- |
@@ -68,10 +68,6 @@ Defaults from the linked source:
 | SelectItem.children | `value` |
 | SelectItem.disabled | `false` |
 
-## Reuse
+## Usage guidance
 
-Uses native focus/overlay primitives and the shared selection patterns.
-
-## Notes
-
-Item labels are strings. SelectValue derives labels from declared items; opaque custom wrappers should provide a custom value presentation.
+Give items string labels so `SelectValue` can display the selected label. Supply a custom value presentation when items are hidden behind custom wrapper components.

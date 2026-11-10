@@ -70,8 +70,9 @@ async function main() {
       await readFile(join(app, '.tcn/manifest.json'), 'utf8'),
     ) as { items: Record<string, { explicit: boolean }> }
     if (
-      Object.values(m.items).filter((i) => i.explicit).length !==
-      info.components
+      Object.entries(m.items).filter(
+        ([id, item]) => item.explicit && !id.startsWith('icons/'),
+      ).length !== info.components
     )
       throw new Error('Generated component tracking is incomplete')
     if (full) {

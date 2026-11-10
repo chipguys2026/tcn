@@ -31,6 +31,8 @@ See [repository structure](docs/project-structure.md) for ownership and build de
 
 ## Validate
 
+Icon data is pinned under `registry/nerd-fonts`. Run `bun run icons:generate` after an intentional snapshot update, or `bun run icons:check` to verify generated source. Builds perform this verification offline. Preserve the upstream notices when updating the catalog.
+
 ```sh
 bun run check
 bun run template:check
@@ -44,7 +46,7 @@ For UI changes, review the affected components in Gallery with light/dark themes
 
 ## Submit a pull request
 
-Create a branch from `main` and describe the user-visible change and validation performed. Use Conventional Commits, for example `fix: preserve local component edits` or `docs: clarify installation`.
+Work on `dev` and open a pull request into protected `main`; do not push directly to `main`. Describe the user-visible change and validation performed. Use Conventional Commits, for example `fix: preserve local component edits` or `docs: clarify installation`. See [AGENTS.md](AGENTS.md) for repository commands, conventions and boundaries.
 
 Non-documentation changes require a higher root `package.json` version and matching `CHANGELOG.md` notes. Markdown and `docs/` changes are exempt from the version bump requirement. See the [release process](docs/releasing.md) for the complete version policy.
 

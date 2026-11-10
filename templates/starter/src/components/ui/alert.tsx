@@ -1,6 +1,6 @@
 import { TextAttributes } from '@opentui/core'
 import { createContext, type PropsWithChildren, useContext } from 'react'
-import { type IconName, icons } from '@/lib/ui/icons'
+import { type IconValue, resolveIcon } from '@/lib/ui/icons'
 import { useComponentStyles } from '@/lib/ui/style-review'
 import { alertDefaults } from '@/lib/ui/styles'
 import { useTheme } from '@/lib/ui/theme/use-theme'
@@ -12,7 +12,7 @@ export function Alert({
   icon,
 }: PropsWithChildren<{
   variant?: 'default' | 'destructive'
-  icon?: IconName
+  icon?: IconValue
 }>) {
   const componentStyle = useComponentStyles('alert')
 
@@ -58,7 +58,7 @@ export function Alert({
               'text',
             )}
           >
-            {icons[icon]}
+            {resolveIcon(icon)}
           </text>
         )}
         <box
