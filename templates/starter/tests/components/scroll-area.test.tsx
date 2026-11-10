@@ -2,7 +2,7 @@ import { expect, test } from 'bun:test'
 import { type Renderable, ScrollBoxRenderable } from '@opentui/core'
 import { testRender } from '@opentui/react/test-utils'
 import { act } from 'react'
-import { ScrollAreaDemo } from '@/features/gallery/examples/scroll-area'
+import { ScrollAreaDemo } from '@/components/shared/component-demos/examples/scroll-area'
 import { FocusScope } from '@/lib/ui/focus/focus-scope'
 import { ThemeProvider } from '@/lib/ui/theme/provider'
 

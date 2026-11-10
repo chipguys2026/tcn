@@ -32,18 +32,14 @@ The compound parts use the shared floating-family contracts; see [interaction](.
 
 ## State and interaction
 
-Escape, outside click or Tab beyond the last control closes and continues focus appropriately. Controlled open can reject changes.
+Escape or an outside click dismisses the popup. Tab beyond its last control dismisses it and continues navigation after the trigger. In controlled mode, update `open` to accept a change.
 
 ## Appearance
 
 Defaults are defined in [styles.ts](../../src/lib/ui/styles.ts). Edit this local file to change appearance across your application.
 
-Borderless anchored popup with placement/clamping and 28% dimming.
+The borderless popup appears beside its trigger and stays within the available terminal region. The background is dimmed by 28%.
 
-## Reuse
+## Usage guidance
 
-Uses the floating family and Overlay. React context is preserved through the portal.
-
-## Notes
-
-Not a modal focus trap. Supply suitable dimensions and meaningful controls.
+Give the popup dimensions appropriate to its content and include focusable controls for actions. Keyboard users can leave the popup with Tab. React context remains available inside the popup.

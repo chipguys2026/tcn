@@ -21,18 +21,18 @@ Exports: `RadioGroup`, `RadioGroupItem`.
 
 | Component | Props contract |
 | --- | --- |
-| RadioGroup | `PropsWithChildren<{ value?: string defaultValue?: string onValueChange?: (value: string) => void disabled?: boolean orientation?: 'horizontal' \| 'vertical' }>` |
-| RadioGroupItem | `{ value: string label?: string disabled?: boolean }` |
+| RadioGroup | Children; controlled `value` or initial `defaultValue`; `onValueChange`; `disabled`; `orientation="horizontal"` or `"vertical"` |
+| RadioGroupItem | Required `value`; optional `label` and `disabled` |
 
 ## State and interaction
 
-Arrows move and select enabled items; Home/End jump. The group has one Tab stop. Disabled items are skipped.
+Use arrow keys to move to and select an enabled item. Home and End select the first and last enabled items. The group occupies one Tab stop and skips disabled options.
 
 ## Appearance
 
-Semantic selected/unselected indicators and labels.
+Distinct indicators show the selected and unselected options alongside their labels.
 
-Defaults from the linked source:
+Default values:
 
 | Parameter | Default |
 | --- | --- |
@@ -42,10 +42,6 @@ Defaults from the linked source:
 | RadioGroupItem.label | `value` |
 | RadioGroupItem.disabled | `false` |
 
-## Reuse
+## Usage guidance
 
-Uses RovingGroup and the shared interaction/focus helpers.
-
-## Notes
-
-Values within the group must be unique. It does not submit a form.
+Give every option a unique value. Use the group's value in your application state and submit it through your own action handler.

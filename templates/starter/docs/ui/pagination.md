@@ -50,8 +50,8 @@ import {
 
 ## State and interaction
 
-Links and previous/next reuse Button. Active links use the secondary background; inactive controls use ghost. Explicit variant overrides are allowed. Every action preserves normal Tab, Enter/Space/click and disabled behavior. Ellipsis has no focus target. Controls wrap on narrow terminals.
+Active links use the secondary variant; inactive controls use ghost. Set `variant` for a different appearance. Controls support normal Tab navigation, Enter, Space and click activation, and disabled states. Ellipses are skipped during focus navigation. Controls wrap on narrow terminals.
 
-The application owns page state, boundary disabling, fetching and routing. This component does not infer a page count, clamp state, fetch data or mutate the router; use `onPress` for those operations. Unlike browser shadcn links, there is no href/anchor API.
+Track the current page and total page count in application state. Disable Previous on the first page and Next on the last. Use `onPress` to update the page, fetch its data or navigate to its route.
 
 Pagination actions use Button defaults. See [styling](../styling.md) for appearance changes.

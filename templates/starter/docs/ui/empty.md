@@ -30,31 +30,29 @@ import { Button } from '@/components/ui/button'
 
 ## API
 
+Empty Media accepts a built-in icon alias or a typed glyph from an installed Nerd Fonts set. See [icons](../icons.md).
+
 Exports: `Empty`, `EmptyHeader`, `EmptyMedia`, `EmptyTitle`, `EmptyDescription`, `EmptyContent`.
 
 | Component | Props contract |
 | --- | --- |
 | Empty | `PropsWithChildren` |
 | EmptyHeader | `PropsWithChildren` |
-| EmptyMedia | `{ icon: IconName }` |
+| EmptyMedia | `{ icon: IconValue }` |
 | EmptyTitle | `{ children: string }` |
 | EmptyDescription | `{ children: string }` |
 | EmptyContent | `PropsWithChildren` |
 
 ## State and interaction
 
-Only child controls participate in focus/activation.
+Buttons and other child controls participate in normal keyboard navigation. The empty-state container itself is skipped.
 
 ## Appearance
 
 Defaults are defined in [styles.ts](../../src/lib/ui/styles.ts). Edit this local file to change appearance across your application.
 
-Header/media/title/description/content are independently composed parts with semantic text colors.
+Compose the header, media, title, description and content independently. Text colors follow the active theme.
 
-## Reuse
+## Usage guidance
 
-Uses theme and accepts real child controls.
-
-## Notes
-
-Does not fetch data or decide whether a collection is empty.
+Render Empty after your application determines that there are no results. Compose its content with actions such as creating an item or clearing a filter.

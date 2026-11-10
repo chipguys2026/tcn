@@ -35,15 +35,15 @@ Exports: `Collapsible`, `CollapsibleTrigger`, `CollapsibleContent`.
 
 ## State and interaction
 
-The compact right-hand button toggles on Enter/Space/click. The title is separate from that button. Hidden content leaves traversal; disabled prevents toggling.
+Press Enter or Space on the right-hand button, or click it, to toggle the content. The title is displayed separately. Controls inside hidden content are skipped during navigation. Setting `disabled` prevents toggling.
 
 ## Appearance
 
 Defaults are defined in [styles.ts](../../src/lib/ui/styles.ts). Edit this local file to change appearance across your application.
 
-Full-width label/header, small chevron button on the right and no enclosing border or automatic item separator.
+The header fills the available width and places a small chevron button on the right. Add separators between sections when needed.
 
-Defaults from the linked source:
+Default values:
 
 | Parameter | Default |
 | --- | --- |
@@ -52,10 +52,6 @@ Defaults from the linked source:
 | CollapsibleTrigger.label | `'Toggle details'` |
 | CollapsibleContent.forceMount | `false` |
 
-## Reuse
+## Usage guidance
 
-Uses Pressable, useControllable and the shared focus/ring infrastructure.
-
-## Notes
-
-forceMount preserves the subtree but not visibility. It is one expandable region rather than an Accordion selection group.
+Set `forceMount` to retain the content subtree while collapsed; the content remains hidden. Use [Accordion](accordion.md) to coordinate several expandable sections.

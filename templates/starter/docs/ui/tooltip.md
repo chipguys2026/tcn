@@ -27,13 +27,13 @@ Exports: `TooltipProvider`, `Tooltip`, `TooltipTrigger`, `TooltipContent`.
 | Component | Props contract |
 | --- | --- |
 | TooltipProvider | `PropsWithChildren<{ delayDuration?: number }>` |
-| Tooltip | `PropsWithChildren<{ open?: boolean defaultOpen?: boolean onOpenChange?: (open: boolean) => void delayDuration?: number }>` |
-| TooltipTrigger | `PropsWithChildren<{ label: string disabled?: boolean onPress?: () => void }>` |
-| TooltipContent | `{ children: string side?: Side } & PopupSizing` |
+| Tooltip | Children; controlled `open` or initial `defaultOpen`; `onOpenChange`; `delayDuration` in milliseconds |
+| TooltipTrigger | Children; required `label`; optional `disabled` and `onPress` |
+| TooltipContent | String children; optional `side`; [popup sizing props](../popup-sizing.md) |
 
 ## State and interaction
 
-Focus/hover opens after a delay (default 350 ms). Blur/leave/activation hides. Timer is cancelled on unmount; the popup does not take focus.
+Focus or hover opens the tooltip after a delay of 350 ms by default. Moving focus or the pointer away, or activating the trigger, hides it. The tooltip preserves focus on the trigger.
 
 ## Appearance
 
@@ -41,9 +41,9 @@ Auto sizing and min/max behavior: [popup sizing](../popup-sizing.md).
 
 Defaults are defined in [styles.ts](../../src/lib/ui/styles.ts). Edit this local file to change appearance across your application.
 
-No dimming. Placement avoids the trigger, flips sides or shrinks to prevent hover flicker at edges.
+The tooltip preserves the background brightness and appears beside its trigger. It can switch sides or shrink to fit near terminal edges.
 
-Defaults from the linked source:
+Default values:
 
 | Parameter | Default |
 | --- | --- |
@@ -52,10 +52,6 @@ Defaults from the linked source:
 | TooltipTrigger.disabled | `false` |
 | TooltipContent.side | `'top'` |
 
-## Reuse
+## Usage guidance
 
-Uses Pressable, the shared overlay placement and an optional TooltipProvider delay.
-
-## Notes
-
-Content is a string, not interactive rich content. If no free region exists, the visual is omitted.
+Keep tooltip content to a short text explanation. Use [Popover](popover.md) for interactive content. A tooltip is hidden when the terminal has no available space for it.

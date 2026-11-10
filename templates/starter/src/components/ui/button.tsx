@@ -5,7 +5,7 @@ import {
   useFocusable,
 } from '@/lib/ui/focus/use-focusable'
 import { useFocusRing } from '@/lib/ui/focus-ring'
-import { type IconName, icons } from '@/lib/ui/icons'
+import { type IconValue, resolveIcon } from '@/lib/ui/icons'
 import { useComponentStyles } from '@/lib/ui/style-review'
 import {
   type ButtonVariant,
@@ -32,8 +32,8 @@ type SharedProps = {
 }
 export type ButtonProps = SharedProps &
   (
-    | { children: string; icon?: IconName; label?: string }
-    | { children?: never; icon: IconName; label: string }
+    | { children: string; icon?: IconValue; label?: string }
+    | { children?: never; icon: IconValue; label: string }
   )
 
 export function Button({
@@ -74,7 +74,7 @@ export function Button({
     },
   })
   const content = icon
-    ? `${icons[icon]}${children ? ` ${children}` : ''}`
+    ? `${resolveIcon(icon)}${children ? ` ${children}` : ''}`
     : children
   const styles = buttonStyles(theme, variant, !disabled && (hovered || pressed))
   const focusProps = getFocusProps({ onMouseDown })

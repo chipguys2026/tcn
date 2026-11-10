@@ -50,16 +50,12 @@ type CloseProps = Omit<ComponentProps<typeof family.Close>, 'stylePart'>
 
 ## State and interaction
 
-Tab is contained; Cancel receives initial focus by default. Outside clicks are ignored. Escape requests closing. Action/Cancel invoke their callback and then request close.
+Tab navigation stays inside the dialog, and Cancel receives initial focus by default. Outside clicks leave the dialog open. Escape requests dismissal. Action and Cancel invoke their callbacks before requesting a close.
 
 ## Appearance
 
-Centered borderless modal, width 52 and auto height by default. Shared compact Header and right-aligned Footer. No corner close icon. Underlying content is dimmed 55%.
+The dialog is centered and borderless, with a default width of 52 columns and height fitted to its content. It has a compact header and right-aligned footer actions. Users close it through its actions or Escape. The background is dimmed by 55%.
 
-## Reuse
+## Usage guidance
 
-Shares the floating family, overlay stack and Header/Footer with Dialog/Sheet. Actions reuse Button; Action defaults to the primary variant.
-
-## Notes
-
-Keep open controlled for asynchronous work that must complete before closing. The component never performs deletion itself.
+For asynchronous confirmation, control `open` and close the dialog after the operation succeeds. Implement the operation in your action handler and display errors before allowing another attempt. `AlertDialogAction` uses the primary Button variant by default.

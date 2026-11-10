@@ -53,15 +53,15 @@ type InputProps = SharedProps &
 
 ## State and interaction
 
-Typing and paste edit the value; Enter invokes onSubmit. Read-only fields allow focus/navigation/selection; disabled fields are skipped. Programmatic value changes do not emit edit callbacks.
+Typing or pasting edits the value, and Enter invokes `onSubmit`. Read-only fields allow focus, navigation and selection; disabled fields are skipped during navigation. Programmatic value changes do not invoke edit callbacks.
 
 ## Appearance
 
 Defaults are defined in [styles.ts](../../src/lib/ui/styles.ts). Edit this local file to change appearance across your application.
 
-One content row, width 100% by default. The outer surface paints the muted background once; native editor backgrounds are transparent. invalid is a visual destructive ring.
+Input occupies one content row and fills its container width by default. It has a continuous muted background. Setting `invalid` displays a destructive-colored outline.
 
-Defaults from the linked source:
+Default values:
 
 | Parameter | Default |
 | --- | --- |
@@ -73,10 +73,6 @@ Defaults from the linked source:
 | Input.autoFocus | `false` |
 | Input.defaultValue | `''` |
 
-## Reuse
+## Usage guidance
 
-Uses the native editor, useFocusable and shared rings. CommandInput and Combobox search reuse Input.
-
-## Notes
-
-value and defaultValue are mutually exclusive. Native text editing and selection follow OpenTUI behavior. invalid does not validate data.
+Use either `value` with `onValueChange` or `defaultValue` for an initial value. Set `invalid` from your validation result. Text editing and selection follow OpenTUI's native editor behavior.

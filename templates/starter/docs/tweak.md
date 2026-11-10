@@ -36,8 +36,4 @@ Then open Gallery, compare the result and commit the source change. Source edits
 
 Popup controls support `auto` width/height and minimum/maximum bounds. Anchored popups can use `minWidth="trigger"`. To make a popup larger than its default maximum, change the maximum as well as the requested size. See [popup sizing](popup-sizing.md).
 
-## Maintain the design tool
-
-The feature lives in `src/features/tweak`. Page/part previews, schema, store, save session, filesystem storage and export are separate modules. Gallery supplies the shared catalog and examples.
-
-The preview adapter supports part observation and shared overrides for reused components. It is internal to the design tool; application styling uses documented props and local defaults.
+For contributor guidance on the editor's modules and preview adapter, see [architecture](architecture.md#development-data).

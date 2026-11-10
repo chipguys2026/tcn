@@ -26,7 +26,7 @@ The dev process restarts on source changes. It does not preserve component state
 
 ## Edit screens and components
 
-Start with `src/features/home/home-page.tsx` for your Home screen. Add features under `src/features` and routes under `src/app`; see [routing](routing.md).
+Start with `src/app/page.tsx`. Implement route screens directly in `src/app`; extract business components and logic under `src/features` when needed. See [routing](routing.md), the [feature walkthrough](features.md) and [contributor conventions](../AGENTS.md).
 
 Components in `src/components/ui` and helpers in `src/lib/ui` are local source. Edit them to fit your application. If you use TCN updates, keep its manifest in Git so it can identify your changes.
 
@@ -42,7 +42,7 @@ bun test tests/components/button.test.tsx
 
 For layout or interaction changes, test observable rendering and input behavior and inspect the result in a real terminal. Wrap updates that trigger React state in `act`. The routing/watcher tests exercise additions, renames and recovery using temporary directories.
 
-When removing the sample Gallery or Tweak features, update the tests that depend on them, including starter structure assertions.
+When removing Gallery or Tweak, follow the [cleanup guide](cleanup.md), including tests and shared fixture ownership.
 
 ## Build for deployment
 

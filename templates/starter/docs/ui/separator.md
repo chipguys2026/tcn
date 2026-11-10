@@ -22,13 +22,13 @@ Exports: `Separator`.
 
 ## State and interaction
 
-No focus or activation.
+Separator divides content and is skipped during keyboard navigation.
 
 ## Appearance
 
-Draws a line in terminal cells using the border color; length can be supplied. `stretch` uses the parent's cross-axis size instead of a percentage, allowing separators inside content-sized groups. ButtonGroupSeparator and ItemSeparator reuse this component; styleSource/stylePart provide their Tweak identities.
+The line uses the theme border color. Set `length` to control its extent. `stretch` uses the parent's cross-axis size instead of a percentage, allowing separators inside content-sized groups.
 
-Defaults from the linked source:
+Default values:
 
 | Parameter | Default |
 | --- | --- |
@@ -37,10 +37,6 @@ Defaults from the linked source:
 | Separator.styleSource | `'separator'` |
 | Separator.stylePart | `'Separator'` |
 
-## Reuse
+## Usage guidance
 
-Used as a content divider rather than a component frame.
-
-## Notes
-
-A line occupies terminal cells; it is not a fractional CSS border.
+Separators occupy terminal cells. Account for their row or column when sizing adjacent content.

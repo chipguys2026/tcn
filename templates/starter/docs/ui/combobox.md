@@ -40,13 +40,13 @@ type ComboboxOption = {
 
 ## State and interaction
 
-Open the popup, type to filter, navigate enabled results and commit one value. Escape/outside dismissal uses the nonmodal overlay behavior.
+Open the popup and type to filter options. Navigate to an enabled result and select it. Escape or an outside click dismisses the popup.
 
 ## Appearance
 
-Trigger plus borderless search/list popup; underlying content dims 28%.
+The trigger opens a borderless popup containing search and results. The background is dimmed by 28%.
 
-Defaults from the linked source:
+Default values:
 
 | Parameter | Default |
 | --- | --- |
@@ -57,10 +57,6 @@ Defaults from the linked source:
 | Combobox.disabled | `false` |
 | Combobox.width | `34` |
 
-## Reuse
+## Usage guidance
 
-Composes Popover and Command; search therefore reuses Input.
-
-## Notes
-
-Options are typed value/label/keywords/disabled records. No multiselect, arbitrary browser asChild composition or remote search engine.
+Each option supplies a value and label, with optional search keywords and a disabled state. Combobox selects one value. Fetch remote options in application code and pass the resulting records to the component.

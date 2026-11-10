@@ -8,17 +8,17 @@ SelectContent, DropdownMenuContent and TooltipContent accept `width`/`height` as
 | DropdownMenu | auto | auto | Trigger width; 3 rows | 32 columns; 16 rows |
 | Tooltip | auto | auto | 3 columns; 3 rows | 32 columns; available region height |
 
-The size includes the source padding (one cell on each side). Auto width measures the real rendered text/layout tree using terminal-cell widths; it does not mount a second copy of the controls. Auto height follows actual content after layout/wrapping. Measurement settles across layout passes and responds to content and terminal changes.
+Dimensions include one cell of padding on each side. Auto width fits the rendered content; auto height accounts for text wrapping. The popup adjusts when its content or the terminal dimensions change.
 
-When a popup opens, native resize hooks apply its measured dimensions before paint. Its first visible frame uses the settled size and placement, including any text wrapping. The popup remains mounted for layout while waiting, and focus moves into it only when it is ready to display.
+The first visible frame uses the measured size and placement. Focus moves into an interactive popup when it becomes visible.
 
 Interactive popups dim the background immediately on opening; the dimming does not change while layout settles. Closing removes the popup and backdrop and restores focus according to the component's normal behavior. Tooltips do not dim the background or take focus.
 
-Source min/max limits apply before placement. Maximum and terminal/free-region bounds take precedence over an impossible minimum. A trigger wider than maxWidth does not force the popup beyond the cap. To intentionally use a wider popup, override maxWidth as well as width.
+Maximum dimensions and available terminal space take precedence when a minimum cannot fit. A trigger wider than `maxWidth` does not expand the popup beyond that limit. To create a wider popup, increase both `width` and `maxWidth`.
 
 Anchored selection/menu/tooltip popups prefer the requested side, then try alternatives without covering the trigger. If no side can fit, the available region caps the result. Extremely small regions may reduce padding to preserve a content cell; if there is no free region, the popup visual is omitted.
 
-Select/Menu items remain one row and truncate when needed. A native vertical scrollbar handles excess height; keyboard focus reveals its item, including after resize. Tooltip wraps text and clips to its region without installing a scrollbox or taking focus.
+Select and menu items occupy one row and truncate when necessary. Content scrolls vertically when it exceeds the available height; keyboard navigation keeps the focused item visible, including after resize. Tooltip text wraps and clips within its available region.
 
 ```tsx
 <>
@@ -31,11 +31,11 @@ Select/Menu items remain one row and truncate when needed. A native vertical scr
   >
     <SelectItem value="bun">Bun</SelectItem>
   </SelectContent>
-  // A deliberate exception for a wider control picker:
+  {/* Set both width and maxWidth for a wider picker. */}
   <SelectContent width={46} maxWidth={46} height={18} maxHeight={18}>
     {/* options */}
   </SelectContent>
 </>
 ```
 
-The limits are ordinary source/props. No exported Tweak JSON is loaded at runtime.
+Set these limits through component props or [shared source defaults](styling.md).

@@ -8,6 +8,7 @@ import type {
 import { ManualClock } from '@opentui/core/testing'
 import { testRender } from '@opentui/react/test-utils'
 import { act, type ReactNode, useState } from 'react'
+import { demos } from '@/components/shared/component-demos/catalog'
 import {
   Accordion,
   AccordionContent,
@@ -82,7 +83,6 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from '@/components/ui/tooltip'
-import { demos } from '@/features/gallery/catalog'
 import { FocusScope } from '@/lib/ui/focus/focus-scope'
 import { overlayRect } from '@/lib/ui/overlay'
 import { StyleReviewProvider } from '@/lib/ui/style-review'

@@ -43,18 +43,14 @@ The compound parts use the shared floating-family contracts; see [interaction](.
 
 ## State and interaction
 
-Tab stays inside; Escape/outside click/corner close request dismissal. Focus returns to the prior valid control. Controlled open may reject a close request.
+Tab navigation stays inside the dialog. Escape, an outside click or the close button requests dismissal. Closing restores focus to the previous control when it is still available. In controlled mode, update `open` to accept a close request.
 
 ## Appearance
 
 Defaults are defined in [styles.ts](../../src/lib/ui/styles.ts). Edit this local file to change appearance across your application.
 
-Centered, width 48, auto height clamped to the terminal. Borderless background, compact Header, right-aligned Footer and a fixed corner close button with one-cell horizontal padding. Dims underlying content 55%.
+The dialog is centered with a default width of 48 columns and height fitted to the content and terminal. Its borderless surface includes a compact header, right-aligned footer and corner close button. The background is dimmed by 55%.
 
-## Reuse
+## Usage guidance
 
-Uses the shared floating family, Overlay, FocusScope and Button-based close actions.
-
-## Notes
-
-showCloseButton=false omits the corner close. Overflow scrolls. Loading async work and committing form data remain caller responsibilities.
+Set `showCloseButton={false}` to hide the corner close button. Content scrolls when it exceeds the available height. Manage loading, validation and persistence in application code.

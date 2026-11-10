@@ -15,6 +15,8 @@ Usage:
   tcn remove <components...> Remove unused managed source
   tcn diff [components...]   Compare local source with the bundled registry
   tcn list                  List available component families
+  tcn list --icons          List available Nerd Fonts sets
+  tcn add icons/fa          Install an icon set (or icons/all for every set)
 
 Options:
   --cwd, -c <directory>      Project directory (default: current directory)
@@ -36,6 +38,7 @@ async function main(args: string[]) {
     positionals: string[] = []
   let cwd = process.cwd(),
     all = false,
+    listIcons = false,
     version = false
   for (let i = 0; i < args.length; i++) {
     const arg = args[i]
@@ -48,6 +51,7 @@ async function main(args: string[]) {
     else if (arg === '--dry-run') options.dryRun = true
     else if (arg === '--no-install') options.install = false
     else if (arg === '--all' || arg === '-a') all = true
+    else if (arg === '--icons') listIcons = true
     else if (arg === '--version' || arg === '-v') version = true
     else if (arg?.startsWith('-')) throw new Error(`Unknown option: ${arg}`)
     else if (arg) positionals.push(arg)
@@ -61,9 +65,13 @@ async function main(args: string[]) {
   if (command === 'list') {
     if (requested.length || all)
       throw new Error('tcn list does not accept component arguments')
-    console.log(names(registry).join('\n'))
+    console.log(names(registry, listIcons ? 'icons' : 'components').join('\n'))
     return
   }
+  if (listIcons)
+    throw new Error(
+      '--icons is only supported by tcn list. Install sets with tcn add icons/<set>.',
+    )
   if (!['init', 'add', 'remove', 'diff'].includes(command ?? ''))
     throw new Error(`Unknown command: ${command}. Run tcn --help.`)
   if (command === 'init' && (all || requested.length > 1))

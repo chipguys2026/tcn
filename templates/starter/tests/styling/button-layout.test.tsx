@@ -20,8 +20,8 @@ import { Select, SelectTrigger } from '@/components/ui/select'
 import { Sheet, SheetTrigger } from '@/components/ui/sheet'
 import { Toggle } from '@/components/ui/toggle'
 import { Tooltip, TooltipTrigger } from '@/components/ui/tooltip'
-import { emptyProfile } from '@/features/tweak/storage'
-import { createStyleReviewStore } from '@/features/tweak/store'
+import { emptyProfile } from '@/features/tweak/api/review.storage'
+import { createStyleReviewStore } from '@/features/tweak/stores/review.store'
 import { FocusScope } from '@/lib/ui/focus/focus-scope'
 import {
   type ComponentStyleProfiles,

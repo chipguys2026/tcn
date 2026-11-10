@@ -49,15 +49,15 @@ type TextareaProps = Common &
 
 ## State and interaction
 
-Enter inserts a newline. Ctrl/Meta+Enter invokes onSubmit. Read-only allows navigation/selection; disabled blocks edits/focus. Padding clicks focus/place the cursor; wheel input in padding scrolls the editor.
+Enter inserts a newline; Ctrl or Meta+Enter invokes `onSubmit`. Read-only editors allow navigation and selection. Disabled editors cannot be edited or focused. Clicking the padding focuses the editor and places the cursor; wheel input over the padding scrolls its content.
 
 ## Appearance
 
 Defaults are defined in [styles.ts](../../src/lib/ui/styles.ts). Edit this local file to change appearance across your application.
 
-Default width 100%, height 4 with minimum 2. Padding insets the text viewport inside a continuous surface; background and focus ring retain the outer bounds.
+Textarea fills its container width by default and has a height of four rows, with a minimum of two. Padding insets the text viewport inside a continuous surface; background and focus ring retain the outer bounds.
 
-Defaults from the linked source:
+Default values:
 
 | Parameter | Default |
 | --- | --- |
@@ -69,10 +69,6 @@ Defaults from the linked source:
 | Textarea.invalid | `false` |
 | Textarea.defaultValue | `''` |
 
-## Reuse
+## Usage guidance
 
-Uses the native editor and shared focus/rings. Outer surface paints the background once, including disabled opacity.
-
-## Notes
-
-value/defaultValue are exclusive. invalid is visual, not validation. Native wrapping, cursor and selection follow OpenTUI.
+Use either `value` with `onValueChange` or `defaultValue` for an initial value. Set `invalid` from your validation result. Wrapping, cursor movement and selection follow OpenTUI's native editor behavior.

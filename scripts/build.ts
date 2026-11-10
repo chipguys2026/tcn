@@ -10,11 +10,13 @@ import { join, relative, resolve } from 'node:path'
 import ts from 'typescript'
 import { hash, json, portable } from '../src/files.js'
 import type { ImportLink, Registry, RegistryItem } from '../src/types.js'
+import { generateIcons } from './generate-icons.js'
 
 const root = resolve(import.meta.dir, '..'),
   template = join(root, 'templates/starter'),
   pkg = JSON.parse(await readFile(join(root, 'package.json'), 'utf8')),
   app = JSON.parse(await readFile(join(template, 'package.json'), 'utf8'))
+await generateIcons(true)
 async function files(directory: string): Promise<string[]> {
   const entries = await readdir(directory, { withFileTypes: true })
   return (
@@ -51,13 +53,24 @@ const sources = all.filter((p) =>
   owner = new Map<string, string>(),
   items: Record<string, RegistryItem> = {}
 for (const path of sources) {
-  const name = path.startsWith('src/components/ui/')
-    ? path.slice('src/components/ui/'.length).replace(/\.tsx?$/, '')
-    : `_${path.slice('src/'.length).replace(/\.tsx?$/, '')}`
+  const iconSet = /^src\/lib\/ui\/nerd-fonts\/sets\/([a-z]+)\.ts$/.exec(
+    path,
+  )?.[1]
+  const iconItem = iconSet
+    ? `icons/${iconSet}`
+    : path === 'src/lib/ui/nerd-fonts/index.ts'
+      ? 'icons/all'
+      : undefined
+  const name =
+    iconItem ??
+    (path.startsWith('src/components/ui/')
+      ? path.slice('src/components/ui/'.length).replace(/\.tsx?$/, '')
+      : `_${path.slice('src/'.length).replace(/\.tsx?$/, '')}`)
   owner.set(path, name)
   items[name] ??= {
     name,
     public: !name.startsWith('_'),
+    ...(iconItem ? { kind: 'icons' as const } : {}),
     revision: '',
     registryDependencies: [],
     dependencies: {},
@@ -200,8 +213,8 @@ if (!build.success) throw new AggregateError(build.logs, 'CLI build failed')
 await chmod(join(root, 'dist/cli.js'), 0o755)
 await writeFile(
   join(root, 'dist/THIRD_PARTY_NOTICES.md'),
-  `# Third-party notices\n\nThe CLI bundles jsdiff (diff), BSD-3-Clause:\n\n${await readFile(join(root, 'node_modules/diff/LICENSE'), 'utf8')}`,
+  `# Third-party notices\n\nThe CLI bundles jsdiff (diff), BSD-3-Clause:\n\n${await readFile(join(root, 'node_modules/diff/LICENSE'), 'utf8')}\n\nNerd Fonts glyph mapping data v3.5.1 (no font binaries):\n\n${await readFile(join(root, 'registry/nerd-fonts/LICENSE'), 'utf8')}`,
 )
 console.log(
-  `Built tcn ${pkg.version}: ${Object.values(items).filter((i) => i.public).length} components, ${sources.length} source files, ${templateFiles.length} template files`,
+  `Built tcn ${pkg.version}: ${Object.values(items).filter((i) => i.public && i.kind !== 'icons').length} components, ${Object.values(items).filter((i) => i.kind === 'icons').length} icon packs, ${sources.length} source files, ${templateFiles.length} template files`,
 )

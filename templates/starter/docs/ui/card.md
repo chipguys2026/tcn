@@ -46,24 +46,20 @@ Exports: `Card`, `CardHeader`, `CardTitle`, `CardDescription`, `CardContent`, `C
 
 ## State and interaction
 
-The surface has no activation policy; children keep their own interactions.
+Controls inside the card keep their normal keyboard and pointer interactions. The card itself is skipped during focus navigation.
 
 ## Appearance
 
 Defaults are defined in [styles.ts](../../src/lib/ui/styles.ts). Edit this local file to change appearance across your application.
 
-Borderless card background with semantic foreground and grouped spacing. Header, title, description, content and footer are separate parts.
+Card uses a borderless surface with theme colors and spacing between its sections. Header, title, description, content and footer are separate parts.
 
-Defaults from the linked source:
+Default values:
 
 | Parameter | Default |
 | --- | --- |
 | Card.width | `'100%'` |
 
-## Reuse
+## Usage guidance
 
-Reuses theme and ordinary layout primitives.
-
-## Notes
-
-Does not implement scrolling, selection or navigation. Use a suitable container for overflowing content.
+Place overflowing content in a [Scroll Area](scroll-area.md). Add controls inside the card for actions, selection or navigation.

@@ -1,5 +1,5 @@
 import type { PropsWithChildren } from 'react'
-import { type IconName, icons } from '@/lib/ui/icons'
+import { type IconValue, resolveIcon } from '@/lib/ui/icons'
 import { useComponentStyles } from '@/lib/ui/style-review'
 import { emptyDefaults } from '@/lib/ui/styles'
 import { useTheme } from '@/lib/ui/theme/use-theme'
@@ -44,7 +44,7 @@ export function EmptyHeader({ children }: PropsWithChildren) {
     </box>
   )
 }
-export function EmptyMedia({ icon }: { icon: IconName }) {
+export function EmptyMedia({ icon }: { icon: IconValue }) {
   const componentStyle = useComponentStyles('empty')
 
   const theme = useTheme()
@@ -53,7 +53,7 @@ export function EmptyMedia({ icon }: { icon: IconName }) {
       fg={theme.mutedForeground}
       {...componentStyle('EmptyMedia', { fg: theme.mutedForeground }, 'text')}
     >
-      {icons[icon]}
+      {resolveIcon(icon)}
     </text>
   )
 }

@@ -7,6 +7,7 @@ import { InputRenderable, type Renderable } from '@opentui/core'
 import { testRender } from '@opentui/react/test-utils'
 import { act, useState } from 'react'
 import RootLayout from '@/app/layout'
+import { TweakPage } from '@/app/tweak/page'
 import { Combobox } from '@/components/ui/combobox'
 import {
   Command,
@@ -15,9 +16,8 @@ import {
   CommandList,
 } from '@/components/ui/command'
 import { Input } from '@/components/ui/input'
-import { emptyProfile, emptyReview } from '@/features/tweak/storage'
-import { useStyleReviewStore } from '@/features/tweak/store'
-import { TweakPage } from '@/features/tweak/tweak-page'
+import { emptyProfile, emptyReview } from '@/features/tweak/api/review.storage'
+import { useStyleReviewStore } from '@/features/tweak/stores/review.store'
 import { FocusScope } from '@/lib/ui/focus/focus-scope'
 import {
   type ComponentReview,

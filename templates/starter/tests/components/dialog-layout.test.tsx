@@ -6,7 +6,7 @@ import {
 } from '@opentui/core'
 import { testRender } from '@opentui/react/test-utils'
 import { act } from 'react'
-import { DialogDemo } from '@/features/gallery/examples/dialog'
+import { DialogDemo } from '@/components/shared/component-demos/examples/dialog'
 import { FocusScope } from '@/lib/ui/focus/focus-scope'
 import { icons } from '@/lib/ui/icons'
 import { ThemeProvider } from '@/lib/ui/theme/provider'

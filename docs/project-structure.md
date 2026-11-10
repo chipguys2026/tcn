@@ -8,6 +8,7 @@ tcn/
 │   ├── workflows/ci-release.yml # Build, test and release pipeline
 │   └── main-ruleset.json       # Branch ruleset for GitHub administration
 ├── package.json              # npm package and tcn executable
+├── AGENTS.md                 # Repository conventions and working rules
 ├── src/                      # Node-compatible CLI implementation
 │   ├── main.ts               # Arguments and command dispatch
 │   ├── config.ts             # Project config, aliases and installed metadata
@@ -27,6 +28,7 @@ tcn/
 ├── tests/                    # CLI and source-management integration tests
 ├── docs/
 ├── templates/starter/        # Canonical application and UI source
+│   ├── AGENTS.md             # Application conventions, copied into generated projects
 │   ├── src/app/              # Home, Gallery and Tweak routes
 │   ├── src/features/
 │   ├── src/components/ui/    # Public component source
@@ -39,3 +41,5 @@ tcn/
 There is one maintained source for components: the starter. The registry compiler uses TypeScript module resolution to collect file ownership, imports, dependencies and package requirements. Theme palettes and component defaults live in `templates/starter/src/lib/ui/styles.ts`. Shared files are internal units, copied once per project and retained while installed components need them.
 
 Generated registry JSON is not manually maintained. The application UI has no dependency on CLI code and does not read tcn.json or .tcn metadata at runtime. Root CLI tests and template tests have separate commands, dependency scopes and tsconfig files.
+
+The starter implements route screens directly in `src/app`. Feature code is grouped by responsibility, while Gallery/Tweak examples live in a shared application module. Its [structure guide](../templates/starter/docs/project-structure.md), [feature walkthrough](../templates/starter/docs/features.md) and [cleanup guide](../templates/starter/docs/cleanup.md) describe conventions for generated applications.

@@ -44,22 +44,18 @@ Exports: `Sheet`, `SheetTrigger`, `SheetContent`, `SheetClose`, `SheetDescriptio
 
 ## State and interaction
 
-Modal Tab containment, Escape/outside dismissal and focus restoration follow Dialog.
+Tab navigation stays inside the sheet. Escape or an outside click requests dismissal, and closing restores focus to the previous control when available.
 
 ## Appearance
 
-Left/right fill terminal height; top/bottom fill width. Shared compact Header/right-aligned Footer and a one-cell-padded corner close button. Borderless; dimming 55%.
+Left and right sheets fill the terminal height; top and bottom sheets fill its width. The borderless surface has a compact header, right-aligned footer and corner close button. The background is dimmed by 55%.
 
-Defaults from the linked source:
+Default values:
 
 | Parameter | Default |
 | --- | --- |
 | SheetContent.side | `'right'` |
 
-## Reuse
+## Usage guidance
 
-Shares floating family, Header/Footer and Button-based close actions with Dialog/AlertDialog.
-
-## Notes
-
-This is an edge-attached panel, not a draggable/resizable workspace region.
+Use Sheet for an edge-attached panel that opens over the current screen. Use [Resizable](resizable.md) for a workspace with adjustable panel dimensions.

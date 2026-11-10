@@ -49,7 +49,7 @@ Exports: `DropdownMenu`, `DropdownMenuTrigger`, `DropdownMenuContent`, `Dropdown
 
 ## State and interaction
 
-Arrows/Home/End/typeahead navigate; Enter/Space activates. Disabled items are skipped. Escape closes. closeOnSelect=false can keep checkbox/radio actions open.
+Use arrows, Home, End or typeahead to navigate enabled items. Enter or Space activates the selected item; Escape closes the menu. Set `closeOnSelect={false}` to keep the menu open when changing checkbox or radio values.
 
 ## Appearance
 
@@ -57,21 +57,15 @@ Auto sizing and min/max behavior: [popup sizing](../popup-sizing.md).
 
 Defaults are defined in [styles.ts](../../src/lib/ui/styles.ts). Edit this local file to change appearance across your application.
 
-Borderless popup with semantic active/disabled items, labels, shortcuts and separators. Dims underlying content 28%.
+The borderless popup uses distinct active and disabled item colors, with optional labels, shortcuts and separators. The background is dimmed by 28%.
 
-Defaults from the linked source:
+Default values:
 
 | Parameter | Default |
 | --- | --- |
 | DropdownMenuCheckboxItem.defaultChecked | `false` |
 | DropdownMenuRadioGroup.defaultValue | `''` |
 
-## Reuse
+## Usage guidance
 
-DropdownMenu and ContextMenu use the same [menu engine](../../src/lib/ui/menu.tsx). Public DropdownMenu exports remain in this module; item props also accept an optional native `id`. Each family keeps isolated selection/open contexts.
-
-Uses the shared floating, grouped-navigation and activation helpers.
-
-## Notes
-
-Nested submenus are not supplied. Domain commands and global hotkeys belong to the application.
+Items accept an optional `id`. Implement commands in selection handlers and register application-wide shortcuts separately. For nested submenus, use [Menubar](menubar.md).

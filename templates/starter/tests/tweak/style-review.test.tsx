@@ -6,6 +6,8 @@ import { join } from 'node:path'
 import type { BoxRenderable } from '@opentui/core'
 import { testRender } from '@opentui/react/test-utils'
 import { act, useRef, useState } from 'react'
+import { TweakPage } from '@/app/tweak/page'
+import { styleDemos } from '@/components/shared/component-demos/catalog'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import {
@@ -14,9 +16,6 @@ import {
   DialogContent,
   DialogTrigger,
 } from '@/components/ui/dialog'
-import { styleDemos } from '@/features/gallery/catalog'
-import { matchesPiece, PiecePreview, piecesFor } from '@/features/tweak/parts'
-import { validValue } from '@/features/tweak/schema'
 import {
   emptyProfile,
   emptyReview,
@@ -24,12 +23,17 @@ import {
   readReview,
   reviewPaths,
   writeReview,
-} from '@/features/tweak/storage'
+} from '@/features/tweak/api/review.storage'
+import {
+  matchesPiece,
+  PiecePreview,
+  piecesFor,
+} from '@/features/tweak/components/part-preview'
+import { validValue } from '@/features/tweak/schemas/review.schema'
 import {
   createStyleReviewStore,
   useStyleReviewStore,
-} from '@/features/tweak/store'
-import { TweakPage } from '@/features/tweak/tweak-page'
+} from '@/features/tweak/stores/review.store'
 import { FocusScope } from '@/lib/ui/focus/focus-scope'
 import {
   type ComponentReview,

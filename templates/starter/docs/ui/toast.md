@@ -61,9 +61,9 @@ The surface is neutral for both variants, using the popover token (secondary whe
 
 ## Timing and focus
 
-Timers use the renderer clock and clean up on unmount. Duration zero persists until dismissed. Hovering a toast or focusing its action/close pauses the remaining duration; leaving resumes it. Updating unchanged duration does not restart the clock. Controlled Toast owners may reject close requests.
+Set duration to zero to keep a toast visible until dismissed. Hovering a toast or focusing its action or close button pauses the remaining duration; leaving resumes it. Updating a toast without changing its duration preserves the remaining time. In controlled mode, apply close requests to dismiss the toast.
 
-Mounting a notification does not auto-focus or trap focus. Actions and close buttons reuse Button and normal focus coordination. Closing an actively focused toast attempts to return to the previously focused control if its focus scope still permits it; expiry while working elsewhere leaves current focus unchanged. Viewport z-index is below the existing popup/modal layer.
+New notifications preserve the user's current focus. Actions and close buttons participate in normal Tab navigation. Closing a focused toast returns focus to the previously focused control when it is still available; expiry while working elsewhere preserves current focus. Toasts appear below popups and modals.
 
 ## Small terminals
 

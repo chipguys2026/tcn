@@ -22,7 +22,7 @@ Exports: `ScrollArea`.
 
 | Component | Props contract |
 | --- | --- |
-| ScrollArea | `PropsWithChildren<{ width?: number \| ${number}% height?: number orientation?: 'horizontal' \| 'vertical' \| 'both' focusable?: boolean label?: string ref?: Ref<ScrollAreaHandle> }>` |
+| ScrollArea | Children; optional `width` in cells or a percentage, `height` in rows, `orientation`, `focusable`, `label` and `ref` |
 
 ### Prop types
 
@@ -34,13 +34,13 @@ type ScrollAreaHandle = FocusableHandle & {
 
 ## State and interaction
 
-Focus the region for arrow scrolling. Wheel, native track clicking/dragging and imperative scrollTo are supported.
+Focus the region to scroll with arrow keys. You can also use the mouse wheel, click or drag the scrollbar, or call `scrollTo` through a ref.
 
 ## Appearance
 
-Vertical is the default; horizontal/both enable the X axis. Horizontal bars paint half-height blocks while retaining a full-row native hit area.
+Set `orientation` to `vertical`, `horizontal` or `both`. The default is vertical. Horizontal scrollbars use half-height block glyphs with a full row available for pointer interaction.
 
-Defaults from the linked source:
+Default values:
 
 | Parameter | Default |
 | --- | --- |
@@ -50,10 +50,6 @@ Defaults from the linked source:
 | ScrollArea.focusable | `true` |
 | ScrollArea.label | `'Scroll area'` |
 
-## Reuse
+## Usage guidance
 
-Uses the native ScrollBox with a visual horizontal bar skin and shared focus ring.
-
-## Notes
-
-Content must actually overflow and resist unintended shrinking. The native two-track corner remains unchanged; the rejected corner paint-over was removed. scrollTo targets X only in horizontal mode, otherwise Y.
+Ensure content can exceed the viewport; prevent flex children from shrinking away the intended overflow. `scrollTo` targets the horizontal axis in horizontal mode and the vertical axis otherwise.

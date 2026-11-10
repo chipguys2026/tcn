@@ -4,6 +4,8 @@ The starter includes 51 component families. Browse the tables below, or run the 
 
 ## Use a component
 
+For component icons, use the existing action aliases or import from the [complete Nerd Fonts sets](../icons.md). Gallery includes a searchable browser at `/gallery/icons`.
+
 Import from local source, using the module named in its reference page:
 
 ```tsx

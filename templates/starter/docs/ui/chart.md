@@ -56,4 +56,4 @@ Tab focuses the plot. Arrow keys and Home/End change the inspected datum; pointe
 
 The plot uses terminal cells and recomputes its grid on resize. Container height is clamped to its minimum/maximum; legend and tooltip occupy additional rows. Line charts use Unicode Braille strokes.
 
-Bar and Line charts are supported. The API uses native terminal rendering and does not accept Recharts components.
+Use BarChart or LineChart for the plot and compose ChartLegend and ChartTooltip alongside it.

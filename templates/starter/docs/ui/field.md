@@ -39,8 +39,10 @@ import { Input } from '@/components/ui/input'
 
 ## Layout and validation
 
-Source gap is one cell/row; field padding is zero. A label delegates click focus through the existing Label implementation and focus coordinator. Field passes disabled/invalid appearance to FieldLabel; explicit label props can override it. Set disabled/invalid on the actual controls too: Field does not clone children or perform validation. There is no form submission or schema dependency.
+Fields have a gap of one cell and zero padding. Set `htmlFor` on FieldLabel to the control's `id` so clicking the label focuses that control.
 
-FieldError renders only when it has a message. Explicit children take priority; error messages are deduplicated while preserving order. Descriptions and errors wrap in the available width. A terminal has no DOM label or ARIA relationship; keep meaningful control labels as well as the visible FieldLabel.
+Field passes disabled and invalid appearance to FieldLabel; explicit label props override these values. Also set `disabled` and `invalid` on the control itself. Validate values in application code and pass the resulting messages to FieldError.
 
-FieldLabel reuses Label; FieldSeparator reuses Separator. Field wrappers and text share the passive PartBox/PartText rendering primitives. See [styling](../styling.md) for customization.
+FieldError renders when it has a message. Explicit children take priority over the `errors` array; duplicate error messages are removed while preserving order. Descriptions and errors wrap within the available width. Give controls meaningful labels as well as a visible FieldLabel.
+
+See [styling](../styling.md) to customize field spacing and appearance.
