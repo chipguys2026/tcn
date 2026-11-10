@@ -4,14 +4,16 @@ import {
   createContext,
   type PropsWithChildren,
   useContext,
+  useInsertionEffect,
   useLayoutEffect,
   useMemo,
   useRef,
 } from 'react'
-import { type FocusRecord, getFocusCoordinator } from './coordinator'
+import { type FocusRecord, getFocusCoordinator, within } from './coordinator'
 
 type FocusContextValue = {
   record: FocusRecord
+  enabled: boolean
   register: (node: Renderable, tabStop?: () => boolean) => () => void
   canFocus: () => boolean
   move: (direction: 1 | -1, from?: Renderable) => boolean
@@ -37,6 +39,7 @@ export function FocusScope({
   trap = false,
   autoFocus = false,
   restoreFocus = false,
+  enabled = true,
   onExit,
 }: PropsWithChildren<{
   onFocusChange?: (label: string) => void
@@ -44,17 +47,30 @@ export function FocusScope({
   trap?: boolean
   autoFocus?: boolean
   restoreFocus?: boolean
+  enabled?: boolean
   onExit?: (direction: 1 | -1) => void
 }>) {
   const renderer = useRenderer()
   const parent = useFocusScope()
+  const active = enabled && (parent?.enabled ?? true)
   const coordinator = getFocusCoordinator(renderer)
   const previous = useRef(renderer.currentFocusedRenderable)
   const exitDirection = useRef<1 | -1 | null>(null)
   const record = useMemo<FocusRecord>(
-    () => ({ parent: parent?.record ?? null, nodes: new Map(), loop, trap }),
+    () => ({
+      parent: parent?.record ?? null,
+      nodes: new Map(),
+      loop,
+      trap,
+      enabled: true,
+    }),
     [parent?.record, loop, trap],
   )
+  // Keep registered handles attached to the same record when measurement ends.
+  // Publish availability before any descendant autofocus layout effects run.
+  useInsertionEffect(() => {
+    record.enabled = active
+  }, [record, active])
   const onFocusChangeRef = useRef(onFocusChange)
   useLayoutEffect(() => {
     onFocusChangeRef.current = onFocusChange
@@ -62,6 +78,7 @@ export function FocusScope({
   const context = useMemo<FocusContextValue>(
     () => ({
       record,
+      enabled: active,
       canFocus: () => coordinator.allowed(record),
       register(node, tabStop = () => true) {
         coordinator.records.add(record)
@@ -117,15 +134,17 @@ export function FocusScope({
         onFocusChangeRef.current?.(label)
       },
     }),
-    [record, coordinator, renderer],
+    [record, coordinator, renderer, active],
   )
 
   useLayoutEffect(() => {
     coordinator.records.add(record)
-    if (record.trap) coordinator.traps.push(record)
+    if (record.trap && active) coordinator.traps.push(record)
+    const focusedOwner = coordinator.owner(renderer.currentFocusedRenderable)
     if (
+      active &&
       autoFocus &&
-      !record.nodes.has(renderer.currentFocusedRenderable as Renderable)
+      (!focusedOwner || !within(focusedOwner, record))
     ) {
       if (!context.move(1) && trap) renderer.currentFocusedRenderable?.blur()
     }
@@ -135,6 +154,7 @@ export function FocusScope({
       const target = previous.current
       const owner = coordinator.owner(target)
       if (
+        active &&
         restoreFocus &&
         (!trap || wasTop) &&
         target &&
@@ -157,6 +177,7 @@ export function FocusScope({
     restoreFocus,
     trap,
     parent,
+    active,
   ])
 
   useKeyboard((key) => {

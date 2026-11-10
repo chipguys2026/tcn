@@ -675,6 +675,7 @@ test('select opens empty, typeahead focuses labels, skips disabled and commits o
     await act(async () => setup.mockInput.pressTab())
     const trigger = setup.renderer.currentFocusedRenderable
     await act(async () => setup.mockInput.pressEnter())
+    await act(async () => setup.renderOnce())
     expect(setup.renderer.currentFocusedRenderable).not.toBe(trigger)
     await act(async () => setup.mockInput.typeText('n'))
     await act(async () => setup.mockInput.pressEnter())
@@ -791,6 +792,7 @@ test('dropdown checkbox/radio items can stay open and normal action closes it', 
     await act(async () => setup.mockInput.pressTab())
     const trigger = setup.renderer.currentFocusedRenderable
     await act(async () => setup.mockInput.pressEnter())
+    await act(async () => setup.renderOnce())
     await act(async () => setup.mockInput.pressEnter())
     await act(async () => setup.mockInput.pressArrow('down'))
     await act(async () => setup.mockInput.pressArrow('down'))
@@ -850,8 +852,10 @@ test('nested overlay Escape dismisses only the top layer and restores focus at e
     await act(async () => setup.mockInput.pressTab())
     const outer = setup.renderer.currentFocusedRenderable
     await act(async () => setup.mockInput.pressEnter())
+    await act(async () => setup.renderOnce())
     const inner = setup.renderer.currentFocusedRenderable
     await act(async () => setup.mockInput.pressEnter())
+    await act(async () => setup.renderOnce())
     await act(async () => setup.mockInput.pressEscape())
     expect(setup.renderer.currentFocusedRenderable).toBe(inner)
     await setup.renderOnce()

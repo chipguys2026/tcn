@@ -5,6 +5,7 @@ export type FocusRecord = {
   nodes: Map<Renderable, () => boolean>
   loop: boolean
   trap: boolean
+  enabled: boolean
 }
 
 export function within(scope: FocusRecord, ancestor: FocusRecord) {
@@ -26,6 +27,11 @@ class FocusCoordinator {
     return [...this.records].find((record) => record.nodes.has(node)) ?? null
   }
   allowed(record: FocusRecord) {
+    let ancestor: FocusRecord | null = record
+    while (ancestor) {
+      if (!ancestor.enabled) return false
+      ancestor = ancestor.parent
+    }
     const top = this.traps.at(-1)
     return !top || within(record, top)
   }

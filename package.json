@@ -1,6 +1,6 @@
 {
   "name": "tcn",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Source-owned React and OpenTUI components and starter CLI.",
   "type": "module",
   "license": "MIT",

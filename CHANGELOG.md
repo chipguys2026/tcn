@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.1.2 — 2026-11-10
+
+- Resolve auto-sized popup layout before painting to avoid flashing provisional dimensions when opening menus and tooltips.
+- Keep backdrop dimming active throughout measurement and defer popup autofocus until its size and placement are ready.
+
 ## 0.1.1 — 2026-11-09
 
 - Consolidate theme palettes and component defaults into `src/lib/ui/styles.ts` for application-wide customization.
